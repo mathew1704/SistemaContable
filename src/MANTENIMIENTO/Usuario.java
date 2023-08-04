@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Usuario extends javax.swing.JFrame {
-
+//hola
     boolean creear;
     boolean Modificar = false;
     boolean encontrado;
