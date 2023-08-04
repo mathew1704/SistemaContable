@@ -129,6 +129,11 @@ public class Usuario extends javax.swing.JFrame {
         estado.setBorder(null);
         estado.setCaretColor(new java.awt.Color(153, 255, 153));
         estado.setDisabledTextColor(new java.awt.Color(153, 255, 153));
+        estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI", 1, 22)); // NOI18N
         jLabel4.setText("Acceso:");
@@ -157,7 +162,6 @@ public class Usuario extends javax.swing.JFrame {
         CajaTextoCorreo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255)));
 
         BotonGuardarUsuario.setBackground(new java.awt.Color(102, 255, 102));
-        BotonGuardarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/guardar.png"))); // NOI18N
         BotonGuardarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotonGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,8 +169,6 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Limpiar.jpg"))); // NOI18N
         btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +181,6 @@ public class Usuario extends javax.swing.JFrame {
         jLabel11.setText("Salir");
 
         btnSalir1.setBackground(new java.awt.Color(255, 0, 0));
-        btnSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/salir.png"))); // NOI18N
         btnSalir1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,8 +196,6 @@ public class Usuario extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Guardar");
 
-        consulta.setBackground(new java.awt.Color(255, 255, 255));
-        consulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/consultas.png"))); // NOI18N
         consulta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         consulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +248,7 @@ public class Usuario extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel12)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -490,6 +489,10 @@ public class Usuario extends javax.swing.JFrame {
         Ventana_Usuario c = new Ventana_Usuario();
         c.setVisible(true);
     }//GEN-LAST:event_consultaActionPerformed
+
+    private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadoActionPerformed
 
     /**
      * @param args the command line arguments

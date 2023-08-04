@@ -1,0 +1,3 @@
+101;Salida
+111;Salida
+111;Salidas
