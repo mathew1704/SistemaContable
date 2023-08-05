@@ -3,6 +3,7 @@ package MANTENIMIENTO;
 import ARCHIVOS.Archivo_Documentos;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -165,62 +166,68 @@ public class De_Documentos extends javax.swing.JFrame {
             txtDescripcion.setText("");
             txtDescripcion.grabFocus();
         }
-
-        String codigo = txtCodigo.getText();
-        String descripcion = txtDescripcion.getText();
-
-        Scanner s;
-        String nv = "";
-        boolean encontrado = false;
-
+        
         try {
-            File f = new File("Documentos.txt");
+            String auxid = txtCodigo.getText();
+            int cod = Integer.parseInt(auxid);
 
-            if (!f.exists()) {
-                f.createNewFile();
+            if (cod <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "El Id debe ser un número positivo intente nuevamente");
+                BtnLimpiarActionPerformed(evt);
             } else {
-                s = new Scanner(f);
 
-                while (s.hasNextLine() && !encontrado) {
-                    String linea = s.nextLine();
-                    Scanner s1 = new Scanner(linea);
-
-                    s1.useDelimiter("\\s*;\\s*");
-
-                    try {
-                        String auxcodigo = s1.next();
-                        String auxdescrip = s1.next();
+                boolean encontrado = false;
+                Scanner s;
+                
+                try {
+                    File f = new File("Documentos.txt");
+                    
+                    if (!f.exists()) {
+                        f.createNewFile();
+                        estado.setText("Creando");
                         
-                        if (codigo.equals(auxcodigo)) {
+                    } else {
+                        s = new Scanner(f);
+                        
+                        while (s.hasNextLine() && !encontrado) {
 
-                            txtCodigo.setText(nv);
-                            txtDescripcion.setText(s1.next());
-                            encontrado = true;
-                            crear = true;
+                            String linea = s.nextLine();
+                            Scanner s1 = new Scanner(linea);
 
-                            antigualinea = txtCodigo.getText() + ";" + txtDescripcion.getText();
-                            estado.setText("MODIFICANDO");
-
-                        } else {
-
-                            txtCodigo.setText("");
-                            txtDescripcion.setText("");
-
-                            encontrado = false;
-                            crear = false;
-                            estado.setText("CREANDO");
+                            s1.useDelimiter("\\s*;\\s*");
+                            
+                            try {
+                                if (cod == Integer.parseInt(s1.next())) {
+                                    txtCodigo.setText(s1.next());
+                                    txtDescripcion.setText(s1.next());
+                                    
+                                    LineaAntigua = txtCodigo.getText() + ";" + txtDescripcion.getText();
+                                    estado.setText("Modificando");
+                                    
+                                    Modificar = true;
+                                    encontrado = true;
+                                } else {
+                                    BtnLimpiarActionPerformed(evt);
+                                    txtCodigo.setText(auxid);
+                                    estado.setText("Creando");
+                                    Modificar = false;
+                                    encontrado = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
+                            }
                         }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                        s.close();
+                        txtCodigo.grabFocus();
                     }
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                s.close();
             }
-
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "No se encontra el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex);
+        } catch (HeadlessException | IOException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
+            BtnLimpiarActionPerformed(evt);
         }
     }//GEN-LAST:event_txtCodigoActionPerformed
 

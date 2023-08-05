@@ -15,6 +15,7 @@ public class Archivo_Documentos {
         try {
             FileWriter F1 = new FileWriter("Documentos.txt", true);
             BufferedWriter bw = new BufferedWriter(F1);
+            
             bw.write(codigo + ";" + descripcion);
             bw.newLine();
             bw.close();
