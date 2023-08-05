@@ -20,7 +20,7 @@ public class ManejoArchivos {
     }
 
     public void Modificar(String cadenaA, String cadenaN, File archivoA) {
-        File archivoN = new File("C:\\Archivo de Datos\\Auxiliar.txt");
+        File archivoN = new File("Auxiliar.txt");
 
         try {
             archivoN.createNewFile();

@@ -1,6 +1,6 @@
 package MANTENIMIENTO;
 
-import ARCHIVOS.Archivo_Documentos;
+import ARCHIVOS.ManejoArchivos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import java.util.Scanner;
+import texto.TextPrompt;
 
 public class De_Documentos extends javax.swing.JFrame {
 
@@ -27,6 +28,13 @@ public class De_Documentos extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
         txtCodigo.requestFocusInWindow();
+
+        TextPrompt codig = new TextPrompt(" Digite el Codigo", txtCodigo, TextPrompt.Show.ALWAYS);
+        codig.setForeground(Color.gray);
+
+        TextPrompt descr = new TextPrompt(" Digite la Descripcion", txtDescripcion, TextPrompt.Show.ALWAYS);
+        descr.setForeground(Color.gray);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -42,18 +50,25 @@ public class De_Documentos extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
-        BtnEliminar = new javax.swing.JButton();
+        BtnSalir = new javax.swing.JButton();
         estado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setLocationByPlatform(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANTENIMIENTO DE DOCUMENTOS");
@@ -62,78 +77,112 @@ public class De_Documentos extends javax.swing.JFrame {
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
         PanelAzulLayout.setVerticalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAzulLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 70));
+        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 70));
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setText("Código");
-        PanelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+        PanelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setText("Descripción");
-        PanelPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+        PanelPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 110, 30));
 
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
+        txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txtDescripcion.setBorder(null);
-        PanelPrincipal.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 270, 30));
+        PanelPrincipal.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 290, 30));
 
         txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
+        txtCodigo.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtCodigo.setBorder(null);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 270, 30));
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
+        });
+        PanelPrincipal.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 290, 30));
 
         BtnGuardar.setBackground(new java.awt.Color(160, 171, 176));
         BtnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         BtnGuardar.setText("GUARDAR");
+        BtnGuardar.setBorder(null);
         BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnGuardarMouseExited(evt);
+            }
+        });
         BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGuardarActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 110, 40));
+        PanelPrincipal.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 130, 50));
 
         BtnLimpiar.setBackground(new java.awt.Color(160, 171, 176));
         BtnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         BtnLimpiar.setText("LIMPIAR");
+        BtnLimpiar.setBorder(null);
         BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseExited(evt);
+            }
+        });
         BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLimpiarActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 100, 40));
+        PanelPrincipal.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 130, 50));
 
-        BtnEliminar.setBackground(new java.awt.Color(160, 171, 176));
-        BtnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEliminar.setText("SALIR");
-        BtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
+        BtnSalir.setBackground(new java.awt.Color(160, 171, 176));
+        BtnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BtnSalir.setText("SALIR");
+        BtnSalir.setBorder(null);
+        BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnSalirMouseExited(evt);
             }
         });
-        PanelPrincipal.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 100, 40));
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 130, 50));
 
         estado.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         estado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        PanelPrincipal.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 100, 30));
+        PanelPrincipal.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,15 +192,15 @@ public class De_Documentos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_BtnEliminarActionPerformed
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
         txtCodigo.setText("");
@@ -166,7 +215,7 @@ public class De_Documentos extends javax.swing.JFrame {
             txtDescripcion.setText("");
             txtDescripcion.grabFocus();
         }
-        
+
         try {
             String auxid = txtCodigo.getText();
             int cod = Integer.parseInt(auxid);
@@ -178,38 +227,38 @@ public class De_Documentos extends javax.swing.JFrame {
 
                 boolean encontrado = false;
                 Scanner s;
-                
+
                 try {
                     File f = new File("Documentos.txt");
-                    
+
                     if (!f.exists()) {
                         f.createNewFile();
                         estado.setText("Creando");
-                        
+
                     } else {
                         s = new Scanner(f);
-                        
+
                         while (s.hasNextLine() && !encontrado) {
 
                             String linea = s.nextLine();
                             Scanner s1 = new Scanner(linea);
 
                             s1.useDelimiter("\\s*;\\s*");
-                            
+
                             try {
                                 if (cod == Integer.parseInt(s1.next())) {
-                                    txtCodigo.setText(s1.next());
+                                    txtCodigo.setText(String.valueOf(cod));
                                     txtDescripcion.setText(s1.next());
-                                    
+
                                     LineaAntigua = txtCodigo.getText() + ";" + txtDescripcion.getText();
-                                    estado.setText("Modificando");
-                                    
+                                    estado.setText(" Modificando");
+
                                     Modificar = true;
                                     encontrado = true;
                                 } else {
                                     BtnLimpiarActionPerformed(evt);
                                     txtCodigo.setText(auxid);
-                                    estado.setText("Creando");
+                                    estado.setText(" Creando");
                                     Modificar = false;
                                     encontrado = false;
                                 }
@@ -219,7 +268,7 @@ public class De_Documentos extends javax.swing.JFrame {
                             }
                         }
                         s.close();
-                        txtCodigo.grabFocus();
+                        txtDescripcion.grabFocus();
                     }
                 } catch (FileNotFoundException e) {
                     JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
@@ -232,32 +281,88 @@ public class De_Documentos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        if (txtCodigo.getText().isEmpty() || txtDescripcion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene Todos los campos", "ERROR", HEIGHT);
+
+        if (txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Codigo antes de guardar", "ERROR", HEIGHT);
+            txtCodigo.grabFocus();
+        } else if (txtDescripcion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Descripcion antes de guardar", "ERROR", HEIGHT);
+            txtDescripcion.grabFocus();
         } else {
 
-            String codigo = "";
-            String descripcion = "";
-            String nuevalinea = "";
+            try {
+                File f = new File("Documentos.txt");
 
-            Archivo_Documentos archivo = new Archivo_Documentos();
+                if (!f.exists()) {
+                    f.createNewFile();
+                }
 
-            codigo = txtCodigo.getText();
-            descripcion = txtDescripcion.getText();
+                String lineaActual = txtCodigo.getText() + ";" + txtDescripcion.getText();
 
-            if (crear == false) {
-                archivo.Guardar(codigo, descripcion);
-            } else {
-                nuevalinea = (codigo + ";" + descripcion);
-                archivo.Modificar(antigualinea, nuevalinea);
+                ManejoArchivos file = new ManejoArchivos();
+
+                if (Modificar) {
+                    file.Modificar(LineaAntigua, lineaActual, f);
+                    BtnLimpiarActionPerformed(evt);
+                    Modificar = false;
+                } else {
+                    file.GuardarDatos(lineaActual, f);
+                    BtnLimpiarActionPerformed(evt);
+                }
+
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+
+            } catch (IOException e) {
             }
-            txtCodigo.setText("");
-            txtDescripcion.setText("");
-            estado.setText("");
-
-            JOptionPane.showMessageDialog(null, "Registro guardado");
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void BtnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseEntered
+        BtnGuardar.setBackground(Color.red);
+    }//GEN-LAST:event_BtnGuardarMouseEntered
+
+    private void BtnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseExited
+        BtnGuardar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnGuardarMouseExited
+
+    private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
+        BtnLimpiar.setBackground(Color.red);
+    }//GEN-LAST:event_BtnLimpiarMouseEntered
+
+    private void BtnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseEntered
+        BtnSalir.setBackground(Color.red);
+    }//GEN-LAST:event_BtnSalirMouseEntered
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtDescripcion.requestFocus();
+        }
+
+        if (Character.isDigit(evt.getKeyChar())) {
+            txtCodigo.setEditable(true);
+        } else {
+            txtCodigo.setEditable(false);
+        }
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
+    private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
+        BtnLimpiar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnLimpiarMouseExited
+
+    private void BtnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseExited
+        BtnSalir.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnSalirMouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos","Cerrar Ventana",JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
 
     public static void main(String args[]) {
 
@@ -269,9 +374,9 @@ public class De_Documentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnSalir;
     private javax.swing.JPanel PanelAzul;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel estado;

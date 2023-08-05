@@ -1,3 +1,4 @@
-101;Salida
-111;Salida
-111;Salidas
+100;Entrada
+200;Pago
+105;Saldo
+96;NuevoC

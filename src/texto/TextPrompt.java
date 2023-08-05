@@ -1,5 +1,5 @@
 
-package MENU_PRINCIPAL;
+package texto;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,5 +1,6 @@
 package MENU_PRINCIPAL;
 
+import texto.TextPrompt;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
@@ -17,11 +18,11 @@ public class LOgin extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
         jLabel1.requestFocusInWindow();
 
-        TextPrompt ejemplo = new TextPrompt("Digite su usuario", txtUsuario, TextPrompt.Show.ALWAYS);
-        ejemplo.setForeground(Color.gray);
+        TextPrompt usuario = new TextPrompt("Digite su usuario", txtUsuario, TextPrompt.Show.ALWAYS);
+        usuario.setForeground(Color.gray);
 
-        TextPrompt ejemplo2 = new TextPrompt("*********", contraseña, TextPrompt.Show.ALWAYS);
-        ejemplo2.setForeground(Color.gray);
+        TextPrompt contr = new TextPrompt("*********", contraseña, TextPrompt.Show.ALWAYS);
+        contr.setForeground(Color.gray);
     }
     public int Nivel;
 
