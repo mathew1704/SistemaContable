@@ -59,13 +59,15 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(102, 255, 102));
         jLabel1.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 80)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 255, 102));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 130, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Leelawadee UI", 1, 24)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Salir");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -74,33 +76,12 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(709, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(170, 170, 170))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(713, 387, 160, 48));
 
         jMenu1.setText("MANTENIMIENTO");
+        jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
+        USUARIO.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         USUARIO.setText("USUARIO");
         USUARIO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +90,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
         });
         jMenu1.add(USUARIO);
 
+        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jMenuItem1.setText("CATALOGO");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +99,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        Mdocumentos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         Mdocumentos.setText("DOCUMENTOS");
         Mdocumentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +111,9 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("MOVIMIENTOS ");
+        jMenu2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
+        jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jMenuItem2.setText("TRANSACCIONES");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,9 +125,11 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu5.setText("PROCESOS ");
+        jMenu5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("CONSULTAS");
+        jMenu6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -155,10 +142,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
