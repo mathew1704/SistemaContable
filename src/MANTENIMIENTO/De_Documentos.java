@@ -100,6 +100,11 @@ public class De_Documentos extends javax.swing.JFrame {
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txtDescripcion.setBorder(null);
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
         PanelPrincipal.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 290, 30));
 
         txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
@@ -362,6 +367,10 @@ public class De_Documentos extends javax.swing.JFrame {
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
 
 
     public static void main(String args[]) {

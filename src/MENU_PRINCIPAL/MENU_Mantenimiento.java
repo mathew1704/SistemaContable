@@ -2,7 +2,7 @@ package MENU_PRINCIPAL;
 
 
 
-import MANTENIMIENTO.DE_CATALOGO_CUENTAS;
+import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.De_Documentos;
 import MANTENIMIENTO.Usuario;
 import MOVIMIENTOS.DE_TRANSACCIONES;
@@ -171,7 +171,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_USUARIOActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        DE_CATALOGO_CUENTAS i = new DE_CATALOGO_CUENTAS();
+        DE_CATALOGO i = new DE_CATALOGO();
          i.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
