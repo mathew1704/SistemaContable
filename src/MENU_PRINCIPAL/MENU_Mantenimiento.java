@@ -1,14 +1,12 @@
 package MENU_PRINCIPAL;
 
-
-
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_USUARIO;
 import MANTENIMIENTO.De_Documentos;
 import MOVIMIENTOS.DE_TRANSACCIONES;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.Graphics;            
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;

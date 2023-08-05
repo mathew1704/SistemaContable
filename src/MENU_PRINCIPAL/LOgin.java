@@ -192,9 +192,11 @@ public class LOgin extends javax.swing.JFrame {
                         if (auxLogin.equals(txtUsuario.getText()) && auxPass.equals(contraseña.getText())) {
                             Nivel = Integer.parseInt(s1.next());
                             String Nombre = s1.next();
-                            MENU_Mantenimiento m = new MENU_Mantenimiento();
+                            
+                            Menu m = new Menu();
 
                             if (Nivel == 1) {
+                                
                                 // MENU_Mantenimiento.menuProcesos.setEnabled(false);
                                 // MENU_Mantenimiento.usuario.setEnabled(false);
 
@@ -204,7 +206,7 @@ public class LOgin extends javax.swing.JFrame {
                                 this.dispose();
                             } else if (Nivel == 0) {
 
-                                MENU_Mantenimiento M = new MENU_Mantenimiento();
+                                Menu M = new Menu();
                                 M.setVisible(true);
                                 dispose();
 
