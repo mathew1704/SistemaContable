@@ -4,9 +4,24 @@
  */
 package MANTENIMIENTO;
 
+import ARCHIVOS.ManejoArchivos;
+import static MANTENIMIENTO.De_Documentos.LineaAntigua;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -14,12 +29,19 @@ import java.util.Date;
  */
 public class DE_CATALOGO extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DE_CATALOGO
-     */
+    boolean crear;
+    boolean Modificar = false;
+    boolean encontrado;
+    String antigualinea;
+    public static String LineaAntigua;
+
     public DE_CATALOGO() {
         initComponents();
-         txtfecha.setText(fecha());
+        this.setTitle("Mantenimiento de Catalogo");
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
+        UIManager.put("OptionPane.messageForeground", Color.black);
+        txtfecha.setText(fecha());
+
     }
 
     /**
@@ -53,12 +75,12 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtpadre = new javax.swing.JTextField();
         txtdebito = new javax.swing.JTextField();
         txtcredito = new javax.swing.JTextField();
-        txtfecha = new javax.swing.JTextField();
         txthora = new javax.swing.JTextField();
         txtbalance = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
+        txtfecha = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +129,16 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtnumero.setBackground(new java.awt.Color(237, 237, 237));
         txtnumero.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txtnumero.setBorder(null);
+        txtnumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumeroActionPerformed(evt);
+            }
+        });
+        txtnumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnumeroKeyPressed(evt);
+            }
+        });
 
         txtdescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtdescripcion.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
@@ -132,13 +164,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtcredito.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txtcredito.setBorder(null);
 
-        txtfecha.setBackground(new java.awt.Color(237, 237, 237));
-        txtfecha.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
-        txtfecha.setActionCommand("<Not Set>");
-        txtfecha.setAlignmentX(1.0F);
-        txtfecha.setAlignmentY(1.0F);
-        txtfecha.setBorder(null);
-
         txthora.setBackground(new java.awt.Color(237, 237, 237));
         txthora.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txthora.setBorder(null);
@@ -159,6 +184,11 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnGuardarMouseExited(evt);
+            }
+        });
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
             }
         });
 
@@ -202,6 +232,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             }
         });
 
+        txtfecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -241,17 +273,17 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
-                                .addGap(354, 354, 354))
+                                .addGap(488, 488, 488))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
+                                .addGap(10, 10, 10)
+                                .addComponent(txthora, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(txthora, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(319, 319, 319)
@@ -271,12 +303,14 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txthora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel7)
-                                            .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txthora, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel7)
+                                                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(2, 2, 2))))
                                 .addGap(18, 18, 18)
                                 .addComponent(txtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
@@ -370,7 +404,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirMouseExited
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-         dispose();
+        dispose();
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
@@ -386,13 +420,178 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txttipo.setText("");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
-    
-      public static String fecha() {
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        if (txtnumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Numero antes de guardar", "ERROR", HEIGHT);
+            txtnumero.grabFocus();
+        } else if (txtdescripcion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Descripcion antes de guardar", "ERROR", HEIGHT);
+            txtdescripcion.grabFocus();
+
+        } else if (txttipo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Tipo antes de guardar", "ERROR", HEIGHT);
+            txttipo.grabFocus();
+
+        } else if (txtnivel.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Nivel De antes de guardar", "ERROR", HEIGHT);
+            txtnivel.grabFocus();
+
+        } else if (txtpadre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Padre De antes de guardar", "ERROR", HEIGHT);
+            txtpadre.grabFocus();
+
+        } else if (txtdebito.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Debito De antes de guardar", "ERROR", HEIGHT);
+            txtdebito.grabFocus();
+
+        } else if (txtcredito.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Credito De antes de guardar", "ERROR", HEIGHT);
+            txtcredito.grabFocus();
+
+        } else if (txtbalance.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Balance De antes de guardar", "ERROR", HEIGHT);
+            txtbalance.grabFocus();
+
+        } else if (txtfecha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Fecha De antes de guardar", "ERROR", HEIGHT);
+            txtfecha.grabFocus();
+
+        } else if (txthora.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Hora De antes de guardar", "ERROR", HEIGHT);
+            txthora.grabFocus();
+
+        } else {
+
+            try {
+                File f = new File("Catalogo.txt");
+
+                if (!f.exists()) {
+                    f.createNewFile();
+                }
+
+                String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + txttipo.getText() + ";"
+                        + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
+                        + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
+                ManejoArchivos file = new ManejoArchivos();
+
+                if (Modificar) {
+                    file.Modificar(LineaAntigua, lineaActual, f);
+                    BtnLimpiarActionPerformed(evt);
+                    Modificar = false;
+                } else {
+                    file.GuardarDatos(lineaActual, f);
+                    BtnLimpiarActionPerformed(evt);
+                }
+
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+
+            } catch (IOException e) {
+            }
+        }
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void txtnumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtdescripcion.requestFocus();
+        }
+
+        if (Character.isDigit(evt.getKeyChar())) {
+            txtnumero.setEditable(true);
+        } else {
+            txtnumero.setEditable(false);
+        }
+    }//GEN-LAST:event_txtnumeroKeyPressed
+
+    private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
+        if (txtnumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+        } else {
+            txtdescripcion.setText("");
+            txtdescripcion.grabFocus();
+        }
+
+        try {
+            String auxid = txtnumero.getText();
+            int cod = Integer.parseInt(auxid);
+
+            if (cod <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "El Id debe ser un número positivo intente nuevamente");
+                BtnLimpiarActionPerformed(evt);
+            } else {
+
+                boolean encontrado = false;
+                Scanner s;
+
+                try {
+                    File f = new File("Catalogo.txt");
+
+                    if (!f.exists()) {
+                        f.createNewFile();
+                        estado.setText("Creando");
+
+                    } else {
+                        s = new Scanner(f);
+
+                        while (s.hasNextLine() && !encontrado) {
+
+                            String linea = s.nextLine();
+                            Scanner s1 = new Scanner(linea);
+
+                            s1.useDelimiter("\\s*;\\s*");
+
+                            try {
+                                if (cod == Integer.parseInt(s1.next())) {
+                                    txtnumero.setText(String.valueOf(cod));
+                                    txtdescripcion.setText(s1.next());
+                                    txtbalance.setText(s1.next());
+                                    txtcredito.setText(s1.next());
+                                    txtdebito.setText(s1.next());
+                                    txtfecha.setText(s1.next());
+                                    txthora.setText(s1.next());
+                                    txtnivel.setText(s1.next());
+                                    txtnumero.setText(s1.next());
+                                    txtpadre.setText(s1.next());
+                                    txttipo.setText(s1.next());
+                                    
+                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + txttipo.getText() + ";"
+                        + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
+                        + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
+                                    estado.setText(" Modificando");
+
+                                    Modificar = true;
+                                    encontrado = true;
+                                } else {
+                                    BtnLimpiarActionPerformed(evt);
+                                    txtnumero.setText(auxid);
+                                    estado.setText(" Creando");
+                                    Modificar = false;
+                                    encontrado = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
+                            }
+                        }
+                        s.close();
+                        txtdescripcion.grabFocus();
+                    }
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (HeadlessException | IOException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
+            BtnLimpiarActionPerformed(evt);
+        }
+    }//GEN-LAST:event_txtnumeroActionPerformed
+
+    public static String fecha() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -451,7 +650,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private javax.swing.JTextField txtcredito;
     private javax.swing.JTextField txtdebito;
     private javax.swing.JTextField txtdescripcion;
-    private javax.swing.JTextField txtfecha;
+    private javax.swing.JFormattedTextField txtfecha;
     private javax.swing.JTextField txthora;
     private javax.swing.JTextField txtnivel;
     private javax.swing.JTextField txtnumero;
