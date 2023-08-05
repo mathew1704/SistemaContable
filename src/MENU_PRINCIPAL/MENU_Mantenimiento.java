@@ -3,22 +3,27 @@ package MENU_PRINCIPAL;
 
 
 import MANTENIMIENTO.DE_CATALOGO;
+import MANTENIMIENTO.DE_USUARIO;
 import MANTENIMIENTO.De_Documentos;
-import MANTENIMIENTO.Usuario;
 import MOVIMIENTOS.DE_TRANSACCIONES;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.plaf.FontUIResource;
 
 public class MENU_Mantenimiento extends javax.swing.JFrame {
 
     public MENU_Mantenimiento() {
         initComponents();
-        setTitle("Restaurante");
-        setLocationRelativeTo(null);
+        this.setTitle("SISTEMA CONTABLE");
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
+        UIManager.put("OptionPane.messageForeground", Color.black);
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +170,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void USUARIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USUARIOActionPerformed
-    Usuario e = new Usuario();
+    DE_USUARIO e = new DE_USUARIO();
         e.setVisible(true);
        
     }//GEN-LAST:event_USUARIOActionPerformed
