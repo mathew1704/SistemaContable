@@ -4,7 +4,7 @@
  */
 package MANTENIMIENTO;
 
-import MENU_PRINCIPAL.MENU_Mantenimiento;
+
 
 /**
  *
@@ -43,6 +43,7 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
@@ -53,7 +54,6 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
         salir = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         Limpiar = new javax.swing.JButton();
-        scrollPane1 = new java.awt.ScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,6 +139,10 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,27 +167,22 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(142, 142, 142)
-                                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(salir)
+                                .addGap(41, 41, 41)
+                                .addComponent(guardar)
+                                .addGap(35, 35, 35)
+                                .addComponent(Limpiar))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(salir)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(guardar)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(Limpiar))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(178, 178, 178))
         );
@@ -199,9 +198,9 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +233,7 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salir)
                     .addComponent(guardar)
@@ -268,9 +267,7 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        MENU_Mantenimiento e = new MENU_Mantenimiento();
-        e.setVisible(true);
-        dispose();
+       
     }//GEN-LAST:event_salirActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
@@ -335,6 +332,7 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
@@ -342,6 +340,5 @@ public class DE_CATALOGO_CUENTAS extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton salir;
-    private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }
