@@ -14,7 +14,7 @@ import javax.swing.plaf.FontUIResource;
 import java.util.Scanner;
 import texto.TextPrompt;
 
-public class DE_DOCUMENTOS extends javax.swing.JFrame {
+public class DE_DOCUMENTO extends javax.swing.JFrame {
 
     boolean crear;
     boolean Modificar = false;
@@ -22,7 +22,7 @@ public class DE_DOCUMENTOS extends javax.swing.JFrame {
     String antigualinea;
     public static String LineaAntigua;
 
-    public DE_DOCUMENTOS() {
+    public DE_DOCUMENTO() {
         initComponents();
         this.setTitle("Mantenimiento de Documentos");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
@@ -368,7 +368,7 @@ public class DE_DOCUMENTOS extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DE_DOCUMENTOS().setVisible(true);
+                new DE_DOCUMENTO().setVisible(true);
             }
         });
     }

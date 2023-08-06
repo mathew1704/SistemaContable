@@ -1,7 +1,7 @@
 package MANTENIMIENTO;
 
 import ARCHIVOS.ManejoArchivos;
-import static MANTENIMIENTO.DE_DOCUMENTOS.LineaAntigua;
+import static MANTENIMIENTO.DE_DOCUMENTO.LineaAntigua;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;

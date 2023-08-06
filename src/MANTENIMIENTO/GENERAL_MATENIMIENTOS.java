@@ -118,7 +118,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
     }//GEN-LAST:event_BcatalogoActionPerformed
 
     private void BdocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BdocumentosActionPerformed
-        DE_DOCUMENTOS doc = new DE_DOCUMENTOS();
+        DE_DOCUMENTO doc = new DE_DOCUMENTO();
         doc.setVisible(true);
     }//GEN-LAST:event_BdocumentosActionPerformed
 
