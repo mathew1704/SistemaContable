@@ -18,20 +18,22 @@ public class DE_USUARIO extends javax.swing.JFrame {
     public boolean Modificar = false;
     public int Nivel = 0;
     public String Email = "NoEmail";
-    
+
     public DE_USUARIO() {
         initComponents();
         initComponents();
         this.setTitle("Mantenimiento de Usuario");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
+        
+        BgAcceso.add(RbAdmin);
+        BgAcceso.add(RbNormal);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         BgAcceso = new javax.swing.ButtonGroup();
         PanelAzul = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -53,9 +55,6 @@ public class DE_USUARIO extends javax.swing.JFrame {
         RbNormal = new javax.swing.JRadioButton();
         RbAdmin = new javax.swing.JRadioButton();
         PFcontrasena = new javax.swing.JPasswordField();
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setText("Código");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -277,7 +276,7 @@ public class DE_USUARIO extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -333,12 +332,7 @@ public class DE_USUARIO extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnombreActionPerformed
 
     private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
-        if (txtusuario.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar el usuario para continuar");
-        } else{
-            PFcontrasena.setText("");
-            PFcontrasena.grabFocus();
-        }
+        
     }//GEN-LAST:event_txtusuarioActionPerformed
 
     private void txtapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapellidoActionPerformed
@@ -374,95 +368,86 @@ public class DE_USUARIO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-        BgAcceso.clearSelection();
-        txtapellido.setText("");
-        PFcontrasena.setText("");
-        txtemail.setText("");
-        txtnombre.setText("");
         txtusuario.setText("");
+        PFcontrasena.setText("");
+        BgAcceso.clearSelection();
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtemail.setText("");
         estado.setText("");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void PFcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PFcontrasenaActionPerformed
         String login = txtusuario.getText();
         String contr = PFcontrasena.getText();
-        boolean encontrado = false;
-      
-        Scanner s;
-        
-        try {
-            File f = new File("Usuarios.txt");
-            
-            if(!f.exists()){
-                f.createNewFile();
-                estado.setText("Creando");
-            } else {
-                s = new Scanner(f);
-                
-                while(s.hasNextLine() && !encontrado){
-                    
-                    String lineaActual = s.nextLine();
-                    Scanner s1 = new Scanner(lineaActual);
-                    
-                    s1.useDelimiter("\\s*;\\s*");
-                    
-                    try {
-                        String auxlogin = s1.next();
-                        String auxPass = s1.next();
-                        
-                        if(login.equals(auxlogin) && contr.equals(auxPass)){
-                            Nivel = Integer.parseInt(s1.next());
-                            
-                            if (Nivel == 1) {
-                                RbAdmin.setSelected(true);
-                            } else {
-                                RbNormal.setSelected(true);
-                            }
-                            
-                            txtnombre.setText(s1.next());
-                            txtapellido.setText(s1.next());
-                            Email = s1.next();
-                            
-                            String aux = "NoEmail";
-                            
-                            if(Email.equals(aux)){
-                                txtemail.setText("");
-                            } else {
-                                txtemail.setText(Email);
-                            }
-                            
-                            LineaAntigua = login+";"+contr+";"+Nivel+";"+txtnombre.getText()+";"+txtapellido.getText()+";"+Email;
-                            estado.setText("Modificando");
-                            
-                            Modificar = true;
-                            encontrado = true;
-                            
-                        } else {
-                            if(login.equals(auxlogin)){
-                                BtnLimpiarActionPerformed(evt);
-                                txtusuario.setText(login);
-                                JOptionPane.showMessageDialog(rootPane,"Contraseña incorrecta intente nuevamente");
-                                return;
-                            }
 
-                            Modificar = false;
-                            estado.setText("Creando");
-                            encontrado = false;
+        try {
+            boolean encontrado = false;
+            Scanner s;
+
+            try {
+                File f = new File("Usuarios.txt");
+
+                if (!f.exists()) {
+                    f.createNewFile();
+                    estado.setText("Creando");
+                } else {
+                    s = new Scanner(f);
+
+                    while (s.hasNextLine() && !encontrado) {
+                        String linea = s.nextLine();
+                        Scanner s1 = new Scanner(linea);
+
+                        s1.useDelimiter("\\s*;\\s*");
+
+                        try {
+                            String auxlogin = s1.next();
+                            String auxPass = s1.next();
+                            if (login.equals(auxlogin) && contr.equals(auxPass)) {
+                                Nivel = Integer.parseInt(s1.next());
+
+                                if (Nivel == 1) {
+                                    RbAdmin.setSelected(true);
+                                } else {
+                                    RbNormal.setSelected(true);
+                                }
+
+                                txtnombre.setText(s1.next());
+                                txtapellido.setText(s1.next());
+                                txtemail.setText(s1.next());
+
+                                LineaAntigua = login + ";" + contr + ";" + Nivel + ";" + txtnombre.getText() + ";" + txtapellido.getText() + ";" + txtemail.getText();
+                                estado.setText("Modificando");
+
+                                Modificar = true;
+                                encontrado = true;
+                            } else {
+                                if (login.equals(auxlogin)) {
+                                    BtnLimpiarActionPerformed(evt);
+                                    txtusuario.setText(login);
+                                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta intente nuevamente");
+                                    return;
+                                }
+
+                                Modificar = false;
+                                encontrado = false;
+                                estado.setText("Creando");
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                            System.out.println(e);
                         }
-                        
-                    } catch (HeadlessException | NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                    s.close();
+                    txtnombre.grabFocus();
                 }
-                s.close();
-                
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            System.out.println("Error: "+ex);
+            System.out.println("Error: " + ex);
         }
+
     }//GEN-LAST:event_PFcontrasenaActionPerformed
 
     private void RbNormalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_RbNormalPropertyChange
@@ -474,57 +459,53 @@ public class DE_USUARIO extends javax.swing.JFrame {
     }//GEN-LAST:event_RbAdminPropertyChange
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        if (txtusuario.getText().isEmpty()){
+        if (txtusuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe rellenar el usuario antes de guardar");
-        } else if (PFcontrasena.getText().isEmpty()){
+        } else if (PFcontrasena.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe rellenar la Contraseña antes de guardar");
-        } else if (!RbAdmin.isSelected() && !RbNormal.isSelected()){
+        } else if (!RbAdmin.isSelected() && !RbNormal.isSelected()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe elegir un Nivel de Acceso antes de guardar");
-        } else if (txtnombre.getText().isEmpty()){
+        } else if (txtnombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe rellenar el Nombre del Usuario antes de guardar");
-        } else if (txtapellido.getText().isEmpty()){
+        } else if (txtapellido.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe rellenar los Apellidos del Usuario antes de guardar");
+        } else if (txtemail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Se debe rellenar el Email del Usuario antes de guardar");
         } else {
-            
+
             File f = new File("Usuarios.txt");
-            
+
             try {
                 if (!f.exists()) {
                     f.createNewFile();
                 }
-                
-                if(RbAdmin.isSelected()){
+
+                if (RbAdmin.isSelected()) {
                     Nivel = 1;
-                } else if(RbNormal.isSelected()){
+                } else if (RbNormal.isSelected()) {
                     Nivel = 0;
                 }
-                
-                if (txtemail.getText().isEmpty()) {
-                    Email = "NoEmail";
-                } else {
-                    Email = txtemail.getText();
-                }
-                
-                String lineaActual = txtusuario.getText()+";"+PFcontrasena.getText()+";"+Nivel+";"+txtnombre.getText()+";"+txtapellido.getText()+";"+Email;
-                
+
+                String lineaActual = txtusuario.getText() + ";" + PFcontrasena.getText() + ";" + Nivel + ";" + txtnombre.getText() + ";" + txtapellido.getText() + ";" + txtemail.getText();
+
                 ManejoArchivos manejoa = new ManejoArchivos();
-                
-                if(Modificar){
+
+                if (Modificar) {
                     manejoa.Modificar(LineaAntigua, lineaActual, f);
                     BtnLimpiarActionPerformed(evt);
                 } else {
                     manejoa.GuardarDatos(lineaActual, f);
                     BtnLimpiarActionPerformed(evt);
                 }
-                
+
             } catch (IOException e) {
-                System.out.println("Error: "+e);
+                System.out.println("Error: " + e);
             }
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Usuarios","Cerrar Ventana",JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Usuarios", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -554,7 +535,6 @@ public class DE_USUARIO extends javax.swing.JFrame {
     private javax.swing.JRadioButton RbNormal;
     private javax.swing.JLabel estado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
