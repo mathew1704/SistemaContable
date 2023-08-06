@@ -2,7 +2,7 @@ package MENU_PRINCIPAL;
 
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_USUARIO;
-import MANTENIMIENTO.De_Documentos;
+import MANTENIMIENTO.DE_DOCUMENTOS;
 import MOVIMIENTOS.DE_TRANSACCIONES;
 import java.awt.Color;
 import java.awt.Font;
@@ -184,7 +184,7 @@ public class MENU_Mantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void MdocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MdocumentosActionPerformed
-        De_Documentos doc = new De_Documentos();
+        DE_DOCUMENTOS doc = new DE_DOCUMENTOS();
         doc.setVisible(true);
     }//GEN-LAST:event_MdocumentosActionPerformed
 

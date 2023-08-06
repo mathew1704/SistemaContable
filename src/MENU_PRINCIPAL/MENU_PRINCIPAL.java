@@ -1,12 +1,14 @@
 package MENU_PRINCIPAL;
 
-import MANTENIMIENTO.General_Mantenimientos;
+import CONSULTAS.GENERAL_CONSULTAS;
+import MANTENIMIENTO.GENERAL_MATENIMIENTOS;
 import MOVIMIENTOS.DE_TRANSACCIONES;
+import PROCESOS.GENERAL_CIERRES;
 import java.awt.Color;
 
-public class Menu extends javax.swing.JFrame {
+public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
-    public Menu() {
+    public MENU_PRINCIPAL() {
         initComponents();
         initComponents();
         jLabel1.requestFocusInWindow();
@@ -25,6 +27,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         PanelPrincipal.setBackground(new java.awt.Color(0, 153, 255));
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,9 +54,17 @@ public class Menu extends javax.swing.JFrame {
 
         Bmovimientos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         Bmovimientos.setForeground(new java.awt.Color(0, 153, 255));
-        Bmovimientos.setText("MOVIMIENTOS\n");
+        Bmovimientos.setText("MOVIMIENTO");
         Bmovimientos.setBorder(null);
         Bmovimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Bmovimientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BmovimientosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BmovimientosMouseExited(evt);
+            }
+        });
         Bmovimientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BmovimientosActionPerformed(evt);
@@ -66,6 +77,14 @@ public class Menu extends javax.swing.JFrame {
         Bprocesos.setText("PROCESOS");
         Bprocesos.setBorder(null);
         Bprocesos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Bprocesos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BprocesosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BprocesosMouseExited(evt);
+            }
+        });
         Bprocesos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BprocesosActionPerformed(evt);
@@ -78,6 +97,14 @@ public class Menu extends javax.swing.JFrame {
         Bconsultas.setText("CONSULTAS");
         Bconsultas.setBorder(null);
         Bconsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Bconsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BconsultasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BconsultasMouseExited(evt);
+            }
+        });
         Bconsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BconsultasActionPerformed(evt);
@@ -120,20 +147,22 @@ public class Menu extends javax.swing.JFrame {
 
     private void BmovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmovimientosActionPerformed
         DE_TRANSACCIONES tran = new DE_TRANSACCIONES();
+        tran.setVisible(true);
     }//GEN-LAST:event_BmovimientosActionPerformed
 
     private void BmantenimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmantenimientosActionPerformed
-
-        General_Mantenimientos mant = new General_Mantenimientos();
+        GENERAL_MATENIMIENTOS mant = new GENERAL_MATENIMIENTOS();
         mant.setVisible(true);
     }//GEN-LAST:event_BmantenimientosActionPerformed
 
     private void BprocesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BprocesosActionPerformed
-        // TODO add your handling code here:
+        GENERAL_CIERRES cierres = new GENERAL_CIERRES();
+        cierres.setVisible(true);
     }//GEN-LAST:event_BprocesosActionPerformed
 
     private void BconsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BconsultasActionPerformed
-        // TODO add your handling code here:
+        GENERAL_CONSULTAS consultas = new GENERAL_CONSULTAS();
+        consultas.setVisible(true);
     }//GEN-LAST:event_BconsultasActionPerformed
 
     private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
@@ -150,11 +179,41 @@ public class Menu extends javax.swing.JFrame {
         Bmantenimientos.setForeground(new Color(0, 153, 255));
     }//GEN-LAST:event_BmantenimientosMouseExited
 
+    private void BmovimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmovimientosMouseEntered
+        Bmovimientos.setBackground(new Color(0, 51, 204));
+        Bmovimientos.setForeground(Color.white);
+    }//GEN-LAST:event_BmovimientosMouseEntered
+
+    private void BmovimientosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmovimientosMouseExited
+        Bmovimientos.setBackground(Color.white);
+        Bmovimientos.setForeground(new Color(0, 153, 255));
+    }//GEN-LAST:event_BmovimientosMouseExited
+
+    private void BprocesosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BprocesosMouseEntered
+       Bprocesos.setBackground(new Color(0, 51, 204));
+       Bprocesos.setForeground(Color.white);
+    }//GEN-LAST:event_BprocesosMouseEntered
+
+    private void BprocesosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BprocesosMouseExited
+        Bprocesos.setBackground(Color.white);
+        Bprocesos.setForeground(new Color(0, 153, 255));
+    }//GEN-LAST:event_BprocesosMouseExited
+
+    private void BconsultasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BconsultasMouseEntered
+       Bconsultas.setBackground(new Color(0, 51, 204));
+       Bconsultas.setForeground(Color.white);
+    }//GEN-LAST:event_BconsultasMouseEntered
+
+    private void BconsultasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BconsultasMouseExited
+        Bconsultas.setBackground(Color.white);
+        Bconsultas.setForeground(new Color(0, 153, 255));
+    }//GEN-LAST:event_BconsultasMouseExited
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new MENU_PRINCIPAL().setVisible(true);
             }
         });
     }

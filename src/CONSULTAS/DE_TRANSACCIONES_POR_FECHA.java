@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package PROCESOS;
+package CONSULTAS;
 
 /**
  *
- * @author mathe
+ * @author garci
  */
-public class CIERRE_FIN_ANO extends javax.swing.JFrame {
+public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
 
     /**
-     * Creates new form CIERRE_FIN_ANO
+     * Creates new form DE_TRANSACCIONES_POR_FECHA
      */
-    public CIERRE_FIN_ANO() {
+    public DE_TRANSACCIONES_POR_FECHA() {
         initComponents();
     }
 
@@ -59,20 +59,20 @@ public class CIERRE_FIN_ANO extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CIERRE_FIN_ANO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DE_TRANSACCIONES_POR_FECHA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CIERRE_FIN_ANO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DE_TRANSACCIONES_POR_FECHA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CIERRE_FIN_ANO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DE_TRANSACCIONES_POR_FECHA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CIERRE_FIN_ANO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DE_TRANSACCIONES_POR_FECHA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CIERRE_FIN_ANO().setVisible(true);
+                new DE_TRANSACCIONES_POR_FECHA().setVisible(true);
             }
         });
     }

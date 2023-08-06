@@ -1,8 +1,8 @@
 package MANTENIMIENTO;
 
-public class General_Mantenimientos extends javax.swing.JFrame {
+public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
 
-    public General_Mantenimientos() {
+    public GENERAL_MATENIMIENTOS() {
         initComponents();
         PanelPrincipal.requestFocus();
     }
@@ -18,6 +18,7 @@ public class General_Mantenimientos extends javax.swing.JFrame {
         Bsalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,7 +118,7 @@ public class General_Mantenimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_BcatalogoActionPerformed
 
     private void BdocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BdocumentosActionPerformed
-        De_Documentos doc = new De_Documentos();
+        DE_DOCUMENTOS doc = new DE_DOCUMENTOS();
         doc.setVisible(true);
     }//GEN-LAST:event_BdocumentosActionPerformed
 
@@ -129,7 +130,7 @@ public class General_Mantenimientos extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new General_Mantenimientos().setVisible(true);
+                new GENERAL_MATENIMIENTOS().setVisible(true);
             }
         });
     }
