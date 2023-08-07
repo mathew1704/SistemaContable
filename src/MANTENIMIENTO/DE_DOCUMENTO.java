@@ -16,10 +16,7 @@ import texto.TextPrompt;
 
 public class DE_DOCUMENTO extends javax.swing.JFrame {
 
-    boolean crear;
     boolean Modificar = false;
-    boolean encontrado;
-    String antigualinea;
     public static String LineaAntigua;
 
     public DE_DOCUMENTO() {
@@ -330,7 +327,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimpiarMouseEntered
 
     private void BtnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseEntered
-        BtnSalir.setBackground(new Color(0, 51, 204));
+        BtnSalir.setBackground(Color.red);
     }//GEN-LAST:event_BtnSalirMouseEntered
 
     private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
@@ -350,7 +347,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimpiarMouseExited
 
     private void BtnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseExited
-        BtnSalir.setBackground(Color.red);
+        BtnSalir.setBackground(new Color(160, 171, 176));
     }//GEN-LAST:event_BtnSalirMouseExited
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

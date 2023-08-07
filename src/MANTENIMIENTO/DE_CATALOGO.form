@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.JSlider" name="jSlider1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTipoCta">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -120,10 +122,14 @@
                                   <Component id="txtcredito" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="txtpadre" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="txtnivel" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
-                                  <Component id="txttipo" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="txtdescripcion" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="txtnumero" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="txtbalance" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="rbgeneral" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rbdetalle" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -172,10 +178,11 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtdescripcion" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txttipo" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbgeneral" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbdetalle" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -341,22 +348,6 @@
               </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdescripcionKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txttipo">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ed" green="ed" red="ed" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri Light" size="18" style="0"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttipoKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtnivel">
@@ -529,6 +520,28 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="16" style="0"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rbgeneral">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="GENERAL"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rbdetalle">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="DETALLE"/>
               </Properties>
             </Component>
           </SubComponents>

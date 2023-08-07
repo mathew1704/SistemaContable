@@ -18,6 +18,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
+import texto.TextPrompt;
 
 public class DE_CATALOGO extends javax.swing.JFrame {
 
@@ -26,6 +27,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     boolean encontrado;
     String antigualinea;
     public static String LineaAntigua;
+    int tipo;
 
     public DE_CATALOGO() {
         initComponents();
@@ -34,6 +36,24 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
         txtfecha.setText(fecha());
         jPanel1.requestFocusInWindow();
+        
+        buttonGroupTipoCta.add(rbgeneral);
+        buttonGroupTipoCta.add(rbdetalle);
+
+        TextPrompt numeroC = new TextPrompt("Digite el No. de Cuenta", txtnumero, TextPrompt.Show.ALWAYS);
+        numeroC.setForeground(Color.gray);
+        TextPrompt descr = new TextPrompt(" Digite la Descripcion  de la cuenta", txtdescripcion, TextPrompt.Show.ALWAYS);
+        descr.setForeground(Color.gray);
+        TextPrompt nivel = new TextPrompt(" Digite el nivel de la cuenta", txtnivel, TextPrompt.Show.ALWAYS);
+        nivel.setForeground(Color.gray);
+        TextPrompt padre = new TextPrompt(" Digite la Cuenta padre", txtpadre, TextPrompt.Show.ALWAYS);
+        padre.setForeground(Color.gray);
+        TextPrompt deb = new TextPrompt(" Digite el Debito acumulado", txtdebito, TextPrompt.Show.ALWAYS);
+        deb.setForeground(Color.gray);
+        TextPrompt cre = new TextPrompt(" Digite el Credito acumulado", txtcredito, TextPrompt.Show.ALWAYS);
+        cre.setForeground(Color.gray);
+        TextPrompt bal = new TextPrompt(" Digite el Balance de la cuenta", txtbalance, TextPrompt.Show.ALWAYS);
+        bal.setForeground(Color.gray);
 
     }
 
@@ -42,6 +62,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private void initComponents() {
 
         jSlider1 = new javax.swing.JSlider();
+        buttonGroupTipoCta = new javax.swing.ButtonGroup();
         PanelAzul = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -58,7 +79,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtnumero = new javax.swing.JTextField();
         txtdescripcion = new javax.swing.JTextField();
-        txttipo = new javax.swing.JTextField();
         txtnivel = new javax.swing.JTextField();
         txtpadre = new javax.swing.JTextField();
         txtdebito = new javax.swing.JTextField();
@@ -69,6 +89,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         BtnLimpiar = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
         txtfecha = new javax.swing.JFormattedTextField();
+        rbgeneral = new javax.swing.JRadioButton();
+        rbdetalle = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -136,15 +158,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtdescripcionKeyPressed(evt);
-            }
-        });
-
-        txttipo.setBackground(new java.awt.Color(237, 237, 237));
-        txttipo.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
-        txttipo.setBorder(null);
-        txttipo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txttipoKeyPressed(evt);
             }
         });
 
@@ -254,6 +267,14 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
         txtfecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
 
+        rbgeneral.setBackground(new java.awt.Color(255, 255, 255));
+        rbgeneral.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        rbgeneral.setText("GENERAL");
+
+        rbdetalle.setBackground(new java.awt.Color(255, 255, 255));
+        rbdetalle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        rbdetalle.setText("DETALLE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,10 +308,13 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                             .addComponent(txtcredito, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtpadre, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtnivel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rbgeneral)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbdetalle)))))
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
@@ -327,10 +351,11 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txttipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(rbgeneral)
+                    .addComponent(rbdetalle))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -391,7 +416,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseEntered
-        BtnGuardar.setBackground(Color.red);
+        BtnGuardar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnGuardarMouseEntered
 
     private void BtnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseExited
@@ -399,7 +424,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuardarMouseExited
 
     private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
-        BtnLimpiar.setBackground(Color.red);
+        BtnLimpiar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnLimpiarMouseEntered
 
     private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
@@ -427,7 +452,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtnivel.setText("");
         txtnumero.setText("");
         txtpadre.setText("");
-        txttipo.setText("");
+        buttonGroupTipoCta.clearSelection();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
@@ -438,9 +463,9 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Descripcion antes de guardar", "ERROR", HEIGHT);
             txtdescripcion.grabFocus();
 
-        } else if (txttipo.getText().isEmpty()) {
+        } else if (!rbgeneral.isSelected() &&  !rbdetalle.isSelected()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Tipo antes de guardar", "ERROR", HEIGHT);
-            txttipo.grabFocus();
+            rbgeneral.grabFocus();
 
         } else if (txtnivel.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Nivel De antes de guardar", "ERROR", HEIGHT);
@@ -479,7 +504,13 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                     f.createNewFile();
                 }
 
-                String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + txttipo.getText() + ";"
+                if (rbgeneral.isSelected()) {
+                    tipo = 0;
+                } else {
+                    tipo = 1;
+                }
+                
+                String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
                         + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
                         + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
                 ManejoArchivos file = new ManejoArchivos();
@@ -561,11 +592,18 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                     txtnivel.setText(s1.next());
                                     txtnumero.setText(s1.next());
                                     txtpadre.setText(s1.next());
-                                    txttipo.setText(s1.next());
                                     
-                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + txttipo.getText() + ";"
-                        + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
-                        + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
+
+                                    tipo = Integer.parseInt(s1.next());
+                                    if (tipo == 0) {
+                                        rbgeneral.isSelected();
+                                    } else{
+                                        rbdetalle.isSelected();
+                                    }
+                                    
+                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
+                                            + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
+                                            + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
                                     estado.setText(" Modificando");
 
                                     Modificar = true;
@@ -601,12 +639,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtdescripcionKeyPressed
 
-    private void txttipoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttipoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txttipo.requestFocus();
-        }
-    }//GEN-LAST:event_txttipoKeyPressed
-
     private void txtnivelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnivelKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtnivel.requestFocus();
@@ -639,7 +671,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DE_CATALOGO().setVisible(true);
@@ -652,6 +684,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private javax.swing.JButton BtnLimpiar;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JPanel PanelAzul;
+    private javax.swing.ButtonGroup buttonGroupTipoCta;
     private javax.swing.JLabel estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -666,6 +699,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JRadioButton rbdetalle;
+    private javax.swing.JRadioButton rbgeneral;
     private javax.swing.JTextField txtbalance;
     private javax.swing.JTextField txtcredito;
     private javax.swing.JTextField txtdebito;
@@ -675,6 +710,5 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private javax.swing.JTextField txtnivel;
     private javax.swing.JTextField txtnumero;
     private javax.swing.JTextField txtpadre;
-    private javax.swing.JTextField txttipo;
     // End of variables declaration//GEN-END:variables
 }
