@@ -16,7 +16,6 @@ public class LOgin extends javax.swing.JFrame {
         initComponents();
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
-        jLabel1.requestFocusInWindow();
 
         TextPrompt usuario = new TextPrompt("Digite su usuario", txtUsuario, TextPrompt.Show.ALWAYS);
         usuario.setForeground(Color.gray);
@@ -175,6 +174,7 @@ public class LOgin extends javax.swing.JFrame {
 
             try {
                 File f = new File("Usuarios.txt");
+                
                 if (!f.exists()) {
                     f.createNewFile();
                     JOptionPane.showMessageDialog(rootPane, "No se encontraron registros de Usuarios");

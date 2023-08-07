@@ -18,6 +18,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         Bsalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setLocationByPlatform(true);
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -27,6 +28,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         Busuario.setForeground(new java.awt.Color(255, 255, 255));
         Busuario.setText("USUARIOS");
         Busuario.setBorder(null);
+        Busuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Busuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BusuarioActionPerformed(evt);
@@ -38,6 +40,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         Bcatalogo.setForeground(new java.awt.Color(255, 255, 255));
         Bcatalogo.setText("CATALOGO DE CUENTA");
         Bcatalogo.setBorder(null);
+        Bcatalogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Bcatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BcatalogoActionPerformed(evt);
@@ -49,6 +52,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         Bdocumentos.setForeground(new java.awt.Color(255, 255, 255));
         Bdocumentos.setText("DOCUMENTOS");
         Bdocumentos.setBorder(null);
+        Bdocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Bdocumentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BdocumentosActionPerformed(evt);
@@ -60,6 +64,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         Bsalir.setForeground(new java.awt.Color(255, 255, 255));
         Bsalir.setText("SALIR");
         Bsalir.setBorder(null);
+        Bsalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Bsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BsalirActionPerformed(evt);
@@ -108,7 +113,7 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusuarioActionPerformed
-       DE_USUARIO user = new DE_USUARIO();
+       DE_USUARIOS_NEW user = new DE_USUARIOS_NEW();
        user.setVisible(true);
     }//GEN-LAST:event_BusuarioActionPerformed
 

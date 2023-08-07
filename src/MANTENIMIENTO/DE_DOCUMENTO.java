@@ -318,7 +318,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseEntered
-        BtnGuardar.setBackground(Color.red);
+        BtnGuardar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnGuardarMouseEntered
 
     private void BtnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarMouseExited
@@ -326,11 +326,11 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnGuardarMouseExited
 
     private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
-        BtnLimpiar.setBackground(Color.red);
+        BtnLimpiar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnLimpiarMouseEntered
 
     private void BtnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseEntered
-        BtnSalir.setBackground(Color.red);
+        BtnSalir.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnSalirMouseEntered
 
     private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
@@ -350,7 +350,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimpiarMouseExited
 
     private void BtnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalirMouseExited
-        BtnSalir.setBackground(new Color(160, 171, 176));
+        BtnSalir.setBackground(Color.red);
     }//GEN-LAST:event_BtnSalirMouseExited
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

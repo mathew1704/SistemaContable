@@ -1,2 +1,2 @@
-admin; 1234; 0; mathew; montero; mathew2004@gmail.com
-yanil; 1234; 1; yanil; garcias; yanilgarcias03@gmail.com
+yanil;1234;0;Yanil de los Angeles;Garcia Diaz;yanilgarcia@gmail.com
+admin ; 1234 ; 1 ; Mathew ; Montero ; mathew2004@gmail.com
