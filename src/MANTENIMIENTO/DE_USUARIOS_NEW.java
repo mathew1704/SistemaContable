@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import ARCHIVOS.ManejoArchivos;
 import CONSULTAS.CONSULTA_USUARIO;
-import CONSULTAS.Ventana_Usuario;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
