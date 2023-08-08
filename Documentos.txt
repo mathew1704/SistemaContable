@@ -2,3 +2,5 @@
 200;Pago
 105;Saldo
 96;NuevoC
+1;adios
+2;klk

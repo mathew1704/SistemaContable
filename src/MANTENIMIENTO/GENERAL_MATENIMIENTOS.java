@@ -113,8 +113,8 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusuarioActionPerformed
-       DE_USUARIOS_NEW user = new DE_USUARIOS_NEW();
-       user.setVisible(true);
+       DE_USUARIOS_NEW u = new DE_USUARIOS_NEW();
+       u.setVisible(true);
     }//GEN-LAST:event_BusuarioActionPerformed
 
     private void BcatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcatalogoActionPerformed

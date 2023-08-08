@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import ARCHIVOS.ManejoArchivos;
+import CONSULTAS.CONSULTA_USUARIO;
+import CONSULTAS.Ventana_Usuario;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -311,7 +313,9 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        CONSULTA_USUARIO e = new CONSULTA_USUARIO();
+        e.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
