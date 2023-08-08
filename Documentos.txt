@@ -1,4 +1,4 @@
-100;Entrada
+100;Entradas
 200;Pago
 105;Saldo
 96;NuevoC
