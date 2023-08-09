@@ -39,7 +39,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtfecha.setText(fecha());
         jPanel1.requestFocusInWindow();
         txthora.setText(hora());
-        
+
         buttonGroupTipoCta.add(rbgeneral);
         buttonGroupTipoCta.add(rbdetalle);
 
@@ -157,6 +157,9 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtnumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtnumeroKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnumeroKeyReleased(evt);
             }
         });
 
@@ -278,10 +281,20 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         rbgeneral.setBackground(new java.awt.Color(255, 255, 255));
         rbgeneral.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         rbgeneral.setText("GENERAL");
+        rbgeneral.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                rbgeneralPropertyChange(evt);
+            }
+        });
 
         rbdetalle.setBackground(new java.awt.Color(255, 255, 255));
         rbdetalle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         rbdetalle.setText("DETALLE");
+        rbdetalle.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                rbdetallePropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -460,6 +473,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtnumero.setText("");
         txtpadre.setText("");
         buttonGroupTipoCta.clearSelection();
+        estado.setText("");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
@@ -470,7 +484,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la Descripcion antes de guardar", "ERROR", HEIGHT);
             txtdescripcion.grabFocus();
 
-        } else if (!rbgeneral.isSelected() &&  !rbdetalle.isSelected()) {
+        } else if (!rbgeneral.isSelected() && !rbdetalle.isSelected()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el Tipo antes de guardar", "ERROR", HEIGHT);
             rbgeneral.grabFocus();
 
@@ -516,10 +530,10 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                 } else {
                     tipo = 1;
                 }
-                
-                String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                        + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
-                        + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
+
+                String lineaActual = txtfecha.getText() + ";" + txthora.getText() + ";" + txtnumero.getText() + ";"
+                        + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
+                        + txtdebito.getText() + ";" + txtcredito.getText() + ";" + txtbalance.getText();
                 ManejoArchivos file = new ManejoArchivos();
 
                 if (Modificar) {
@@ -551,22 +565,10 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnumeroKeyPressed
 
     private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
-        if (txtnumero.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
-        } else {
-            txtdescripcion.setText("");
-            txtdescripcion.grabFocus();
-        }
-
+    
+       String num = txtnumero.getText();
         try {
-            String auxid = txtnumero.getText();
-            int cod = Integer.parseInt(auxid);
-
-            if (cod <= 0) {
-                JOptionPane.showMessageDialog(rootPane, "El Id debe ser un número positivo intente nuevamente");
-                BtnLimpiarActionPerformed(evt);
-            } else {
-
+            
                 boolean encontrado = false;
                 Scanner s;
 
@@ -588,36 +590,35 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                             s1.useDelimiter("\\s*;\\s*");
 
                             try {
-                                if (cod == Integer.parseInt(s1.next())) {
-                                    txtnumero.setText(String.valueOf(cod));
-                                    txtdescripcion.setText(s1.next());
-                                    txtbalance.setText(s1.next());
-                                    txtcredito.setText(s1.next());
-                                    txtdebito.setText(s1.next());
+                                  String auxnum = s1.next();
+                                if (num.equals(auxnum)) {
                                     txtfecha.setText(s1.next());
                                     txthora.setText(s1.next());
-                                    txtnivel.setText(s1.next());
-                                    txtnumero.setText(s1.next());
-                                    txtpadre.setText(s1.next());
-                                    
-
+                                    txtnumero.setText(String.valueOf(auxnum));
+                                    txtdescripcion.setText(s1.next());
                                     tipo = Integer.parseInt(s1.next());
+                                    txtnivel.setText(s1.next());
+                                    txtpadre.setText(s1.next());
+                                    txtdebito.setText(s1.next());
+                                    txtcredito.setText(s1.next());
+                                    txtbalance.setText(s1.next());
+
                                     if (tipo == 0) {
                                         rbgeneral.isSelected();
-                                    } else{
+                                    } else {
                                         rbdetalle.isSelected();
                                     }
-                                    
-                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                                            + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";" + txtcredito.getText() + ";"
-                                            + txtbalance.getText() + ";" + txtfecha.getText() + ";" + txthora.getText();
+
+                                    LineaAntigua = txtfecha.getText() + ";" + txthora.getText() + ";" + num + ";"
+                                            + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
+                                            + txtdebito.getText() + ";" + txtcredito.getText() + ";" + txtbalance.getText();
                                     estado.setText(" Modificando");
 
                                     Modificar = true;
                                     encontrado = true;
                                 } else {
                                     BtnLimpiarActionPerformed(evt);
-                                    txtnumero.setText(auxid);
+                                    txtnumero.setText(auxnum);
                                     estado.setText(" Creando");
                                     Modificar = false;
                                     encontrado = false;
@@ -633,11 +634,12 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                 } catch (FileNotFoundException e) {
                     JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
+            
         } catch (HeadlessException | IOException | NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
             BtnLimpiarActionPerformed(evt);
         }
+         
     }//GEN-LAST:event_txtnumeroActionPerformed
 
     private void txtdescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyPressed
@@ -671,7 +673,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcreditoKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Catalogo", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -680,20 +682,30 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void txtnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyReleased
+       
+    }//GEN-LAST:event_txtnumeroKeyReleased
+
+    private void rbgeneralPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbgeneralPropertyChange
+        tipo = 0;
+    }//GEN-LAST:event_rbgeneralPropertyChange
+
+    private void rbdetallePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbdetallePropertyChange
+        tipo = 1;
+    }//GEN-LAST:event_rbdetallePropertyChange
+
     public static String fecha() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
 
     }
-   
+
     public static String hora() {
         LocalTime horaActual = LocalTime.now();
-DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
         return horaActual.format(hora);
     }
-    
-
 
     public static void main(String args[]) {
 
