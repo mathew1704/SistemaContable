@@ -25,7 +25,6 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(449, 447));
         setResizable(false);
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -41,7 +40,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BcatalogoCuentaActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BcatalogoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 404, 30));
+        PanelPrincipal.add(BcatalogoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 404, 30));
 
         BtransaccionFecha.setBackground(new java.awt.Color(0, 153, 255));
         BtransaccionFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -53,7 +52,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BtransaccionFechaActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtransaccionFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 404, 30));
+        PanelPrincipal.add(BtransaccionFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 404, 30));
 
         BtransaccionRangoFecha.setBackground(new java.awt.Color(0, 153, 255));
         BtransaccionRangoFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -65,7 +64,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BtransaccionRangoFechaActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtransaccionRangoFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 404, 30));
+        PanelPrincipal.add(BtransaccionRangoFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 404, 30));
 
         BtransaccionDocumento.setBackground(new java.awt.Color(0, 153, 255));
         BtransaccionDocumento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -77,7 +76,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BtransaccionDocumentoActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtransaccionDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 404, 30));
+        PanelPrincipal.add(BtransaccionDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 404, 30));
 
         BtransaccionTipoDocumento.setBackground(new java.awt.Color(0, 153, 255));
         BtransaccionTipoDocumento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -89,7 +88,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BtransaccionTipoDocumentoActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BtransaccionTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 404, 30));
+        PanelPrincipal.add(BtransaccionTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 404, 30));
 
         BbalanzaGeneral.setBackground(new java.awt.Color(0, 153, 255));
         BbalanzaGeneral.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -101,7 +100,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BbalanzaGeneralActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BbalanzaGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 404, 30));
+        PanelPrincipal.add(BbalanzaGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 404, 30));
 
         BbalanzaComprobacion.setBackground(new java.awt.Color(0, 153, 255));
         BbalanzaComprobacion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -113,7 +112,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BbalanzaComprobacionActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BbalanzaComprobacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 404, 30));
+        PanelPrincipal.add(BbalanzaComprobacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 404, 30));
 
         BresumenGastosGenerales.setBackground(new java.awt.Color(0, 153, 255));
         BresumenGastosGenerales.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -125,7 +124,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BresumenGastosGeneralesActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BresumenGastosGenerales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 404, 30));
+        PanelPrincipal.add(BresumenGastosGenerales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 404, 30));
 
         BestadoGananciasPerdidas.setBackground(new java.awt.Color(0, 153, 255));
         BestadoGananciasPerdidas.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -137,7 +136,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BestadoGananciasPerdidasActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(BestadoGananciasPerdidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 404, 30));
+        PanelPrincipal.add(BestadoGananciasPerdidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 404, 30));
 
         Bsalir.setBackground(new java.awt.Color(255, 0, 51));
         Bsalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -149,7 +148,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
                 BsalirActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(Bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 404, 30));
+        PanelPrincipal.add(Bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 404, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +158,7 @@ public class GENERAL_CONSULTAS extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
