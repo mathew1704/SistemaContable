@@ -501,77 +501,82 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             txtdescripcion.requestFocus();
         }
 
-        String auxcod = txtnumero.getText();
-
         try {
 
-            boolean encontrado = false;
-            Scanner s;
+            String auxcod = txtnumero.getText();
+            int codigo = Integer.parseInt(auxcod);
 
-            try {
-                File f = new File("Catalogo.txt");
+            if (codigo <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "El codigo debe ser un número positivo intente nuevamente");
+                BtnLimpiarActionPerformed(evt);
+            } else {
+                boolean encontrado = false;
+                Scanner s;
+                try {
+                    File f = new File("Catalogo.txt");
 
-                if (!f.exists()) {
-                    f.createNewFile();
-                    estado.setText("Creando");
+                    if (!f.exists()) {
+                        f.createNewFile();
+                        estado.setText("Creando");
 
-                } else {
-                    s = new Scanner(f);
+                    } else {
+                        s = new Scanner(f);
 
-                    while (s.hasNextLine() && !encontrado) {
+                        while (s.hasNextLine() && !encontrado) {
 
-                        String linea = s.nextLine();
-                        Scanner s1 = new Scanner(linea);
+                            String linea = s.nextLine();
+                            Scanner s1 = new Scanner(linea);
 
-                        s1.useDelimiter("\\s*;\\s*");
+                            s1.useDelimiter("\\s*;\\s*");
 
-                        try {
-                            String cod = s1.next();
-                            if (auxcod.equals(cod)) {
+                            try {
+                                if (codigo == Integer.parseInt(s1.next())) {
 
-                                txtdescripcion.setText(s1.next());
-                                tipo = Integer.parseInt(s1.next());
+                                    txtdescripcion.setText(s1.next());
+                                    tipo = Integer.parseInt(s1.next());
 
-                                if (tipo == 0) {
-                                    rbgeneral.setSelected(true);
+                                    if (tipo == 0) {
+                                        rbgeneral.setSelected(true);
+                                    } else {
+                                        rbdetalle.setSelected(true);
+                                    }
+
+                                    txtnivel.setText(s1.next());
+                                    txtpadre.setText(s1.next());
+                                    txtdebito.setText(s1.next());
+                                    txtcredito.setText(s1.next());
+                                    txtbalance.setText(s1.next());
+
+                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
+                                            + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";"
+                                            + txtcredito.getText() + ";" + txtbalance.getText();
+
+                                    estado.setText(" Modificando");
+
+                                    Modificar = true;
+                                    encontrado = true;
                                 } else {
-                                    rbdetalle.setSelected(true);
+                                    BtnLimpiarActionPerformed(evt);
+                                    txtnumero.setText(auxcod);
+                                    estado.setText(" Creando");
+                                    Modificar = false;
+                                    encontrado = false;
                                 }
-
-                                txtnivel.setText(s1.next());
-                                txtpadre.setText(s1.next());
-                                txtdebito.setText(s1.next());
-                                txtcredito.setText(s1.next());
-                                txtbalance.setText(s1.next());
-
-                                LineaAntigua = cod + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                                        + txtnivel.getText() + ";" + txtpadre.getText() + ";" + txtdebito.getText() + ";"
-                                        + txtcredito.getText() + ";" + txtbalance.getText();
-
-                                estado.setText(" Modificando");
-
-                                Modificar = true;
-                                encontrado = true;
-                            } else {
-                                BtnLimpiarActionPerformed(evt);
-                                txtnumero.setText(auxcod);
-                                estado.setText(" Creando");
-                                Modificar = false;
-                                encontrado = false;
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
                             }
-                        } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-                            System.out.println(e);
                         }
+                        s.close();
+                        txtdescripcion.requestFocus();
                     }
-                    s.close();
-                    txtdescripcion.requestFocus();
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (FileNotFoundException e) {
-                JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } catch (HeadlessException | IOException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
+            JOptionPane.showMessageDialog(rootPane, "El codigo no permite carácteres, intente nuevamente...");
             BtnLimpiarActionPerformed(evt);
         }
     }//GEN-LAST:event_txtnumeroActionPerformed
