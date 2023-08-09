@@ -28,15 +28,15 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
 
-        TextPrompt usuario = new TextPrompt("Digite el usuario", txtUsuario, TextPrompt.Show.ALWAYS);
+        TextPrompt usuario = new TextPrompt(" Digite el usuario", txtUsuario, TextPrompt.Show.ALWAYS);
         usuario.setForeground(Color.gray);
-        TextPrompt password = new TextPrompt("Digite la contraseña", txtcontrasena, TextPrompt.Show.ALWAYS);
+        TextPrompt password = new TextPrompt(" Digite la contraseña", txtcontrasena, TextPrompt.Show.ALWAYS);
         password.setForeground(Color.gray);
-        TextPrompt nombre = new TextPrompt("Digite el Nombre", txtNombre, TextPrompt.Show.ALWAYS);
+        TextPrompt nombre = new TextPrompt(" Digite el Nombre", txtNombre, TextPrompt.Show.ALWAYS);
         nombre.setForeground(Color.gray);
-        TextPrompt apell = new TextPrompt("Digite el Apellido", txtApellido, TextPrompt.Show.ALWAYS);
+        TextPrompt apell = new TextPrompt(" Digite el Apellido", txtApellido, TextPrompt.Show.ALWAYS);
         apell.setForeground(Color.gray);
-        TextPrompt email = new TextPrompt("Digite el Email", txtEmail, TextPrompt.Show.ALWAYS);
+        TextPrompt email = new TextPrompt(" Digite el Email", txtEmail, TextPrompt.Show.ALWAYS);
         email.setForeground(Color.gray);
     }
 
@@ -296,28 +296,28 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         txtApellido.setText("");
         txtEmail.setText("");
         estado.setText("");
-        txtUsuario.grabFocus();
+        txtUsuario.requestFocus();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el usuario antes de guardar", "ERROR", HEIGHT);
-            txtUsuario.grabFocus();
+            txtUsuario.requestFocus();
         } else if (txtcontrasena.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene la contraseba antes de guardar", "ERROR", HEIGHT);
-            txtcontrasena.grabFocus();
+            txtcontrasena.requestFocus();
         } else if (!rbAdmin.isSelected() && !rbNormal.isSelected()) {
             JOptionPane.showMessageDialog(rootPane, "Se debe elegir el nivel antes de guardar", "ERROR", HEIGHT);
-            rbNormal.grabFocus();
+            rbNormal.requestFocus();
         } else if (txtNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el nombre del usuario antes de guardar", "ERROR", HEIGHT);
-            txtNombre.grabFocus();
+            txtNombre.requestFocus();
         } else if (txtApellido.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el apellido del usuario antes de guardar", "ERROR", HEIGHT);
-            txtApellido.grabFocus();
+            txtApellido.requestFocus();
         } else if (txtEmail.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el email del usuario antes de guardar", "ERROR", HEIGHT);
-            txtEmail.grabFocus();
+            txtEmail.requestFocus();
         } else {
             try {
                 File f = new File("Usuarios.txt");
@@ -341,11 +341,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                     file.Modificar(LineaAntigua, lineaActual, f);
                     btnLimpiarActionPerformed(evt);
                     Modificar = false;
-                    txtUsuario.grabFocus();
+                    txtUsuario.requestFocus();
                 } else {
                     file.GuardarDatos(lineaActual, f);
                     btnLimpiarActionPerformed(evt);
-                    txtUsuario.grabFocus();
+                    txtUsuario.requestFocus();
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -358,9 +358,9 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         if (txtUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el usuario para continuar");
-            txtUsuario.grabFocus();
+            txtUsuario.requestFocus();
         } else {
-            txtcontrasena.grabFocus();
+            txtcontrasena.requestFocus();
         }
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
@@ -426,7 +426,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                         }
                     }
                     s.close();
-                    txtNombre.grabFocus();
+                    txtNombre.requestFocus();
                 }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);

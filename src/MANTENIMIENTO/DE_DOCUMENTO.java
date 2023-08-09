@@ -95,8 +95,8 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         PanelPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 110, 30));
 
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
-        txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
-        txtDescripcion.setBorder(null);
+        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 237, 237)));
         txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDescripcionKeyPressed(evt);
@@ -105,8 +105,8 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         PanelPrincipal.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 290, 30));
 
         txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
-        txtCodigo.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
-        txtCodigo.setBorder(null);
+        txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCodigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 237, 237)));
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -208,16 +208,16 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         txtCodigo.setText("");
         txtDescripcion.setText("");
         estado.setText("");
-        txtCodigo.grabFocus();
+        txtCodigo.requestFocus();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
-            txtCodigo.grabFocus();
+            txtCodigo.requestFocus();
         } else {
             txtDescripcion.setText("");
-            txtDescripcion.grabFocus();
+            txtDescripcion.requestFocus();
         }
 
         String auxcod = txtCodigo.getText();
@@ -267,7 +267,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
                         }
                     }
                     s.close();
-                    txtDescripcion.grabFocus();
+                    txtDescripcion.requestFocus();
                 }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
@@ -303,9 +303,11 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
                     file.Modificar(LineaAntigua, lineaActual, f);
                     BtnLimpiarActionPerformed(evt);
                     Modificar = false;
+                    txtCodigo.requestFocus();
                 } else {
                     file.GuardarDatos(lineaActual, f);
                     BtnLimpiarActionPerformed(evt);
+                    txtCodigo.requestFocus();
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");

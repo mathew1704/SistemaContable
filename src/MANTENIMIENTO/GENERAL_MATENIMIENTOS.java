@@ -1,10 +1,20 @@
 package MANTENIMIENTO;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.plaf.FontUIResource;
+
 public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
 
     public GENERAL_MATENIMIENTOS() {
         initComponents();
         PanelPrincipal.requestFocus();
+        
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
+        UIManager.put("OptionPane.messageForeground", Color.black);
     }
 
     @SuppressWarnings("unchecked")
@@ -20,6 +30,11 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setLocationByPlatform(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,6 +148,16 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
     private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_BsalirActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
 
