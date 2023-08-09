@@ -531,7 +531,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                     tipo = 1;
                 }
 
-                String lineaActual = txtfecha.getText() + ";" + txthora.getText() + ";" + txtnumero.getText() + ";"
+                String lineaActual = txtnumero.getText() + ";"
                         + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
                         + txtdebito.getText() + ";" + txtcredito.getText() + ";" + txtbalance.getText();
                 ManejoArchivos file = new ManejoArchivos();
@@ -565,81 +565,77 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnumeroKeyPressed
 
     private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
-    
-       String num = txtnumero.getText();
+        if (txtnumero.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+            txtnumero.grabFocus();
+        }
+
+        String auxcod = txtnumero.getText();
+
         try {
-            
-                boolean encontrado = false;
-                Scanner s;
 
-                try {
-                    File f = new File("Catalogo.txt");
+            boolean encontrado = false;
+            Scanner s;
 
-                    if (!f.exists()) {
-                        f.createNewFile();
-                        estado.setText("Creando");
+            try {
+                File f = new File("Catalogo.txt");
 
-                    } else {
-                        s = new Scanner(f);
+                if (!f.exists()) {
+                    f.createNewFile();
+                    estado.setText("Creando");
 
-                        while (s.hasNextLine() && !encontrado) {
+                } else {
+                    s = new Scanner(f);
 
-                            String linea = s.nextLine();
-                            Scanner s1 = new Scanner(linea);
+                    while (s.hasNextLine() && !encontrado) {
 
-                            s1.useDelimiter("\\s*;\\s*");
+                        String linea = s.nextLine();
+                        Scanner s1 = new Scanner(linea);
 
-                            try {
-                                  String auxnum = s1.next();
-                                if (num.equals(auxnum)) {
-                                    txtfecha.setText(s1.next());
-                                    txthora.setText(s1.next());
-                                    txtnumero.setText(String.valueOf(auxnum));
-                                    txtdescripcion.setText(s1.next());
-                                    tipo = Integer.parseInt(s1.next());
-                                    txtnivel.setText(s1.next());
-                                    txtpadre.setText(s1.next());
-                                    txtdebito.setText(s1.next());
-                                    txtcredito.setText(s1.next());
-                                    txtbalance.setText(s1.next());
+                        s1.useDelimiter("\\s*;\\s*");
 
-                                    if (tipo == 0) {
-                                        rbgeneral.isSelected();
-                                    } else {
-                                        rbdetalle.isSelected();
-                                    }
+                        try {
+                            String cod = s1.next();
+                            if (auxcod.equals(cod)) {
+                               
+                                txtdescripcion.setText(s1.next());
+                                tipo = Integer.parseInt(s1.next());
+                                txtnivel.setText(s1.next());
+                                txtpadre.setText(s1.next());
+                                txtdebito.setText(s1.next());
+                                txtcredito.setText(s1.next());
+                                txtbalance.setText(s1.next());
 
-                                    LineaAntigua = txtfecha.getText() + ";" + txthora.getText() + ";" + num + ";"
-                                            + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
-                                            + txtdebito.getText() + ";" + txtcredito.getText() + ";" + txtbalance.getText();
-                                    estado.setText(" Modificando");
+                                LineaAntigua =  cod + ";"
+                                        + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
+                                        + txtdebito.getText() + ";" + txtcredito.getText() + ";" + txtbalance.getText();
+                                estado.setText(" Modificando");
 
-                                    Modificar = true;
-                                    encontrado = true;
-                                } else {
-                                    BtnLimpiarActionPerformed(evt);
-                                    txtnumero.setText(auxnum);
-                                    estado.setText(" Creando");
-                                    Modificar = false;
-                                    encontrado = false;
-                                }
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-                                System.out.println(e);
+                                Modificar = true;
+                                encontrado = true;
+                            } else {
+                                BtnLimpiarActionPerformed(evt);
+                                txtnumero.setText(auxcod);
+                                estado.setText(" Creando");
+                                Modificar = false;
+                                encontrado = false;
                             }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                            System.out.println(e);
                         }
-                        s.close();
-                        txtdescripcion.grabFocus();
                     }
-                } catch (FileNotFoundException e) {
-                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                    s.close();
+                    txtnumero.grabFocus();
                 }
-            
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (HeadlessException | IOException | NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
             BtnLimpiarActionPerformed(evt);
         }
-         
+
     }//GEN-LAST:event_txtnumeroActionPerformed
 
     private void txtdescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyPressed
@@ -683,7 +679,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void txtnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyReleased
-       
+
     }//GEN-LAST:event_txtnumeroKeyReleased
 
     private void rbgeneralPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbgeneralPropertyChange

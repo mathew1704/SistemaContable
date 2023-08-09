@@ -1,3 +1,4 @@
 100;Entrada
 200;Salidas
 EN-102;Entrada cxc
+1;credito
