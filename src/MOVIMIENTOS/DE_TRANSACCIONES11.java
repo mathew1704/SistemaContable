@@ -44,6 +44,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaRegistros = new javax.swing.JTable();
+        BtnSalir = new javax.swing.JButton();
+        BtnGuardar = new javax.swing.JButton();
+        BtnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,12 +70,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 CbTipoDocActionPerformed(evt);
             }
         });
-        PanelCabezera.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 204, 30));
+        PanelCabezera.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 204, 30));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("TIPO DE DOCUMENTO");
-        PanelCabezera.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 152, 32));
+        PanelCabezera.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 152, 32));
 
         txtFecha.setBackground(new java.awt.Color(237, 237, 237));
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
@@ -87,12 +90,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("MONTO");
-        PanelCabezera.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 105, 32));
+        PanelCabezera.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 105, 32));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("NO. DOCUMENTO");
-        PanelCabezera.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 128, 32));
+        PanelCabezera.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 128, 32));
 
         txtNdocumento.setBackground(new java.awt.Color(237, 237, 237));
         txtNdocumento.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -102,12 +105,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtNdocumentoActionPerformed(evt);
             }
         });
-        PanelCabezera.add(txtNdocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 142, 26));
+        PanelCabezera.add(txtNdocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 142, 26));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("DESCRIPCION");
-        PanelCabezera.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 105, 32));
+        PanelCabezera.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 105, 32));
 
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -117,7 +120,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtDescripcionActionPerformed(evt);
             }
         });
-        PanelCabezera.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 280, 26));
+        PanelCabezera.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 280, 26));
 
         txtMonto.setBackground(new java.awt.Color(237, 237, 237));
         txtMonto.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -127,9 +130,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtMontoActionPerformed(evt);
             }
         });
-        PanelCabezera.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 142, 26));
+        PanelCabezera.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 142, 26));
 
-        PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 200));
+        PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 170));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -220,9 +223,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnAgregar.setText("AGREGAR");
         jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 110, 40));
 
-        PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 690, 190));
+        PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 690, 190));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TablaRegistros.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         TablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
@@ -254,18 +258,40 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             TablaRegistros.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-        );
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 152));
 
-        PanelPrincipal.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 690, 200));
+        BtnSalir.setBackground(new java.awt.Color(255, 0, 51));
+        BtnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BtnSalir.setText("SALIR");
+        BtnSalir.setBorder(null);
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 110, 40));
+
+        BtnGuardar.setBackground(new java.awt.Color(0, 153, 255));
+        BtnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnGuardar.setText("GUARDAR");
+        BtnGuardar.setBorder(null);
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 110, 40));
+
+        BtnLimpiar.setBackground(new java.awt.Color(0, 153, 255));
+        BtnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLimpiar.setText("LIMPIAR");
+        BtnLimpiar.setBorder(null);
+        jPanel2.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 110, 40));
+
+        PanelPrincipal.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 690, 230));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -324,6 +350,14 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoActionPerformed
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnSalirActionPerformed
     
     public static String fecha() {
         Date fecha = new Date();
@@ -342,6 +376,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnSalir;
     private javax.swing.JComboBox<String> CbTipoDoc;
     private javax.swing.JPanel PanelCabezera;
     private javax.swing.JPanel PanelPrincipal;

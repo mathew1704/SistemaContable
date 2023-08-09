@@ -2,7 +2,7 @@ package MENU_PRINCIPAL;
 
 import CONSULTAS.GENERAL_CONSULTAS;
 import MANTENIMIENTO.GENERAL_MATENIMIENTOS;
-import MOVIMIENTOS.DE_TRANSACCIONES;
+import MOVIMIENTOS.DE_TRANSACCIONES11;
 import PROCESOS.GENERAL_CIERRES;
 import java.awt.Color;
 
@@ -28,12 +28,18 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        PanelPrincipal.setBackground(new java.awt.Color(0, 153, 255));
+        PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Bmantenimientos.setBackground(new java.awt.Color(0, 153, 255));
         Bmantenimientos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        Bmantenimientos.setForeground(new java.awt.Color(0, 153, 255));
+        Bmantenimientos.setForeground(new java.awt.Color(255, 255, 255));
         Bmantenimientos.setText("MANTENIMIENTOS");
         Bmantenimientos.setBorder(null);
         Bmantenimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -52,8 +58,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         PanelPrincipal.add(Bmantenimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 349, 52));
 
+        Bmovimientos.setBackground(new java.awt.Color(0, 153, 255));
         Bmovimientos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        Bmovimientos.setForeground(new java.awt.Color(0, 153, 255));
+        Bmovimientos.setForeground(new java.awt.Color(255, 255, 255));
         Bmovimientos.setText("MOVIMIENTO");
         Bmovimientos.setBorder(null);
         Bmovimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -72,8 +79,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         PanelPrincipal.add(Bmovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 349, 52));
 
+        Bprocesos.setBackground(new java.awt.Color(0, 153, 255));
         Bprocesos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        Bprocesos.setForeground(new java.awt.Color(0, 153, 255));
+        Bprocesos.setForeground(new java.awt.Color(255, 255, 255));
         Bprocesos.setText("PROCESOS");
         Bprocesos.setBorder(null);
         Bprocesos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -92,8 +100,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         PanelPrincipal.add(Bprocesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 349, 52));
 
+        Bconsultas.setBackground(new java.awt.Color(0, 153, 255));
         Bconsultas.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        Bconsultas.setForeground(new java.awt.Color(0, 153, 255));
+        Bconsultas.setForeground(new java.awt.Color(255, 255, 255));
         Bconsultas.setText("CONSULTAS");
         Bconsultas.setBorder(null);
         Bconsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -125,11 +134,13 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         PanelPrincipal.add(Bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 349, 52));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PRINCIPAL");
-        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 349, 46));
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255)));
+        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 349, 46));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +157,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BmovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmovimientosActionPerformed
-        DE_TRANSACCIONES tran = new DE_TRANSACCIONES();
+        DE_TRANSACCIONES11 tran = new DE_TRANSACCIONES11();
         tran.setVisible(true);
     }//GEN-LAST:event_BmovimientosActionPerformed
 
@@ -171,43 +182,39 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
     private void BmantenimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmantenimientosMouseEntered
         Bmantenimientos.setBackground(new Color(0, 51, 204));
-        Bmantenimientos.setForeground(Color.white);
     }//GEN-LAST:event_BmantenimientosMouseEntered
 
     private void BmantenimientosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmantenimientosMouseExited
-        Bmantenimientos.setBackground(Color.white);
-        Bmantenimientos.setForeground(new Color(0, 153, 255));
+        Bmantenimientos.setBackground(new Color(0, 153, 255));
     }//GEN-LAST:event_BmantenimientosMouseExited
 
     private void BmovimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmovimientosMouseEntered
         Bmovimientos.setBackground(new Color(0, 51, 204));
-        Bmovimientos.setForeground(Color.white);
     }//GEN-LAST:event_BmovimientosMouseEntered
 
     private void BmovimientosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BmovimientosMouseExited
-        Bmovimientos.setBackground(Color.white);
-        Bmovimientos.setForeground(new Color(0, 153, 255));
+        Bmovimientos.setBackground(new Color(0, 153, 255));
     }//GEN-LAST:event_BmovimientosMouseExited
 
     private void BprocesosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BprocesosMouseEntered
        Bprocesos.setBackground(new Color(0, 51, 204));
-       Bprocesos.setForeground(Color.white);
     }//GEN-LAST:event_BprocesosMouseEntered
 
     private void BprocesosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BprocesosMouseExited
-        Bprocesos.setBackground(Color.white);
-        Bprocesos.setForeground(new Color(0, 153, 255));
+        Bprocesos.setBackground(new Color(0, 153, 255));
     }//GEN-LAST:event_BprocesosMouseExited
 
     private void BconsultasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BconsultasMouseEntered
-       Bconsultas.setBackground(new Color(0, 51, 204));
-       Bconsultas.setForeground(Color.white);
+       Bconsultas.setBackground(new Color(0, 51, 204)); 
     }//GEN-LAST:event_BconsultasMouseEntered
 
     private void BconsultasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BconsultasMouseExited
-        Bconsultas.setBackground(Color.white);
-        Bconsultas.setForeground(new Color(0, 153, 255));
+        Bconsultas.setBackground(new Color(0, 153, 255));
     }//GEN-LAST:event_BconsultasMouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+     
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
 

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import ARCHIVOS.ManejoArchivos;
-import CONSULTAS.CONSULTA_USUARIO;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -18,20 +17,17 @@ import texto.TextPrompt;
 public class DE_USUARIOS_NEW extends javax.swing.JFrame {
 
     int nivel;
-    boolean crear;
     boolean Modificar = false;
-    boolean encontrado;
-    String antigualinea;
     public static String LineaAntigua;
 
     public DE_USUARIOS_NEW() {
         initComponents();
         buttonGroup1.add(rbAdmin);
         buttonGroup1.add(rbNormal);
-        
+
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
-        
+
         TextPrompt usuario = new TextPrompt("Digite el usuario", txtUsuario, TextPrompt.Show.ALWAYS);
         usuario.setForeground(Color.gray);
         TextPrompt password = new TextPrompt("Digite la contraseña", txtcontrasena, TextPrompt.Show.ALWAYS);
@@ -59,7 +55,6 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        btnConsultar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -76,6 +71,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         jButton4.setText("SALIR");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,27 +127,6 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         jLabel7.setText("Apellido");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
 
-        btnConsultar.setBackground(new java.awt.Color(160, 171, 176));
-        btnConsultar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultar.setText("CONSULTAR");
-        btnConsultar.setBorder(null);
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseExited(evt);
-            }
-        });
-        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 150, 50));
-
         btnGuardar.setBackground(new java.awt.Color(160, 171, 176));
         btnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,7 +146,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 150, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 150, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(160, 171, 176));
         btnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -191,7 +170,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 150, 50));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 150, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -212,11 +191,19 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 150, 50));
 
         txtEmail.setBackground(new java.awt.Color(237, 237, 237));
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 237, 237)));
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 290, 30));
 
         txtUsuario.setBackground(new java.awt.Color(237, 237, 237));
@@ -298,7 +285,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -309,13 +296,8 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         txtApellido.setText("");
         txtEmail.setText("");
         estado.setText("");
+        txtUsuario.grabFocus();
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        CONSULTA_USUARIO e = new CONSULTA_USUARIO();
-        e.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtUsuario.getText().isEmpty()) {
@@ -349,9 +331,9 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                 } else {
                     nivel = 0;
                 }
-                
-                String lineaActual = txtUsuario.getText() + " ; " + txtcontrasena.getText() + " ; " + nivel + " ; " 
-                        + txtNombre.getText() +" ; " + txtApellido.getText() + " ; " + txtEmail.getText();
+
+                String lineaActual = txtUsuario.getText() + " ; " + txtcontrasena.getText() + " ; " + nivel + " ; "
+                        + txtNombre.getText() + " ; " + txtApellido.getText() + " ; " + txtEmail.getText();
 
                 ManejoArchivos file = new ManejoArchivos();
 
@@ -359,9 +341,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
                     file.Modificar(LineaAntigua, lineaActual, f);
                     btnLimpiarActionPerformed(evt);
                     Modificar = false;
+                    txtUsuario.grabFocus();
                 } else {
                     file.GuardarDatos(lineaActual, f);
                     btnLimpiarActionPerformed(evt);
+                    txtUsuario.grabFocus();
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -374,15 +358,16 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         if (txtUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el usuario para continuar");
+            txtUsuario.grabFocus();
         } else {
             txtcontrasena.grabFocus();
         }
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
-         String login = txtUsuario.getText();
+        String login = txtUsuario.getText();
         String contr = txtcontrasena.getText();
-        
+
         try {
             boolean encontrado = false;
             Scanner s;
@@ -467,16 +452,8 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         btnGuardar.setBackground(new Color(160, 171, 176));
     }//GEN-LAST:event_btnGuardarMouseExited
 
-    private void btnConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseEntered
-        btnConsultar.setBackground(new Color(0, 51, 204));
-    }//GEN-LAST:event_btnConsultarMouseEntered
-
-    private void btnConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseExited
-        btnConsultar.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_btnConsultarMouseExited
-
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
-        
+
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -499,13 +476,46 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtApellido.requestFocus();
         }
+
+        if (Character.isDigit(evt.getKeyChar())) {
+            txtNombre.setEditable(false);
+        } else {
+            txtNombre.setEditable(true);
+        }
     }//GEN-LAST:event_txtNombreKeyPressed
 
     private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtEmail.requestFocus();
         }
+
+        if (Character.isDigit(evt.getKeyChar())) {
+            txtApellido.setEditable(false);
+        } else {
+            txtApellido.setEditable(true);
+        }
     }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        char c = evt.getKeyChar();
+        if (c == ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
 
     public static void main(String args[]) {
 
@@ -518,7 +528,6 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAzul;
-    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;

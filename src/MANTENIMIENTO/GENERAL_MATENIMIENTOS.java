@@ -115,16 +115,19 @@ public class GENERAL_MATENIMIENTOS extends javax.swing.JFrame {
     private void BusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusuarioActionPerformed
        DE_USUARIOS_NEW u = new DE_USUARIOS_NEW();
        u.setVisible(true);
+       dispose();
     }//GEN-LAST:event_BusuarioActionPerformed
 
     private void BcatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcatalogoActionPerformed
         DE_CATALOGO catalogos = new DE_CATALOGO();
         catalogos.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BcatalogoActionPerformed
 
     private void BdocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BdocumentosActionPerformed
         DE_DOCUMENTO doc = new DE_DOCUMENTO();
         doc.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BdocumentosActionPerformed
 
     private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed

@@ -218,7 +218,6 @@ public class LOgin extends javax.swing.JFrame {
                             encontrado = false;
                             if (auxLogin.equals(txtUsuario.getText())) {
                                 JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Atención", 2);
-                                txtUsuario.setText("");
                                 contraseña.setText("");
                                 return;
                             } else if (!s.hasNextLine()) {

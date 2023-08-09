@@ -1,6 +1,3 @@
-100;Entradas
-200;Pago
-105;Saldo
-96;NuevoC
-1;adios
-2;klk
+100;Entrada
+200;Salidas
+EN-102;Entrada cxc

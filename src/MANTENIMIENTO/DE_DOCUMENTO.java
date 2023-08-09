@@ -97,6 +97,11 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         txtDescripcion.setBorder(null);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
         PanelPrincipal.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 290, 30));
 
         txtCodigo.setBackground(new java.awt.Color(237, 237, 237));
@@ -203,73 +208,69 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         txtCodigo.setText("");
         txtDescripcion.setText("");
         estado.setText("");
+        txtCodigo.grabFocus();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+            txtCodigo.grabFocus();
         } else {
             txtDescripcion.setText("");
             txtDescripcion.grabFocus();
         }
 
+        String auxcod = txtCodigo.getText();
+        
         try {
-            String auxid = txtCodigo.getText();
-            int cod = Integer.parseInt(auxid);
+            
+            boolean encontrado = false;
+            Scanner s;
 
-            if (cod <= 0) {
-                JOptionPane.showMessageDialog(rootPane, "El Id debe ser un número positivo intente nuevamente");
-                BtnLimpiarActionPerformed(evt);
-            } else {
+            try {
+                File f = new File("Documentos.txt");
 
-                boolean encontrado = false;
-                Scanner s;
+                if (!f.exists()) {
+                    f.createNewFile();
+                    estado.setText("Creando");
 
-                try {
-                    File f = new File("Documentos.txt");
+                } else {
+                    s = new Scanner(f);
 
-                    if (!f.exists()) {
-                        f.createNewFile();
-                        estado.setText("Creando");
+                    while (s.hasNextLine() && !encontrado) {
 
-                    } else {
-                        s = new Scanner(f);
+                        String linea = s.nextLine();
+                        Scanner s1 = new Scanner(linea);
 
-                        while (s.hasNextLine() && !encontrado) {
+                        s1.useDelimiter("\\s*;\\s*");
 
-                            String linea = s.nextLine();
-                            Scanner s1 = new Scanner(linea);
+                        try {
+                            String cod = s1.next();
+                            if (auxcod.equals(cod)) {
+                                txtDescripcion.setText(s1.next());
 
-                            s1.useDelimiter("\\s*;\\s*");
+                                LineaAntigua = cod + ";" + txtDescripcion.getText();
+                                estado.setText(" Modificando");
 
-                            try {
-                                if (cod == Integer.parseInt(s1.next())) {
-                                    txtCodigo.setText(String.valueOf(cod));
-                                    txtDescripcion.setText(s1.next());
-
-                                    LineaAntigua = txtCodigo.getText() + ";" + txtDescripcion.getText();
-                                    estado.setText(" Modificando");
-
-                                    Modificar = true;
-                                    encontrado = true;
-                                } else {
-                                    BtnLimpiarActionPerformed(evt);
-                                    txtCodigo.setText(auxid);
-                                    estado.setText(" Creando");
-                                    Modificar = false;
-                                    encontrado = false;
-                                }
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-                                System.out.println(e);
+                                Modificar = true;
+                                encontrado = true;
+                            } else {
+                                BtnLimpiarActionPerformed(evt);
+                                txtCodigo.setText(auxcod);
+                                estado.setText(" Creando");
+                                Modificar = false;
+                                encontrado = false;
                             }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                            System.out.println(e);
                         }
-                        s.close();
-                        txtDescripcion.grabFocus();
                     }
-                } catch (FileNotFoundException e) {
-                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                    s.close();
+                    txtDescripcion.grabFocus();
                 }
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (HeadlessException | IOException | NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "El Id no permite carácteres, intente nuevamente...");
@@ -334,12 +335,6 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtDescripcion.requestFocus();
         }
-
-        if (Character.isDigit(evt.getKeyChar())) {
-            txtCodigo.setEditable(true);
-        } else {
-            txtCodigo.setEditable(false);
-        }
     }//GEN-LAST:event_txtCodigoKeyPressed
 
     private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
@@ -351,7 +346,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalirMouseExited
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos","Cerrar Ventana",JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -360,6 +355,13 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+         if (Character.isDigit(evt.getKeyChar())) {
+            txtDescripcion.setEditable(false);
+        } else {
+            txtDescripcion.setEditable(true);
+        }
+    }//GEN-LAST:event_txtDescripcionKeyPressed
 
     public static void main(String args[]) {
 
