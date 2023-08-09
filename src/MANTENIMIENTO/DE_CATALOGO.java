@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,6 +38,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
         txtfecha.setText(fecha());
         jPanel1.requestFocusInWindow();
+        txthora.setText(hora());
         
         buttonGroupTipoCta.add(rbgeneral);
         buttonGroupTipoCta.add(rbdetalle);
@@ -453,7 +456,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtcredito.setText("");
         txtdebito.setText("");
         txtdescripcion.setText("");
-        txthora.setText("");
         txtnivel.setText("");
         txtnumero.setText("");
         txtpadre.setText("");
@@ -684,6 +686,14 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         return formatoFecha.format(fecha);
 
     }
+   
+    public static String hora() {
+        LocalTime horaActual = LocalTime.now();
+DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return horaActual.format(hora);
+    }
+    
+
 
     public static void main(String args[]) {
 
