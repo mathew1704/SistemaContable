@@ -605,6 +605,12 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                 txtdebito.setText(s1.next());
                                 txtcredito.setText(s1.next());
                                 txtbalance.setText(s1.next());
+                                 if (tipo == 0) {
+                                        rbgeneral.isSelected();
+                                    } else {
+                                        rbdetalle.isSelected();
+                                    }
+
 
                                 LineaAntigua =  cod + ";"
                                         + txtdescripcion.getText() + ";" + tipo + ";" + txtnivel.getText() + ";" + txtpadre.getText() + ";"
