@@ -193,7 +193,7 @@ public class LOgin extends javax.swing.JFrame {
                             Nivel = Integer.parseInt(s1.next());
                             String Nombre = s1.next();
                             
-                            MENU_PRINCIPAL m = new MENU_PRINCIPAL();
+                            MENU_PRINCIPAL1 m = new MENU_PRINCIPAL1();
 
                             if (Nivel == 1) {
                                 
@@ -206,7 +206,7 @@ public class LOgin extends javax.swing.JFrame {
                                 this.dispose();
                             } else if (Nivel == 0) {
 
-                                MENU_PRINCIPAL M = new MENU_PRINCIPAL();
+                                MENU_PRINCIPAL1 M = new MENU_PRINCIPAL1();
                                 M.setVisible(true);
                                 dispose();
 
