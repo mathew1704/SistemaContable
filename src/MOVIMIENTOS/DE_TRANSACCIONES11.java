@@ -1,7 +1,13 @@
 package MOVIMIENTOS;
 
+import ARCHIVOS.ManejoArchivos;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
@@ -9,8 +15,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         initComponents();
         txtFecha.setText(fecha());
         txtFecha.setEditable(false);
-        PanelCabezera.requestFocusInWindow();
         this.setTitle("Movimiento de Transacciones");
+
+        txtNdocumento.requestFocusInWindow();
+        txtDescripcion.setEditable(false);
+        txtDescripcionC.setEditable(false);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -146,9 +156,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtDebito.setBackground(new java.awt.Color(237, 237, 237));
         txtDebito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtDebito.setBorder(null);
-        txtDebito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDebitoActionPerformed(evt);
+        txtDebito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDebitoKeyPressed(evt);
             }
         });
         jPanel1.add(txtDebito, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 90, 26));
@@ -195,9 +205,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtCredito.setBackground(new java.awt.Color(237, 237, 237));
         txtCredito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtCredito.setBorder(null);
-        txtCredito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCreditoActionPerformed(evt);
+        txtCredito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCreditoKeyPressed(evt);
             }
         });
         jPanel1.add(txtCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 100, 26));
@@ -221,6 +231,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
         BtnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnAgregar.setText("AGREGAR");
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 110, 40));
 
         PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 690, 190));
@@ -289,6 +304,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         BtnLimpiar.setText("LIMPIAR");
         BtnLimpiar.setBorder(null);
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
         jPanel2.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 110, 40));
 
         PanelPrincipal.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 690, 230));
@@ -323,16 +343,63 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
 
-    private void txtDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDebitoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDebitoActionPerformed
-
     private void txtComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComentarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtComentarioActionPerformed
 
     private void txtNdocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNdocumentoActionPerformed
-        // TODO add your handling code here:
+        if (txtNdocumento.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+            txtNdocumento.grabFocus();
+        } else {
+            txtNcuenta.requestFocus();
+        }
+
+        String auxn = txtNdocumento.getText();
+        String desc;
+
+        int codigo = Integer.parseInt(auxn);
+        boolean encontrado = false;
+        Scanner s;
+
+        try {
+
+            File f = new File("Documentos.txt");
+            if (!f.exists()) {
+                JOptionPane.showMessageDialog(this, "No hay ningun registro de Documentos");
+            } else {
+
+                s = new Scanner(f);
+
+                while (s.hasNextLine() && !encontrado) {
+
+                    String linea = s.nextLine();
+                    Scanner s1 = new Scanner(linea);
+
+                    s1.useDelimiter("\\s*;\\s*");
+
+                    try {
+                        if (codigo == Integer.parseInt(s1.next())) {
+
+                            txtNdocumento.setText(auxn);
+                            txtDescripcion.setText(s1.next());
+                            encontrado = true;
+                        } else {
+
+                            JOptionPane.showMessageDialog(this, "Este codigo no existe");
+                            txtNdocumento.setText("");
+                            txtNdocumento.requestFocus();
+                            encontrado = false;
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.println(e);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_txtNdocumentoActionPerformed
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
@@ -340,12 +407,70 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void txtNcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNcuentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNcuentaActionPerformed
+        if (txtNcuenta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+            txtNcuenta.grabFocus();
+        } else {
+            txtDescripcionC.requestFocus();
+        }
 
-    private void txtCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreditoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCreditoActionPerformed
+        String auxc = txtNcuenta.getText();
+        String tipoc;
+        int tipo;
+        int cuenta = Integer.parseInt(auxc);
+
+        boolean encontrado = false;
+        Scanner s;
+
+        try {
+
+            File f = new File("Catalogo.txt");
+            if (!f.exists()) {
+                JOptionPane.showMessageDialog(this, "No hay ningun registro de esta Cuenta");
+            } else {
+
+                s = new Scanner(f);
+
+                while (s.hasNextLine() && !encontrado) {
+
+                    String linea = s.nextLine();
+                    Scanner s1 = new Scanner(linea);
+
+                    s1.useDelimiter("\\s*;\\s*");
+
+                    try {
+                        if (cuenta == Integer.parseInt(s1.next())) {
+
+                            txtNcuenta.setText(auxc);
+                            txtDescripcionC.setText(s1.next());
+                            tipo = Integer.parseInt(s1.next());
+
+                            if (tipo == 0) {
+                                tipoc = "General";
+                                JOptionPane.showMessageDialog(this, "Esta cuenta no puede realizar transacciones");
+                                BtnLimpiarActionPerformed(evt);
+                                txtNcuenta.requestFocus();
+                            }
+
+                            encontrado = true;
+                        } 
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.println(e);
+                    }
+                }
+
+                if (!encontrado) {
+                    JOptionPane.showMessageDialog(this, "Este codigo de cuenta no existe");
+                    txtNcuenta.setText("");
+                    txtNcuenta.requestFocus();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_txtNcuentaActionPerformed
 
     private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         // TODO add your handling code here:
@@ -358,7 +483,86 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_BtnSalirActionPerformed
-    
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        txtNcuenta.setText("");
+        txtDescripcionC.setText("");
+        txtDebito.setText("");
+        txtCredito.setText("");
+        txtComentario.setText("");
+        txtMonto.setText("");
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
+
+    private void txtCreditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreditoKeyPressed
+        if (!txtCredito.getText().isEmpty() && txtDebito.getText().isEmpty()) {
+            txtDebito.setEditable(false);
+        } else {
+            txtDebito.setEditable(true);
+        }
+    }//GEN-LAST:event_txtCreditoKeyPressed
+
+    private void txtDebitoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDebitoKeyPressed
+        if (!txtDebito.getText().isEmpty() && txtCredito.getText().isEmpty()) {
+            txtCredito.setEditable(false);
+        } else {
+            txtCredito.setEditable(true);
+        }
+    }//GEN-LAST:event_txtDebitoKeyPressed
+
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        if (txtNcuenta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el No. de cuenta antes de agregar", "ERROR", HEIGHT);
+            txtNcuenta.grabFocus();
+        } else if (!txtCredito.getText().isEmpty() && txtDebito.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el No. de cuenta antes de agregar", "ERROR", HEIGHT);
+            txtDebito.grabFocus();
+        } else if (!txtDebito.getText().isEmpty() && txtCredito.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene el No. de cuenta antes de agregar", "ERROR", HEIGHT);
+            txtCredito.grabFocus();
+        } else {
+            int secuencia = 0;
+            String monto;
+
+            if (!txtDebito.getText().isEmpty()) {
+                monto = txtDebito.getText();
+                txtMonto.setText(monto);
+            } else if (!txtCredito.getText().isEmpty()) {
+                monto = txtCredito.getText();
+                txtMonto.setText(monto);
+            }
+
+            try {
+
+                secuencia++;
+
+                File f = new File("DetalleTransacciones.txt");
+
+                if (!f.exists()) {
+                    f.createNewFile();
+                }
+
+                if (txtDebito.getText().isEmpty()) {
+                    txtDebito.setText("0");
+                }
+                if (txtCredito.getText().isEmpty()) {
+                    txtCredito.setText("0");
+                }
+
+                String lineaActual = txtNdocumento.getText() + ";" + secuencia + ";" + txtNcuenta.getText() + ";"
+                        + txtDescripcionC.getText() + ";" + txtDebito.getText() + ";" + txtCredito.getText()
+                        + ";" + txtComentario.getText();
+
+                ManejoArchivos file = new ManejoArchivos();
+
+                file.GuardarDatos(lineaActual, f);
+                BtnLimpiarActionPerformed(evt);
+                txtNcuenta.requestFocus();
+
+            } catch (IOException e) {
+            }
+        }
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
     public static String fecha() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat(" dd/MM/YYYY");
