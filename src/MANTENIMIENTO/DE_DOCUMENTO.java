@@ -337,6 +337,13 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtDescripcion.requestFocus();
         }
+        
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCodigoKeyPressed
 
     private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited

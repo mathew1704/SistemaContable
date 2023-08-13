@@ -1,3 +1,4 @@
 1;Activos;0;1;0;Activo;0;0;0
 1101;Efectivo en Caja;0;3;11;Activo;0;0;0
 11021;Banco Popular Dominicano;1;4;1102;Activo;0;0;0
+2;Pasivos;0;1;0;Pasivo;;;

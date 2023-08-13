@@ -28,7 +28,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         PanelPrincipal = new javax.swing.JPanel();
-        Bsalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Mantenimientos = new javax.swing.JMenu();
         m_usuarios = new javax.swing.JMenuItem();
@@ -43,6 +42,9 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         c_usuarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        m_login = new javax.swing.JMenuItem();
+        m_salir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -57,21 +59,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         PanelPrincipal.setBackground(new java.awt.Color(0, 153, 255));
         PanelPrincipal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         PanelPrincipal.setLayout(null);
-
-        Bsalir.setBackground(new java.awt.Color(0, 153, 255));
-        Bsalir.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        Bsalir.setForeground(new java.awt.Color(255, 255, 255));
-        Bsalir.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\cerrar-sesionrojo.png")); // NOI18N
-        Bsalir.setText("SALIR");
-        Bsalir.setBorder(null);
-        Bsalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Bsalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BsalirActionPerformed(evt);
-            }
-        });
-        PanelPrincipal.add(Bsalir);
-        Bsalir.setBounds(500, 520, 120, 40);
 
         Mantenimientos.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\mantenimiento.png")); // NOI18N
         Mantenimientos.setText("MANTENIMIENTOS");
@@ -163,13 +150,37 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
 
         jMenuBar1.add(Consultas);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\salida.png")); // NOI18N
+        jMenu1.setText("SALIR");
+        jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+
+        m_login.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_login.setText("IR AL LOGIN");
+        m_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_loginActionPerformed(evt);
+            }
+        });
+        jMenu1.add(m_login);
+
+        m_salir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_salir.setText("SALIR DEL PROGRAMA");
+        m_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_salirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(m_salir);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,24 +219,36 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         cu.setVisible(true);
     }//GEN-LAST:event_c_usuariosActionPerformed
 
-    private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_BsalirActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea volver a la ventana del Login?","Cerrar Ventana",JOptionPane.YES_NO_CANCEL_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Seguro desea Salir?","Cerrar Ventana",JOptionPane.YES_NO_CANCEL_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
-            LOgin l = new LOgin();
-            l.setVisible(true);
             this.dispose();
         } else if(resp == JOptionPane.NO_OPTION){
-            this.dispose();
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         } else {
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void m_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_loginActionPerformed
+        LOgin L = new LOgin();
+        L.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_m_loginActionPerformed
+
+    private void m_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_m_salirActionPerformed
+    
+    public void habilitarMantenimientos(boolean habilitar) {
+        Mantenimientos.setEnabled(habilitar);
+    }
+
+    public void habilitarMovimiento(boolean habilitar) {
+        Movimiento.setEnabled(habilitar);
+    }
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -236,13 +259,13 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bsalir;
     private javax.swing.JMenu Consultas;
     private javax.swing.JMenu Mantenimientos;
     private javax.swing.JMenu Movimiento;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JMenu Procesos;
     private javax.swing.JMenuItem c_usuarios;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
@@ -251,6 +274,8 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem m_cuentas;
     private javax.swing.JMenuItem m_documentos;
+    private javax.swing.JMenuItem m_login;
+    private javax.swing.JMenuItem m_salir;
     private javax.swing.JMenuItem m_transacciones;
     private javax.swing.JMenuItem m_usuarios;
     // End of variables declaration//GEN-END:variables

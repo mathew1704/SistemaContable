@@ -197,9 +197,6 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 237, 237)));
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtEmailKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEmailKeyTyped(evt);
             }
@@ -212,6 +209,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
             }
         });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 290, 30));
@@ -242,6 +244,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcontrasenaActionPerformed(evt);
+            }
+        });
+        txtcontrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontrasenaKeyTyped(evt);
             }
         });
         jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 290, 30));
@@ -476,8 +483,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtApellido.requestFocus();
         }
+        
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        char c = evt.getKeyChar();
 
-        if (Character.isDigit(evt.getKeyChar())) {
+        if (Character.isDigit(evt.getKeyChar()) && (allowedCharacters.indexOf(c) == -1)) {
             txtNombre.setEditable(false);
         } else {
             txtNombre.setEditable(true);
@@ -488,8 +498,11 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtEmail.requestFocus();
         }
+        
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        char c = evt.getKeyChar();
 
-        if (Character.isDigit(evt.getKeyChar())) {
+        if (Character.isDigit(evt.getKeyChar()) && (allowedCharacters.indexOf(c) == -1)) {
             txtApellido.setEditable(false);
         } else {
             txtApellido.setEditable(true);
@@ -506,16 +519,47 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
-
-    }//GEN-LAST:event_txtEmailKeyPressed
-
     private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@";
         char c = evt.getKeyChar();
-        if (c == ' ') {
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
+
+        char d = evt.getKeyChar();
+        if (d == ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!-_.";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
+
+        char d = evt.getKeyChar();
+        if (d == ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtcontrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasenaKeyTyped
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*_-.,:;()[]{}?/|\\+~";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
+
+        char d = evt.getKeyChar();
+        if (d == ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcontrasenaKeyTyped
 
     public static void main(String args[]) {
 

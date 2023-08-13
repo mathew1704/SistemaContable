@@ -1,0 +1,1 @@
+100; 12/08/20230;Entradas;Yanil de los Angeles;5000.0;**/**/****;false

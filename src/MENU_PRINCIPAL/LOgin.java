@@ -3,6 +3,7 @@ package MENU_PRINCIPAL;
 import texto.TextPrompt;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,6 +12,8 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
 public class LOgin extends javax.swing.JFrame {
+
+    private static String Usuario;
 
     public LOgin() {
         initComponents();
@@ -68,6 +71,11 @@ public class LOgin extends javax.swing.JFrame {
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraseñaActionPerformed(evt);
+            }
+        });
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contraseñaKeyPressed(evt);
             }
         });
 
@@ -237,28 +245,27 @@ public class LOgin extends javax.swing.JFrame {
 
                         if (auxLogin.equals(txtUsuario.getText()) && auxPass.equals(contraseña.getText())) {
                             Nivel = Integer.parseInt(s1.next());
-                            String Nombre = s1.next();
+                            Usuario = s1.next();
 
                             MENU_PRINCIPAL1 m = new MENU_PRINCIPAL1();
 
                             if (Nivel == 1) {
-
-                                // MENU_Mantenimiento.menuProcesos.setEnabled(false);
-                                // MENU_Mantenimiento.usuario.setEnabled(false);
-
+                                
                                 m.setVisible(true);
 
                                 encontrado = true;
                                 this.dispose();
                             } else if (Nivel == 0) {
 
-                                MENU_PRINCIPAL1 M = new MENU_PRINCIPAL1();
-                                M.setVisible(true);
+                                MENU_PRINCIPAL1 menuPrincipal = new MENU_PRINCIPAL1();
+                                menuPrincipal.habilitarMantenimientos(false);
+                                menuPrincipal.habilitarMovimiento(false);
+                                menuPrincipal.setVisible(true);
                                 dispose();
 
                             }
 
-                            JOptionPane.showMessageDialog(rootPane, "Bienvenido " + Nombre);
+                            JOptionPane.showMessageDialog(rootPane, "Bienvenido " + Usuario);
 
                         } else {
                             encontrado = false;
@@ -299,6 +306,20 @@ public class LOgin extends javax.swing.JFrame {
             contraseña.grabFocus();
         }
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnLogin.doClick();
+        }
+    }//GEN-LAST:event_contraseñaKeyPressed
+
+    public static String getUsuario() {
+        return Usuario;
+    }
+
+    public static void setUsuario(String Usuario) {
+        LOgin.Usuario = Usuario;
+    }
 
     public static void main(String args[]) {
 
