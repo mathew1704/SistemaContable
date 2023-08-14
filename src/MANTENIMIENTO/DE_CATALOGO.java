@@ -1,6 +1,7 @@
 package MANTENIMIENTO;
 
 import ARCHIVOS.ManejoArchivos;
+import MOVIMIENTOS.DE_TRANSACCIONES11;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -28,8 +29,14 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     int tipo;
     private javax.swing.Timer timer;
 
+    private double debitoAcumulado = DE_TRANSACCIONES11.getDebitoA();
+    private double creditoAcumulado = DE_TRANSACCIONES11.getCreditoA();
+    double acumD = 0.0;
+    double acumC = 0.0;
+
     public DE_CATALOGO() {
         initComponents();
+
         this.setTitle("Mantenimiento de Catalogo");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
@@ -360,7 +367,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         Principal.add(cbxGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 402, 290, 30));
 
         cbxNivel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cbxNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        cbxNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
         Principal.add(cbxNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 302, 290, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -453,6 +460,34 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                     tipo = 1;
                 }
 
+                double cambioD = 0.0;
+                double cambioC = 0.0;
+                double balance = 0.0;
+
+                if (!txtdebito.getText().isEmpty()) {
+                    cambioD = Double.parseDouble(txtdebito.getText());
+                }
+
+                if (!txtcredito.getText().isEmpty()) {
+                    cambioC = Double.parseDouble(txtcredito.getText());
+                }
+
+                if (!txtbalance.getText().isEmpty()) {
+                    balance = Double.parseDouble(txtbalance.getText());
+                }
+
+                acumD += cambioD;
+                acumC += cambioC;
+                balance = acumD - acumC;
+
+                String cd = Double.toString(acumD);
+                String cc = Double.toString(acumC);
+                String cb = Double.toString(balance);
+
+                txtdebito.setText(cd);
+                txtcredito.setText(cc);
+                txtbalance.setText(cb);
+
                 String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
                         + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
                         + txtcredito.getText() + ";" + txtbalance.getText();
@@ -472,7 +507,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
-            } catch (IOException e) {
+            } catch (IOException | NumberFormatException e) {
+                System.out.println(e);
             }
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
@@ -480,10 +516,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private void txtnumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtdescripcion.requestFocus();
-        }
-        char c = evt.getKeyChar();
-        if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
         }
     }//GEN-LAST:event_txtnumeroKeyPressed
 
@@ -524,38 +556,46 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
                             s1.useDelimiter("\\s*;\\s*");
 
-                            if (codigo == Integer.parseInt(s1.next())) {
+                            try {
+                                if (codigo == Integer.parseInt(s1.next())) {
 
-                                txtdescripcion.setText(s1.next());
-                                tipo = Integer.parseInt(s1.next());
+                                    txtdescripcion.setText(s1.next());
+                                    tipo = Integer.parseInt(s1.next());
 
-                                if (tipo == 0) {
-                                    rbgeneral.setSelected(true);
+                                    if (tipo == 0) {
+                                        rbgeneral.setSelected(true);
+                                    } else {
+                                        rbdetalle.setSelected(true);
+                                    }
+
+                                    cbxNivel.setSelectedItem(s1.next());
+                                    txtpadre.setText(s1.next());
+                                    cbxGrupo.setSelectedItem(s1.next());
+                                    txtdebito.setText(s1.next());
+                                    txtcredito.setText(s1.next());
+                                    txtbalance.setText(s1.next());
+
+                                    LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
+                                            + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
+                                            + txtcredito.getText() + ";" + txtbalance.getText();
+
+                                    estado.setText(" Modificando");
+
+                                    Modificar = true;
+                                    encontrado = true;
                                 } else {
-                                    rbdetalle.setSelected(true);
+                                    BtnLimpiarActionPerformed(evt);
+                                    txtnumero.setText(auxcod);
+                                    estado.setText(" Creando");
+                                    Modificar = false;
+                                    encontrado = false;
+                                    txtdebito.setText("0.0");
+                                    txtcredito.setText("0.0");
+                                    txtbalance.setText("0.0");
                                 }
-
-                                cbxNivel.setSelectedItem(s1.next());
-                                txtpadre.setText(s1.next());
-                                cbxGrupo.setSelectedItem(s1.next());
-                                txtdebito.setText(s1.next());
-                                txtcredito.setText(s1.next());
-                                txtbalance.setText(s1.next());
-
-                                LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                                        + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
-                                        + txtcredito.getText() + ";" + txtbalance.getText();
-
-                                estado.setText(" Modificando");
-
-                                Modificar = true;
-                                encontrado = true;
-                            } else {
-                                BtnLimpiarActionPerformed(evt);
-                                txtnumero.setText(auxcod);
-                                estado.setText(" Creando");
-                                Modificar = false;
-                                encontrado = false;
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
                             }
                         }
                         s.close();
@@ -598,24 +638,12 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtcredito.requestFocus();
         }
-
-//        char c = evt.getKeyChar();
-//
-//        if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != '.' || txtdebito.getText().contains("."))) {
-//            evt.consume();
-//        }
     }//GEN-LAST:event_txtdebitoKeyPressed
 
     private void txtcreditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcreditoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtbalance.requestFocus();
         }
-
-//        char c = evt.getKeyChar();
-//
-//        if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != '.' || txtcredito.getText().contains("."))) {
-//            evt.consume();
-//        }
     }//GEN-LAST:event_txtcreditoKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

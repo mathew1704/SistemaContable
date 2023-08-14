@@ -27,6 +27,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     String usuario = LOgin.getUsuario();
     boolean estatus;
 
+    private static double DebitoA, CreditoA;
+
     public DE_TRANSACCIONES11() {
         initComponents();
         txtFecha.setText(fecha());
@@ -706,6 +708,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 credito = txtCredito.getText();
             }
 
+            double acumD = Double.parseDouble(debito);
+            double acumC = Double.parseDouble(credito);
+            DebitoA = acumD;
+            CreditoA = acumC;
+
             String coment = txtComentario.getText();
 
             TablaM.addRow(new Object[]{secuencia, cuenta, descrip, debito, credito, coment});
@@ -812,6 +819,24 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         SimpleDateFormat formatoFecha = new SimpleDateFormat(" dd/MM/YYYY");
         return formatoFecha.format(fecha);
     }
+
+    public static double getDebitoA() {
+        return DebitoA;
+    }
+
+    public static void setDebitoA(double DebitoA) {
+        DE_TRANSACCIONES11.DebitoA = DebitoA;
+    }
+
+    public static double getCreditoA() {
+        return CreditoA;
+    }
+
+    public static void setCreditoA(double CreditoA) {
+        DE_TRANSACCIONES11.CreditoA = CreditoA;
+    }
+
+    
 
     public static void main(String args[]) {
 
