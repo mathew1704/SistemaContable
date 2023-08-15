@@ -364,10 +364,20 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
         cbxGrupo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbxGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pasivo", "Capital", "Ingresos", "Costos", "Gastos" }));
+        cbxGrupo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxGrupoItemStateChanged(evt);
+            }
+        });
         Principal.add(cbxGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 402, 290, 30));
 
         cbxNivel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbxNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        cbxNivel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxNivelItemStateChanged(evt);
+            }
+        });
         Principal.add(cbxNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 302, 290, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -626,7 +636,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
     private void txtpadreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpadreKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            cbxGrupo.requestFocus();
+            txtdebito.requestFocus();
         }
         char c = evt.getKeyChar();
         if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
@@ -665,10 +675,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         tipo = 0;
     }//GEN-LAST:event_rbgeneralPropertyChange
 
-    private void rbdetallePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbdetallePropertyChange
-        tipo = 1;
-    }//GEN-LAST:event_rbdetallePropertyChange
-
     private void txtnumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyTyped
         char c = evt.getKeyChar();
 
@@ -683,6 +689,18 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtbalanceKeyTyped
+
+    private void cbxNivelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNivelItemStateChanged
+        txtpadre.requestFocus();
+    }//GEN-LAST:event_cbxNivelItemStateChanged
+
+    private void cbxGrupoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxGrupoItemStateChanged
+        txtdebito.requestFocus();
+    }//GEN-LAST:event_cbxGrupoItemStateChanged
+
+    private void rbdetallePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbdetallePropertyChange
+        tipo = 1;
+    }//GEN-LAST:event_rbdetallePropertyChange
 
     public static String fecha() {
         Date fecha = new Date();

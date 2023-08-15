@@ -1,1 +1,6 @@
 1;Activo;0;1;0;Activo;0.0;0.0;0.0
+1101;Efectivo en caja;0;3;11;Activo;0.0;0.0;0.0
+11;Activos Circulares;0;2;1;Activo;0.0;0.0;0.0
+1102;Efectivo en Bancos;0;3;11;Activo;0.0;0.0;0.0
+11021;Banco Popular Dominicano;1;4;1102;Activo;0.0;0.0;0.0
+11022;Banco BHD;1;4;1102;Activo;0.0;0.0;0.0

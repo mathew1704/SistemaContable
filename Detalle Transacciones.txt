@@ -11,3 +11,9 @@
 1;11021;Banco Popular Dominicano;7000;0;
 2;11021;Banco Popular Dominicano;0;4000;
 3;11021;Banco Popular Dominicano;0;3000;
+1;11021;Banco Popular Dominicano;5000;0;entrada abc
+2;11022;Banco BHD;0;5000;entrada cde
+1;11021;Banco Popular Dominicano;5000;0;entrada abc
+2;11022;Banco BHD;0;5000;entrada cbd
+1;11021;Banco Popular Dominicano;5000;0;entrada abc
+2;11022;Banco BHD;0;5000;entrada cbd
