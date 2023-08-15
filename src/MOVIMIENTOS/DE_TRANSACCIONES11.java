@@ -495,7 +495,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                             Scanner s1 = new Scanner(linea);
 
                             s1.useDelimiter("\\s*;\\s*");
-                            
+
                             String aux = s1.next();
 
                             if (doc.equals(aux)) {
@@ -630,7 +630,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                     }
 
                     BufferedWriter writer = new BufferedWriter(new FileWriter(d, true));
+
                     for (int i = 0; i < TablaM.getRowCount(); i++) {
+                        writer.write(txtNdocumento.getText());
+                        writer.write(";");
                         for (int j = 0; j < TablaM.getColumnCount(); j++) {
 
                             writer.write(TablaM.getValueAt(i, j).toString());
@@ -643,7 +646,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                     }
                     writer.close();
                     JOptionPane.showMessageDialog(rootPane, "Registro guardado");
-                    
+
                     DE_TRANSACCIONES11.addToDebitoA(totaldb);
                     DE_TRANSACCIONES11.addToCreditoA(totalcr);
 
@@ -720,6 +723,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         } else {
 
             secuencia++;
+            String secf = String.format("%03d", secuencia);
 
             String debito, credito;
             String cuenta = txtNcuenta.getText();
@@ -746,7 +750,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
             String coment = txtComentario.getText();
 
-            TablaM.addRow(new Object[]{secuencia, cuenta, descrip, debito, credito, coment});
+            TablaM.addRow(new Object[]{secf, cuenta, descrip, debito, credito, coment});
             BtnLimpiarActionPerformed(evt);
             txtNcuenta.requestFocus();
         }

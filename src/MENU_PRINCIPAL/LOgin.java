@@ -238,7 +238,7 @@ public class LOgin extends javax.swing.JFrame {
 
                                 MENU_PRINCIPAL1 menuPrincipal = new MENU_PRINCIPAL1();
                                 menuPrincipal.habilitarMantenimientos(false);
-                                menuPrincipal.habilitarMovimiento(false);
+                                menuPrincipal.habilitarProcesos(false);
                                 menuPrincipal.setVisible(true);
                                 dispose();
 

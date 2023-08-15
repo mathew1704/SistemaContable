@@ -1,3 +1,1 @@
-100; 12/08/20230;Entradas;Yanil de los Angeles;5000.0;**/**/****;false
-200; 14/08/202312;Salidas;Yanil de los Angeles;5000.0;**/**/****;false
-EN-102; 14/08/20230;Entrada cxc;null;5000.0;**/**/****;false
+1; 15/08/20230;credito;null;500.0;**/**/****;false

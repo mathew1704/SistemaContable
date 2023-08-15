@@ -245,8 +245,8 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         Mantenimientos.setEnabled(habilitar);
     }
 
-    public void habilitarMovimiento(boolean habilitar) {
-        Movimiento.setEnabled(habilitar);
+    public void habilitarProcesos(boolean habilitar) {
+        Procesos.setEnabled(habilitar);
     }
     
     public static void main(String args[]) {
