@@ -65,8 +65,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         descr.setForeground(Color.gray);
         TextPrompt padre = new TextPrompt(" Digite la Cuenta padre", txtpadre, TextPrompt.Show.ALWAYS);
         padre.setForeground(Color.gray);
-        
-        Actualizardcb();
+//        Actualizardcb();
     }
 
     @SuppressWarnings("unchecked")
@@ -537,7 +536,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             txtdescripcion.setText("");
             txtdescripcion.requestFocus();
         }
-
+        
         try {
 
             String auxcod = txtnumero.getText();
@@ -568,7 +567,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
                             try {
                                 if (codigo == Integer.parseInt(s1.next())) {
-
+                                    
                                     txtdescripcion.setText(s1.next());
                                     tipo = Integer.parseInt(s1.next());
 
@@ -584,6 +583,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                     txtdebito.setText(s1.next());
                                     txtcredito.setText(s1.next());
                                     txtbalance.setText(s1.next());
+
 
                                     LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
                                             + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
@@ -740,115 +740,109 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }
 
     public void Actualizardcb() {
-//        try {
-//            Scanner s;
-//            Scanner k;
-//
-//            try {
-//
-//                File f = new File("Catalogo.txt");
-//
-//                if (!f.exists()) {
-//                    JOptionPane.showMessageDialog(this, "No hay ningun registro de cuetas");
-//                } else {
-//
-//                    s = new Scanner(f);
-//
-//                    while (s.hasNextLine()) {
-//
-//                        String linea = s.nextLine();
-//                        Scanner s1 = new Scanner(linea);
-//
-//                        s1.useDelimiter("\\s*;\\s*");
-//
-//                        String numc = s1.next();
-//                        String desc = s1.next();
-//                        String tipo = s1.next();
-//                        String nivel = s1.next();
-//                        String padre = s1.next();
-//                        String grupo = s1.next();
-//                        String db = s1.next();
-//                        String cr = s1.next();
-//                        String bl = s1.next();
-//                        
-//                        try {
-//                            File g = new File("Detalle Transacciones.txt");
-//
-//                            if (!g.exists()) {
-//                                JOptionPane.showMessageDialog(this, "No hay ningun registro de transacciones");
-//                            } else {
-//                                k = new Scanner(g);
-//
-//                                while (k.hasNextLine()) {
-//                                    String line = k.nextLine();
-//                                    Scanner s2 = new Scanner(line);
-//
-//                                    s2.useDelimiter("\\s*;\\s*");
-//
-//                                    String doc = s2.next();
-//                                    String sec = s2.next();
-//                                    String cuenta = s2.next();
-//                                    String descrip = s2.next();
-//                                    String debitoc = s2.next();
-//                                    String creditoc = s2.next();
-//
-//                                    if (cuenta.equals(numc)) {
-//
-//                                        int item = Integer.parseInt(grupo);
-//                                        String orig = origen(item);
-//
-//                                        if (orig.equals("debito")) {
-//                                            double almD = Double.parseDouble(debitoc);
-//                                            acumD += almD;
-//
-//                                            double almC = Double.parseDouble(creditoc);
-//                                            acumC -= almC;
-//
-//                                            double balancc = acumD - acumC;
-//
-//                                            String pdeb = Double.toString(almD);
-//                                            String pcre = Double.toString(almC);
-//                                            String pbal = Double.toString(balancc);
-//
-//                                            txtdebito.setText(pdeb);
-//                                            txtcredito.setText(pcre);
-//                                            txtbalance.setText(pbal);
-//
-//                                        } else if (orig.equals("credito")) {
-//
-//                                            double almD = Double.parseDouble(debitoc);
-//                                            acumD -= almD;
-//
-//                                            double almC = Double.parseDouble(creditoc);
-//                                            acumC += almC;
-//
-//                                            double balancc = acumD - acumC;
-//
-//                                            String pdeb = Double.toString(almD);
-//                                            String pcre = Double.toString(almC);
-//                                            String pbal = Double.toString(balancc);
-//
-//                                            txtdebito.setText(pdeb);
-//                                            txtcredito.setText(pcre);
-//                                            txtbalance.setText(pbal);
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//
-//                        } catch (FileNotFoundException b) {
-//                            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-//                        }
-//                    }
-//
-//                }
-//            } catch (FileNotFoundException e) {
-//                JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (HeadlessException | NumberFormatException e) {
-//            JOptionPane.showMessageDialog(rootPane, "Error al Abrir el Archivo...");
-//        }
+        Scanner s;
+
+        try {
+
+            File f = new File("Catalogo.txt");
+
+                s = new Scanner(f);
+
+                while (s.hasNextLine()) {
+
+                    String linea = s.nextLine();
+                    Scanner s1 = new Scanner(linea);
+
+                    s1.useDelimiter("\\s*;\\s*");
+
+                    String numc = s1.next();
+                    String desc = s1.next();
+                    String tipo = s1.next();
+                    String nivel = s1.next();
+                    String padre = s1.next();
+                    String grupo = s1.next();
+                    String db = s1.next();
+                    String cr = s1.next();
+                    String bl = s1.next();
+
+                    trans(numc, grupo);
+                }
+                s.close();
+
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void trans(String cnum, String itg) {
+
+        Scanner k;
+        try {
+            File g = new File("Detalle Transacciones.txt");
+
+                k = new Scanner(g);
+
+                while (k.hasNextLine()) {
+                    String line = k.nextLine();
+                    Scanner s2 = new Scanner(line);
+
+                    s2.useDelimiter("\\s*;\\s*");
+
+                    String doc = s2.next();
+                    String sec = s2.next();
+                    String cuenta = s2.next();
+                    String descrip = s2.next();
+                    String debitoc = s2.next();
+                    String creditoc = s2.next();
+
+                    if (cuenta.equals(cnum)) {
+
+                        int item = Integer.parseInt(itg);
+                        String orig = origen(item);
+
+                        if (orig.equals("debito")) {
+                            double almD = Double.parseDouble(debitoc);
+                            acumD += almD;
+
+                            double almC = Double.parseDouble(creditoc);
+                            acumC -= almC;
+
+                            double balancc = acumD - acumC;
+
+                            String pdeb = Double.toString(almD);
+                            String pcre = Double.toString(almC);
+                            String pbal = Double.toString(balancc);
+
+                            txtdebito.setText(pdeb);
+                            txtcredito.setText(pcre);
+                            txtbalance.setText(pbal);
+
+                        } else if (orig.equals("credito")) {
+
+                            double almD = Double.parseDouble(debitoc);
+                            acumD -= almD;
+
+                            double almC = Double.parseDouble(creditoc);
+                            acumC += almC;
+
+                            double balancc = acumD - acumC;
+
+                            String pdeb = Double.toString(almD);
+                            String pcre = Double.toString(almC);
+                            String pbal = Double.toString(balancc);
+
+                            txtdebito.setText(pdeb);
+                            txtcredito.setText(pcre);
+                            txtbalance.setText(pbal);
+                        }
+                    }
+                }
+                k.close();
+
+
+        } catch (FileNotFoundException b) {
+            JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static String fecha() {

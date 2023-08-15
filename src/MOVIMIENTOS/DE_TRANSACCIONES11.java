@@ -5,6 +5,8 @@ import MENU_PRINCIPAL.LOgin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -116,6 +118,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         CbTipoDoc.setBackground(new java.awt.Color(237, 237, 237));
         CbTipoDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         CbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0. AJUSTE", "1.COMPROVANTE DE PAGO", "2. COMPROVANTE DE DEVOLUCION", "3. CONSIGNACIONES", "4. ENTRADA", "5. FACTURA DE VENTA", "6. FACTURA DE COMPRA", "7. LETRAS DE CAMBIO", "8. PRESUPUESTOS", "9. RECIBO DE COBRO", "10. RECIBO DE PAGO", "11. RECIBO DE CAJA", "12.SALIDA", "13. VALES", " " }));
+        CbTipoDoc.setSelectedIndex(-1);
         CbTipoDoc.setToolTipText("");
         CbTipoDoc.setBorder(null);
         CbTipoDoc.addItemListener(new java.awt.event.ItemListener() {
@@ -503,6 +506,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                                 txtNdocumento.setText(doc);
                                 txtDescripcion.setText(s1.next());
                                 encontrado = true;
+                                txtNdocumento.setEditable(false);
                             }
                         }
 
@@ -758,6 +762,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
     private void CbTipoDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CbTipoDocItemStateChanged
         txtNcuenta.requestFocus();
+        
     }//GEN-LAST:event_CbTipoDocItemStateChanged
 
     private void txtDescripcionCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionCKeyPressed
