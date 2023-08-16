@@ -1,6 +1,7 @@
 package MENU_PRINCIPAL;
 
 import CONSULTAS.CONSULTA_USUARIO;
+import CONSULTAS.DE_TRANSACCIONES_TIPO_DOCUMENTO;
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_DOCUMENTO;
 import MANTENIMIENTO.DE_USUARIOS_NEW;
@@ -41,7 +42,7 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         Consultas = new javax.swing.JMenu();
         c_usuarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        TipoDocumento = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         m_login = new javax.swing.JMenuItem();
         m_salir = new javax.swing.JMenuItem();
@@ -60,7 +61,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         PanelPrincipal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         PanelPrincipal.setLayout(null);
 
-        Mantenimientos.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\mantenimiento.png")); // NOI18N
         Mantenimientos.setText("MANTENIMIENTOS");
         Mantenimientos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         Mantenimientos.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +98,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
 
         jMenuBar1.add(Mantenimientos);
 
-        Movimiento.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\transaccion (1).png")); // NOI18N
         Movimiento.setText("MOVIMIENTO");
         Movimiento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
@@ -113,7 +112,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
 
         jMenuBar1.add(Movimiento);
 
-        Procesos.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\flujo-de-trabajo.png")); // NOI18N
         Procesos.setText("PROCESOS");
         Procesos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
@@ -127,7 +125,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
 
         jMenuBar1.add(Procesos);
 
-        Consultas.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\consulta.png")); // NOI18N
         Consultas.setText("CONSULTAS");
         Consultas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
@@ -144,13 +141,17 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
         Consultas.add(jMenuItem3);
 
-        jMenuItem4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jMenuItem4.setText("jMenuItem4");
-        Consultas.add(jMenuItem4);
+        TipoDocumento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        TipoDocumento.setText("TIPO DE DOCUMENTO");
+        TipoDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipoDocumentoActionPerformed(evt);
+            }
+        });
+        Consultas.add(TipoDocumento);
 
         jMenuBar1.add(Consultas);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\salida.png")); // NOI18N
         jMenu1.setText("SALIR");
         jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
@@ -240,6 +241,11 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
     private void m_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_salirActionPerformed
         this.dispose();
     }//GEN-LAST:event_m_salirActionPerformed
+
+    private void TipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoDocumentoActionPerformed
+      DE_TRANSACCIONES_TIPO_DOCUMENTO t = new DE_TRANSACCIONES_TIPO_DOCUMENTO();
+        t.setVisible(true);
+    }//GEN-LAST:event_TipoDocumentoActionPerformed
     
     public void habilitarMantenimientos(boolean habilitar) {
         Mantenimientos.setEnabled(habilitar);
@@ -264,6 +270,7 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
     private javax.swing.JMenu Movimiento;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JMenu Procesos;
+    private javax.swing.JMenuItem TipoDocumento;
     private javax.swing.JMenuItem c_usuarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
@@ -271,7 +278,6 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem m_cuentas;
     private javax.swing.JMenuItem m_documentos;
     private javax.swing.JMenuItem m_login;
