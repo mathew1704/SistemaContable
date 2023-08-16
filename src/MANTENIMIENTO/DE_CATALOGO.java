@@ -35,7 +35,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     public DE_CATALOGO() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Mantenimiento de Catalogo");
+        this.setTitle("Mantenimiento de Catalogo de Cuentas");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
         txtfecha.setText(fecha());

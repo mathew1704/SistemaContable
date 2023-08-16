@@ -42,7 +42,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         c_usuarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         TipoDocumento = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        Salida = new javax.swing.JMenu();
         m_login = new javax.swing.JMenuItem();
         m_salir = new javax.swing.JMenuItem();
 
@@ -78,6 +78,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Mantenimientos.add(m_usuarios);
 
         m_cuentas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_cuentas.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\extracto-de-cuenta.png")); // NOI18N
         m_cuentas.setText("CUENTAS");
         m_cuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +88,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Mantenimientos.add(m_cuentas);
 
         m_documentos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_documentos.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\google-docs.png")); // NOI18N
         m_documentos.setText("DOCUMENTOS");
         m_documentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +104,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Movimiento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         m_transacciones.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_transacciones.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\cambio-de-dinero.png")); // NOI18N
         m_transacciones.setText("TRANSACCIONES");
         m_transacciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Procesos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\actualizar-pagina.png")); // NOI18N
         jMenuItem2.setText("CIERRE DIARO");
         Procesos.add(jMenuItem2);
 
@@ -137,6 +141,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Consultas.add(c_usuarios);
 
         jMenuItem3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\extracto-de-cuenta.png")); // NOI18N
         jMenuItem3.setText("CATALOGO DE CUENTAS");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +151,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Consultas.add(jMenuItem3);
 
         TipoDocumento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        TipoDocumento.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\google-docs.png")); // NOI18N
         TipoDocumento.setText("TIPO DE DOCUMENTO");
         TipoDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,18 +162,19 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
         jMenuBar1.add(Consultas);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\cerrar-sesion.png")); // NOI18N
-        jMenu1.setText("SALIR");
-        jMenu1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        Salida.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\cerrar-sesion.png")); // NOI18N
+        Salida.setText("SALIR");
+        Salida.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         m_login.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_login.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\acceso.png")); // NOI18N
         m_login.setText("IR AL LOGIN");
         m_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 m_loginActionPerformed(evt);
             }
         });
-        jMenu1.add(m_login);
+        Salida.add(m_login);
 
         m_salir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         m_salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\salida.png")); // NOI18N
@@ -177,9 +184,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
                 m_salirActionPerformed(evt);
             }
         });
-        jMenu1.add(m_salir);
+        Salida.add(m_salir);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(Salida);
 
         setJMenuBar(jMenuBar1);
 
@@ -281,9 +288,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     private javax.swing.JMenu Movimiento;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JMenu Procesos;
+    private javax.swing.JMenu Salida;
     private javax.swing.JMenuItem TipoDocumento;
     private javax.swing.JMenuItem c_usuarios;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

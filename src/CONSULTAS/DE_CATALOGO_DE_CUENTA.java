@@ -3,8 +3,11 @@ package CONSULTAS;
 import MANTENIMIENTO.DE_CATALOGO;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.List;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -190,6 +193,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
         String num, desc, tipo, nivel, padre, grupo, debito, credito, balance;
         File f = new File("Catalogo.txt");
+        ArrayList<String[]> datos = new ArrayList<>();
 
         try {
             if (!f.exists()) {
@@ -212,13 +216,35 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
                     debito = s1.next();
                     credito = s1.next();
                     balance = s1.next();
-                    TablaM.addRow(new Object[]{num, desc, tipo, nivel, padre, grupo, debito, credito, balance});
+                    
+                    datos.add(new String[]{num, desc, tipo, nivel, padre, grupo, debito, credito, balance});
 
                     filas = true;
                 }
                 s.close();
 
-                if (!filas) {
+                if (filas) {
+                    
+                     Comparator<String[]> comparator = (arr1, arr2) -> {
+                        String num1 = arr1[0];
+                        String num2 = arr2[0];
+
+                        int digit1 = Integer.parseInt(num1.substring(0, 1));
+                        int digit2 = Integer.parseInt(num2.substring(0, 1));
+
+                        if (digit1 != digit2) {
+                            return Integer.compare(digit1, digit2);
+                        } else {
+                            return Integer.compare(Integer.parseInt(num1), Integer.parseInt(num2));
+                        }
+                    };
+                     
+                    datos.sort(comparator);
+                    
+                    for (String[] fila: datos) {
+                        TablaM.addRow(fila);
+                    }
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "No se encontró ningún registro");
                 }
             }
