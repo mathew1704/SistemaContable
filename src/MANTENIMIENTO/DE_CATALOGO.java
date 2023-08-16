@@ -29,8 +29,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     int tipo;
     private javax.swing.Timer timer;
 
-//    private double debitoAcumulado = DE_TRANSACCIONES11.getDebitoA();
-//    private double creditoAcumulado = DE_TRANSACCIONES11.getCreditoA();
     double acumD = 0.0;
     double acumC = 0.0;
 
