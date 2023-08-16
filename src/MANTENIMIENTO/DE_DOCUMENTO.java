@@ -21,6 +21,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
 
     public DE_DOCUMENTO() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setTitle("Mantenimiento de Documentos");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
@@ -50,7 +51,7 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         BtnSalir = new javax.swing.JButton();
         estado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
         setResizable(false);
@@ -359,6 +360,8 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
+        } else if (resp == JOptionPane.NO_OPTION) {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         } else {
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }

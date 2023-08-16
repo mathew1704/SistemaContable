@@ -1,6 +1,6 @@
 package CONSULTAS;
 
-import MANTENIMIENTO.DE_USUARIOS;
+import MANTENIMIENTO.DE_DOCUMENTO;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
@@ -11,14 +11,15 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 
-public class CONSULTA_USUARIO extends javax.swing.JFrame {
+public class DE_DOCUMENTOS extends javax.swing.JFrame {
 
     public DefaultTableModel TablaM;
 
-    public CONSULTA_USUARIO() {
+    public DE_DOCUMENTOS() {
         initComponents();
+          initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Consulta Usuarios");
+        this.setTitle("Consulta Documentos");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
 
@@ -44,7 +45,7 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CONSULTA DE USUARIO");
+        jLabel1.setText("CONSULTA DE DOCUMENTOS");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,11 +56,11 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Usuario", "Contraseña", "Nivel", "Nombre", "Apellidos", "Email"
+                "Codigo", "Descripcion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -151,13 +152,13 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseExited
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-//        DE_USUARIOS e = new DE_USUARIOS();
+//        DE_DOCUMENTO e = new DE_DOCUMENTO();
 //        e.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnconsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultarMouseEntered
-        btnconsultar.setBackground(Color.red);
+        btnconsultar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_btnconsultarMouseEntered
 
     private void btnconsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultarMouseExited
@@ -168,8 +169,8 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
         TablaM.setRowCount(0);
         boolean filas = false;
 
-        String user, passw, nivel, nomb, apell, email;
-        File f = new File("Usuarios.txt");
+        String cod, desc;
+        File f = new File("Documentos.txt");
 
         try {
             if (!f.exists()) {
@@ -183,14 +184,11 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
 
                     s1.useDelimiter("\\s*;\\s*");
 
-                    user = s1.next();
-                    passw = s1.next();
-                    nivel = s1.next();
-                    nomb = s1.next();
-                    apell = s1.next();
-                    email = s1.next();
+                    cod = s1.next();
+                    desc = s1.next();
+                    
 
-                    TablaM.addRow(new Object[]{user, passw, nivel, nomb, apell, email});
+                    TablaM.addRow(new Object[]{cod, desc});
 
                     filas = true;
                 }
@@ -203,14 +201,13 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
-
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CONSULTA_USUARIO().setVisible(true);
+                new DE_DOCUMENTOS().setVisible(true);
             }
         });
     }

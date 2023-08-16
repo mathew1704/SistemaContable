@@ -37,6 +37,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtFecha.setText(fecha());
         txtFecha.setEditable(false);
         this.setTitle("Movimiento de Transacciones");
+        this.setLocationRelativeTo(null);
 
         txtNdocumento.requestFocusInWindow();
         txtDescripcion.setEditable(false);
@@ -98,7 +99,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         PanelAzul = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -808,10 +809,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCreditoKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Catalogo", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Transacciones?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
+        } else if (resp == JOptionPane.NO_OPTION) {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         } else {
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }

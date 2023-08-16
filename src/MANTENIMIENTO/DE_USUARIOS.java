@@ -14,14 +14,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import texto.TextPrompt;
 
-public class DE_USUARIOS_NEW extends javax.swing.JFrame {
+public class DE_USUARIOS extends javax.swing.JFrame {
 
     int nivel;
     boolean Modificar = false;
     public static String LineaAntigua;
 
-    public DE_USUARIOS_NEW() {
+    public DE_USUARIOS() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Mantenimiento de Usuarios");
         buttonGroup1.add(rbAdmin);
         buttonGroup1.add(rbNormal);
 
@@ -70,7 +72,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton4.setText("SALIR");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -510,10 +512,12 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Documentos", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Usuarios", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
+        } else if (resp == JOptionPane.NO_OPTION) {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         } else {
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
@@ -565,7 +569,7 @@ public class DE_USUARIOS_NEW extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DE_USUARIOS_NEW().setVisible(true);
+                new DE_USUARIOS().setVisible(true);
             }
         });
     }

@@ -17,6 +17,7 @@ public class LOgin extends javax.swing.JFrame {
 
     public LOgin() {
         initComponents();
+        this.setLocationRelativeTo(null);
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
 
@@ -226,7 +227,7 @@ public class LOgin extends javax.swing.JFrame {
                             Nivel = Integer.parseInt(s1.next());
                             Usuario = s1.next();
 
-                            MENU_PRINCIPAL1 m = new MENU_PRINCIPAL1();
+                            MENU_PRINCIPAL m = new MENU_PRINCIPAL();
 
                             if (Nivel == 1) {
 
@@ -236,7 +237,7 @@ public class LOgin extends javax.swing.JFrame {
                                 this.dispose();
                             } else if (Nivel == 0) {
 
-                                MENU_PRINCIPAL1 menuPrincipal = new MENU_PRINCIPAL1();
+                                MENU_PRINCIPAL menuPrincipal = new MENU_PRINCIPAL();
                                 menuPrincipal.habilitarMantenimientos(false);
                                 menuPrincipal.habilitarProcesos(false);
                                 menuPrincipal.setVisible(true);

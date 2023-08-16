@@ -34,7 +34,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
     public DE_CATALOGO() {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         this.setTitle("Mantenimiento de Catalogo");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
@@ -103,7 +103,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         cbxGrupo = new javax.swing.JComboBox<>();
         cbxNivel = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -657,11 +657,17 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Catalogo", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
-        if (resp == JOptionPane.YES_OPTION) {
-            timer.stop();
-            this.dispose();
-        } else {
-            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        switch (resp) {
+            case JOptionPane.YES_OPTION:
+                timer.stop();
+                this.dispose();
+                break;
+            case JOptionPane.NO_OPTION:
+                this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                break;
+            default:
+                this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                break;
         }
     }//GEN-LAST:event_formWindowClosing
 
