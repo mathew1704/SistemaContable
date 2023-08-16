@@ -1,6 +1,7 @@
 package MENU_PRINCIPAL;
 
 import CONSULTAS.CONSULTA_USUARIO;
+import CONSULTAS.DE_CATALOGO_DE_CUENTA;
 import CONSULTAS.DE_TRANSACCIONES_TIPO_DOCUMENTO;
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_DOCUMENTO;
@@ -138,7 +139,12 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
         Consultas.add(c_usuarios);
 
         jMenuItem3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("CATALOGO DE CUENTAS");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         Consultas.add(jMenuItem3);
 
         TipoDocumento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -246,6 +252,11 @@ public class MENU_PRINCIPAL1 extends javax.swing.JFrame {
       DE_TRANSACCIONES_TIPO_DOCUMENTO t = new DE_TRANSACCIONES_TIPO_DOCUMENTO();
         t.setVisible(true);
     }//GEN-LAST:event_TipoDocumentoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        DE_CATALOGO_DE_CUENTA t = new DE_CATALOGO_DE_CUENTA();
+        t.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     public void habilitarMantenimientos(boolean habilitar) {
         Mantenimientos.setEnabled(habilitar);

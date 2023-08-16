@@ -4,11 +4,15 @@
  */
 package CONSULTAS;
 
+import MENU_PRINCIPAL.MENU_PRINCIPAL1;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,8 +22,16 @@ import javax.swing.table.DefaultTableModel;
 public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
     public DefaultTableModel TablaM;
+
     public DE_CATALOGO_DE_CUENTA() {
         initComponents();
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Consulta Usuarios");
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
+        UIManager.put("OptionPane.messageForeground", Color.black);
+
+        TablaM = (DefaultTableModel) tablaRegistro.getModel();
     }
 
     /**
@@ -54,13 +66,13 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         tablaRegistro.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tablaRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Usuario", "Contraseña", "Nivel", "Nombre", "Apellidos", "Email"
+                "Num_Cta", "Descripcion", "Tipo", "Nivel", "Padre", "Grupo", "Debito", "Credito", "Balance"
             }
         ));
         jScrollPane1.setViewportView(tablaRegistro);
@@ -148,7 +160,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseExited
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        GENERAL_CONSULTAS e = new GENERAL_CONSULTAS();
+        MENU_PRINCIPAL1 e = new MENU_PRINCIPAL1();
         e.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -165,8 +177,8 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         TablaM.setRowCount(0);
         boolean filas = false;
 
-        String user, passw, nivel, nomb, apell, email;
-        File f = new File("Usuarios.txt");
+        String num, desc, tipo, nivel, padre, grupo, debito, credito, balance;
+        File f = new File("Catalogo.txt");
 
         try {
             if (!f.exists()) {
@@ -180,14 +192,16 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
                     s1.useDelimiter("\\s*;\\s*");
 
-                    user = s1.next();
-                    passw = s1.next();
+                    num = s1.next();
+                    desc = s1.next();
                     nivel = s1.next();
-                    nomb = s1.next();
-                    apell = s1.next();
-                    email = s1.next();
-
-                    TablaM.addRow(new Object[]{user, passw, nivel, nomb, apell, email});
+                    tipo = s1.next();
+                    padre = s1.next();
+                    grupo = s1.next();
+                    debito = s1.next();
+                    credito = s1.next();
+                    balance = s1.next();
+                    TablaM.addRow(new Object[]{num, desc, tipo, nivel, padre, grupo, debito, credito, balance});
 
                     filas = true;
                 }
@@ -200,6 +214,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
+
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     /**
