@@ -222,9 +222,9 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         }
 
         String auxcod = txtCodigo.getText();
-        
+
         try {
-            
+
             boolean encontrado = false;
             Scanner s;
 
@@ -338,12 +338,14 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtDescripcion.requestFocus();
         }
-        
-        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-";
+
+        String allowedCharacters = "0123456789abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ-";
         char c = evt.getKeyChar();
 
         if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
-            evt.consume();
+            txtCodigo.setEditable(false);
+        } else {
+            txtCodigo.setEditable(true);
         }
     }//GEN-LAST:event_txtCodigoKeyPressed
 
@@ -368,7 +370,10 @@ public class DE_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
-         if (Character.isDigit(evt.getKeyChar())) {
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ-/.%()";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER) && (c != KeyEvent.VK_SPACE)) {
             txtDescripcion.setEditable(false);
         } else {
             txtDescripcion.setEditable(true);

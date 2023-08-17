@@ -257,6 +257,7 @@ public class LOgin extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(rootPane, "No hay registro de este usuario");
                                 txtUsuario.setText("");
                                 contraseña.setText("");
+                                txtUsuario.requestFocus();
                             }
                         }
                     }

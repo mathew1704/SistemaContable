@@ -17,7 +17,6 @@ public class DE_DOCUMENTOS extends javax.swing.JFrame {
 
     public DE_DOCUMENTOS() {
         initComponents();
-          initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Consulta Documentos");
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));

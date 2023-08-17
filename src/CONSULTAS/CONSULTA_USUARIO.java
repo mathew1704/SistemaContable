@@ -157,7 +157,7 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnconsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultarMouseEntered
-        btnconsultar.setBackground(Color.red);
+        btnconsultar.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_btnconsultarMouseEntered
 
     private void btnconsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultarMouseExited

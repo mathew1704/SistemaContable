@@ -64,10 +64,10 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtcontrasena = new javax.swing.JPasswordField();
         rbNormal = new javax.swing.JRadioButton();
         rbAdmin = new javax.swing.JRadioButton();
         estado = new javax.swing.JLabel();
+        txtcontrasena = new javax.swing.JTextField();
 
         jButton4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton4.setText("SALIR");
@@ -240,21 +240,6 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         });
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 290, 30));
 
-        txtcontrasena.setBackground(new java.awt.Color(237, 237, 237));
-        txtcontrasena.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        txtcontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 237, 237)));
-        txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontrasenaActionPerformed(evt);
-            }
-        });
-        txtcontrasena.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcontrasenaKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 290, 30));
-
         rbNormal.setBackground(new java.awt.Color(255, 255, 255));
         rbNormal.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         rbNormal.setText("Normal");
@@ -278,6 +263,21 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         estado.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         estado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 100, 30));
+
+        txtcontrasena.setBackground(new java.awt.Color(237, 237, 237));
+        txtcontrasena.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtcontrasena.setBorder(null);
+        txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontrasenaActionPerformed(evt);
+            }
+        });
+        txtcontrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontrasenaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 172, 290, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -373,6 +373,113 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
+    private void rbNormalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbNormalPropertyChange
+        nivel = 0;
+    }//GEN-LAST:event_rbNormalPropertyChange
+
+    private void rbAdminPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbAdminPropertyChange
+        nivel = 1;
+    }//GEN-LAST:event_rbAdminPropertyChange
+
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        btnGuardar.setBackground(new Color(0, 51, 204));
+    }//GEN-LAST:event_btnGuardarMouseEntered
+
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        btnGuardar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnGuardarMouseExited
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        btnLimpiar.setBackground(new Color(0, 51, 204));
+    }//GEN-LAST:event_btnLimpiarMouseEntered
+
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        btnLimpiar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        btnSalir.setBackground(Color.red);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        btnSalir.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtApellido.requestFocus();
+        }
+
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER) && (c != KeyEvent.VK_SPACE)) {
+            txtNombre.setEditable(false);
+        } else {
+            txtNombre.setEditable(true);
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtEmail.requestFocus();
+        }
+
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER) && (c != KeyEvent.VK_SPACE)) {
+            txtApellido.setEditable(false);
+        } else {
+            txtApellido.setEditable(true);
+        }
+    }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Usuarios", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else if (resp == JOptionPane.NO_OPTION) {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        } else {
+            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
+
+        char d = evt.getKeyChar();
+        if (d == ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!-_.";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
+            evt.consume();
+        }
+
+        char d = evt.getKeyChar();
+        if (d == ' ') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
     private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
         String login = txtUsuario.getText();
         String contr = txtcontrasena.getText();
@@ -443,126 +550,19 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Error: " + ex);
         }
+
     }//GEN-LAST:event_txtcontrasenaActionPerformed
 
-    private void rbNormalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbNormalPropertyChange
-        nivel = 0;
-    }//GEN-LAST:event_rbNormalPropertyChange
-
-    private void rbAdminPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbAdminPropertyChange
-        nivel = 1;
-    }//GEN-LAST:event_rbAdminPropertyChange
-
-    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
-        btnGuardar.setBackground(new Color(0, 51, 204));
-    }//GEN-LAST:event_btnGuardarMouseEntered
-
-    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
-        btnGuardar.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_btnGuardarMouseExited
-
-    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
-
-    }//GEN-LAST:event_btnLimpiarMouseClicked
-
-    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
-        btnLimpiar.setBackground(new Color(0, 51, 204));
-    }//GEN-LAST:event_btnLimpiarMouseEntered
-
-    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
-        btnLimpiar.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_btnLimpiarMouseExited
-
-    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        btnSalir.setBackground(Color.red);
-    }//GEN-LAST:event_btnSalirMouseEntered
-
-    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        btnSalir.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_btnSalirMouseExited
-
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtApellido.requestFocus();
-        }
-        
-        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(evt.getKeyChar()) && (allowedCharacters.indexOf(c) == -1)) {
-            txtNombre.setEditable(false);
-        } else {
-            txtNombre.setEditable(true);
-        }
-    }//GEN-LAST:event_txtNombreKeyPressed
-
-    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtEmail.requestFocus();
-        }
-        
-        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(evt.getKeyChar()) && (allowedCharacters.indexOf(c) == -1)) {
-            txtApellido.setEditable(false);
-        } else {
-            txtApellido.setEditable(true);
-        }
-    }//GEN-LAST:event_txtApellidoKeyPressed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int resp = JOptionPane.showConfirmDialog(rootPane, "Desea cerrar la ventana de Mantenimiento de Usuarios", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
-
-        if (resp == JOptionPane.YES_OPTION) {
-            this.dispose();
-        } else if (resp == JOptionPane.NO_OPTION) {
-            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        } else {
-            this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        }
-    }//GEN-LAST:event_formWindowClosing
-
-    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
-        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@";
-        char c = evt.getKeyChar();
-
-        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
-            evt.consume();
-        }
-
-        char d = evt.getKeyChar();
-        if (d == ' ') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtEmailKeyTyped
-
-    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
-        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!-_.";
-        char c = evt.getKeyChar();
-
-        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
-            evt.consume();
-        }
-
-        char d = evt.getKeyChar();
-        if (d == ' ') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtUsuarioKeyTyped
-
     private void txtcontrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasenaKeyTyped
-        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*_-.,:;()[]{}?/|\\+~";
+        String allowedCharacters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*_-.,:;()[]{}<>?/|\\+~";
         char c = evt.getKeyChar();
 
-        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER)) {
-            evt.consume();
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER) && (c == KeyEvent.VK_SPACE)) {
+            txtcontrasena.setEditable(false);
+        } else {
+            txtcontrasena.setEditable(true);
         }
 
-        char d = evt.getKeyChar();
-        if (d == ' ') {
-            evt.consume();
-        }
     }//GEN-LAST:event_txtcontrasenaKeyTyped
 
     public static void main(String args[]) {
@@ -596,6 +596,6 @@ public class DE_USUARIOS extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JPasswordField txtcontrasena;
+    private javax.swing.JTextField txtcontrasena;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,6 @@ package CONSULTAS;
 import MANTENIMIENTO.DE_CATALOGO;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
     public DefaultTableModel TablaM;
 
     public DE_CATALOGO_DE_CUENTA() {
-        initComponents();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Consulta Cuentas");
@@ -59,11 +57,11 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num_Cta", "Descripción", "Tipo", "Nivel", "Padre", "Grupo", "Débito", "Credito", "Balance"
+                "No. Cuenta", "Descripción", "Tipo", "Nivel", "Padre", "Grupo", "Fecha C", "Hora C", "Débito", "Credito", "Balance"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -72,26 +70,20 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaRegistro);
         if (tablaRegistro.getColumnModel().getColumnCount() > 0) {
-            tablaRegistro.getColumnModel().getColumn(0).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(4);
-            tablaRegistro.getColumnModel().getColumn(1).setPreferredWidth(160);
-            tablaRegistro.getColumnModel().getColumn(2).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(2).setPreferredWidth(6);
-            tablaRegistro.getColumnModel().getColumn(3).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(3).setPreferredWidth(2);
-            tablaRegistro.getColumnModel().getColumn(4).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(4).setPreferredWidth(4);
-            tablaRegistro.getColumnModel().getColumn(5).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tablaRegistro.getColumnModel().getColumn(1).setPreferredWidth(155);
+            tablaRegistro.getColumnModel().getColumn(2).setPreferredWidth(4);
+            tablaRegistro.getColumnModel().getColumn(3).setPreferredWidth(1);
+            tablaRegistro.getColumnModel().getColumn(4).setPreferredWidth(1);
             tablaRegistro.getColumnModel().getColumn(5).setPreferredWidth(10);
-            tablaRegistro.getColumnModel().getColumn(6).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(6).setPreferredWidth(15);
-            tablaRegistro.getColumnModel().getColumn(7).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(6).setPreferredWidth(17);
             tablaRegistro.getColumnModel().getColumn(7).setPreferredWidth(15);
-            tablaRegistro.getColumnModel().getColumn(8).setResizable(false);
             tablaRegistro.getColumnModel().getColumn(8).setPreferredWidth(15);
+            tablaRegistro.getColumnModel().getColumn(9).setPreferredWidth(15);
+            tablaRegistro.getColumnModel().getColumn(10).setPreferredWidth(15);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 410));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 410));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -112,7 +104,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 150, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 150, 50));
 
         btnconsultar.setBackground(new java.awt.Color(160, 171, 176));
         btnconsultar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -133,7 +125,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
                 btnconsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 150, 50));
+        jPanel1.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 150, 50));
 
         javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
         PanelAzul.setLayout(PanelAzulLayout);
@@ -191,7 +183,8 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         TablaM.setRowCount(0);
         boolean filas = false;
 
-        String num, desc, tipo, nivel, padre, grupo, debito, credito, balance;
+        String num, desc, tipo, nivel, padre, grupo, debito, credito, balance, fecha, hora;
+        String tipoL = "";
         File f = new File("Catalogo.txt");
         ArrayList<String[]> datos = new ArrayList<>();
 
@@ -209,15 +202,23 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
                     num = s1.next();
                     desc = s1.next();
-                    nivel = s1.next();
                     tipo = s1.next();
+                    nivel = s1.next();
                     padre = s1.next();
                     grupo = s1.next();
+                    fecha = s1.next();
+                    hora = s1.next();
                     debito = s1.next();
                     credito = s1.next();
                     balance = s1.next();
                     
-                    datos.add(new String[]{num, desc, tipo, nivel, padre, grupo, debito, credito, balance});
+                    if (tipo.equals("0")) {
+                        tipoL = "GENERAL";
+                    } else if (tipo.equals("1")) {
+                        tipoL = "DETALLE";
+                    }
+                    
+                    datos.add(new String[]{num, desc, tipoL, nivel, padre, grupo, fecha, hora, debito, credito, balance});
 
                     filas = true;
                 }

@@ -1,4 +1,0 @@
-1;001;11021;Banco Popular Dominicano;500;0;abd
-1;002;11022;Banco BHD;0;500;cbb
-100;001;11021;Banco Popular Dominicano;7000;0;sssss
-100;002;11022;Banco BHD;0;7000;ddddd

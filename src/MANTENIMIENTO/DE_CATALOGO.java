@@ -204,9 +204,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtnumeroKeyPressed(evt);
             }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtnumeroKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnumeroKeyTyped(evt);
             }
@@ -229,6 +226,9 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         txtpadre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtpadreKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpadreKeyTyped(evt);
             }
         });
         Principal.add(txtpadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 290, 30));
@@ -362,6 +362,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
         cbxGrupo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbxGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pasivo", "Capital", "Ingresos", "Costos", "Gastos" }));
+        cbxGrupo.setSelectedIndex(-1);
         cbxGrupo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxGrupoItemStateChanged(evt);
@@ -371,6 +372,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
         cbxNivel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cbxNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        cbxNivel.setSelectedIndex(-1);
         cbxNivel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxNivelItemStateChanged(evt);
@@ -496,7 +498,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 //                txtcredito.setText(cc);
 //                txtbalance.setText(cb);
                 String lineaActual = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                        + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
+                        + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";"
+                        + txtfecha.getText() + ";" + txthora.getText() + ";" + txtdebito.getText() + ";"
                         + txtcredito.getText() + ";" + txtbalance.getText();
 
                 ManejoArchivos file = new ManejoArchivos();
@@ -534,7 +537,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             txtdescripcion.setText("");
             txtdescripcion.requestFocus();
         }
-        
+
         try {
 
             String auxcod = txtnumero.getText();
@@ -552,6 +555,9 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                     if (!f.exists()) {
                         f.createNewFile();
                         estado.setText("Creando");
+                        txtdebito.setText("0.0");
+                        txtcredito.setText("0.0");
+                        txtbalance.setText("0.0");
 
                     } else {
                         s = new Scanner(f);
@@ -565,7 +571,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
                             try {
                                 if (codigo == Integer.parseInt(s1.next())) {
-                                    
+
                                     txtdescripcion.setText(s1.next());
                                     tipo = Integer.parseInt(s1.next());
 
@@ -578,13 +584,31 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                     cbxNivel.setSelectedItem(s1.next());
                                     txtpadre.setText(s1.next());
                                     cbxGrupo.setSelectedItem(s1.next());
-                                    txtdebito.setText(s1.next());
-                                    txtcredito.setText(s1.next());
-                                    txtbalance.setText(s1.next());
+                                    String fecha = s1.next();
+                                    String hora = s1.next();
 
+                                    String debito = "0.0";
+                                    if (s1.hasNext()) {
+                                        debito = s1.next();
+                                    }
+
+                                    String credito = "0.0";
+                                    if (s1.hasNext()) {
+                                        credito = s1.next();
+                                    }
+
+                                    String balance = "0.0";
+                                    if (s1.hasNext()) {
+                                        balance = s1.next();
+                                    }
+
+                                    txtdebito.setText(debito);
+                                    txtcredito.setText(credito);
+                                    txtbalance.setText(balance);
 
                                     LineaAntigua = txtnumero.getText() + ";" + txtdescripcion.getText() + ";" + tipo + ";"
-                                            + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem() + ";" + txtdebito.getText() + ";"
+                                            + cbxNivel.getSelectedItem() + ";" + txtpadre.getText() + ";" + cbxGrupo.getSelectedItem()
+                                            + ";" + fecha + ";" + hora + ";" + txtdebito.getText() + ";"
                                             + txtcredito.getText() + ";" + txtbalance.getText();
 
                                     estado.setText(" Modificando");
@@ -597,6 +621,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
                                     estado.setText(" Creando");
                                     Modificar = false;
                                     encontrado = false;
+
                                     txtdebito.setText("0.0");
                                     txtcredito.setText("0.0");
                                     txtbalance.setText("0.0");
@@ -625,7 +650,10 @@ public class DE_CATALOGO extends javax.swing.JFrame {
             rbgeneral.requestFocus();
         }
 
-        if (Character.isDigit(evt.getKeyChar())) {
+        String allowedCharacters = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ-/.%()";
+        char c = evt.getKeyChar();
+
+        if ((allowedCharacters.indexOf(c) == -1) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_ENTER) && (c != KeyEvent.VK_SPACE)) {
             txtdescripcion.setEditable(false);
         } else {
             txtdescripcion.setEditable(true);
@@ -635,10 +663,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private void txtpadreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpadreKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtdebito.requestFocus();
-        }
-        char c = evt.getKeyChar();
-        if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
         }
     }//GEN-LAST:event_txtpadreKeyPressed
 
@@ -671,10 +695,6 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void txtnumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyReleased
-
-    }//GEN-LAST:event_txtnumeroKeyReleased
-
     private void rbgeneralPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbgeneralPropertyChange
         tipo = 0;
     }//GEN-LAST:event_rbgeneralPropertyChange
@@ -705,6 +725,13 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     private void rbdetallePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rbdetallePropertyChange
         tipo = 1;
     }//GEN-LAST:event_rbdetallePropertyChange
+
+    private void txtpadreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpadreKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtpadreKeyTyped
 
     public String origen(int indice) {
 
@@ -750,28 +777,28 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
             File f = new File("Catalogo.txt");
 
-                s = new Scanner(f);
+            s = new Scanner(f);
 
-                while (s.hasNextLine()) {
+            while (s.hasNextLine()) {
 
-                    String linea = s.nextLine();
-                    Scanner s1 = new Scanner(linea);
+                String linea = s.nextLine();
+                Scanner s1 = new Scanner(linea);
 
-                    s1.useDelimiter("\\s*;\\s*");
+                s1.useDelimiter("\\s*;\\s*");
 
-                    String numc = s1.next();
-                    String desc = s1.next();
-                    String tipo = s1.next();
-                    String nivel = s1.next();
-                    String padre = s1.next();
-                    String grupo = s1.next();
-                    String db = s1.next();
-                    String cr = s1.next();
-                    String bl = s1.next();
+                String numc = s1.next();
+                String desc = s1.next();
+                String tipo = s1.next();
+                String nivel = s1.next();
+                String padre = s1.next();
+                String grupo = s1.next();
+                String db = s1.next();
+                String cr = s1.next();
+                String bl = s1.next();
 
-                    trans(numc, grupo);
-                }
-                s.close();
+                trans(numc, grupo);
+            }
+            s.close();
 
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
@@ -784,65 +811,64 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         try {
             File g = new File("Detalle Transacciones.txt");
 
-                k = new Scanner(g);
+            k = new Scanner(g);
 
-                while (k.hasNextLine()) {
-                    String line = k.nextLine();
-                    Scanner s2 = new Scanner(line);
+            while (k.hasNextLine()) {
+                String line = k.nextLine();
+                Scanner s2 = new Scanner(line);
 
-                    s2.useDelimiter("\\s*;\\s*");
+                s2.useDelimiter("\\s*;\\s*");
 
-                    String doc = s2.next();
-                    String sec = s2.next();
-                    String cuenta = s2.next();
-                    String descrip = s2.next();
-                    String debitoc = s2.next();
-                    String creditoc = s2.next();
+                String doc = s2.next();
+                String sec = s2.next();
+                String cuenta = s2.next();
+                String descrip = s2.next();
+                String debitoc = s2.next();
+                String creditoc = s2.next();
 
-                    if (cuenta.equals(cnum)) {
+                if (cuenta.equals(cnum)) {
 
-                        int item = Integer.parseInt(itg);
-                        String orig = origen(item);
+                    int item = Integer.parseInt(itg);
+                    String orig = origen(item);
 
-                        if (orig.equals("debito")) {
-                            double almD = Double.parseDouble(debitoc);
-                            acumD += almD;
+                    if (orig.equals("debito")) {
+                        double almD = Double.parseDouble(debitoc);
+                        acumD += almD;
 
-                            double almC = Double.parseDouble(creditoc);
-                            acumC -= almC;
+                        double almC = Double.parseDouble(creditoc);
+                        acumC -= almC;
 
-                            double balancc = acumD - acumC;
+                        double balancc = acumD - acumC;
 
-                            String pdeb = Double.toString(almD);
-                            String pcre = Double.toString(almC);
-                            String pbal = Double.toString(balancc);
+                        String pdeb = Double.toString(almD);
+                        String pcre = Double.toString(almC);
+                        String pbal = Double.toString(balancc);
 
-                            txtdebito.setText(pdeb);
-                            txtcredito.setText(pcre);
-                            txtbalance.setText(pbal);
+                        txtdebito.setText(pdeb);
+                        txtcredito.setText(pcre);
+                        txtbalance.setText(pbal);
 
-                        } else if (orig.equals("credito")) {
+                    } else if (orig.equals("credito")) {
 
-                            double almD = Double.parseDouble(debitoc);
-                            acumD -= almD;
+                        double almD = Double.parseDouble(debitoc);
+                        acumD -= almD;
 
-                            double almC = Double.parseDouble(creditoc);
-                            acumC += almC;
+                        double almC = Double.parseDouble(creditoc);
+                        acumC += almC;
 
-                            double balancc = acumD - acumC;
+                        double balancc = acumD - acumC;
 
-                            String pdeb = Double.toString(almD);
-                            String pcre = Double.toString(almC);
-                            String pbal = Double.toString(balancc);
+                        String pdeb = Double.toString(almD);
+                        String pcre = Double.toString(almC);
+                        String pbal = Double.toString(balancc);
 
-                            txtdebito.setText(pdeb);
-                            txtcredito.setText(pcre);
-                            txtbalance.setText(pbal);
-                        }
+                        txtdebito.setText(pdeb);
+                        txtcredito.setText(pcre);
+                        txtbalance.setText(pbal);
                     }
                 }
-                k.close();
-
+            }
+            k.close();
 
         } catch (FileNotFoundException b) {
             JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
