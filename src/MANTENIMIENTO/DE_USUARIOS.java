@@ -67,7 +67,7 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         rbNormal = new javax.swing.JRadioButton();
         rbAdmin = new javax.swing.JRadioButton();
         estado = new javax.swing.JLabel();
-        txtcontrasena = new javax.swing.JTextField();
+        txtcontrasena = new javax.swing.JPasswordField();
 
         jButton4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton4.setText("SALIR");
@@ -596,6 +596,6 @@ public class DE_USUARIOS extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtcontrasena;
+    private javax.swing.JPasswordField txtcontrasena;
     // End of variables declaration//GEN-END:variables
 }

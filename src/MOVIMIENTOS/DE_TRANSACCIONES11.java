@@ -4,16 +4,23 @@ import ARCHIVOS.ManejoArchivos;
 import MENU_PRINCIPAL.LOgin;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -26,30 +33,42 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private int secuencia = 0;
     String usuario = LOgin.getUsuario();
     boolean estatus;
+    public static String LineaAntigua;
+    private javax.swing.Timer timer;
 
     private static double DebitoA = 0.0;
     private static double CreditoA = 0.0;
+    String fechaAc = "**/**/****";
+    boolean Modificar = false;
 
     public DE_TRANSACCIONES11() {
         initComponents();
         txtFecha.setText(fecha());
         txtFecha.setEditable(false);
+        txtUser.setText(usuario);
+        txtUser.setEditable(false);
+        txtHora.setEditable(false);
         this.setTitle("Movimiento de Transacciones");
         this.setLocationRelativeTo(null);
 
         txtNdocumento.requestFocusInWindow();
-        txtDescripcion.setEditable(false);
-        txtDescripcionC.setEditable(false);
         txtMonto.setEditable(false);
 
         TablaM = (DefaultTableModel) TablaRegistros.getModel();
+
+        timer = new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtHora.setText(hora());
+            }
+        });
+        timer.start();
 
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
 
         TextPrompt ndoc = new TextPrompt(" Digite No. del documento", txtNdocumento, TextPrompt.Show.ALWAYS);
         ndoc.setForeground(Color.gray);
-
         TextPrompt ncuent = new TextPrompt(" Digite el No. de cuenta", txtNcuenta, TextPrompt.Show.ALWAYS);
         ncuent.setForeground(Color.gray);
         TextPrompt deb = new TextPrompt(" Digite el Debito", txtDebito, TextPrompt.Show.ALWAYS);
@@ -58,6 +77,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         cred.setForeground(Color.gray);
         TextPrompt com = new TextPrompt(" Digite un Comentario", txtComentario, TextPrompt.Show.ALWAYS);
         com.setForeground(Color.gray);
+        TextPrompt descD = new TextPrompt(" Digite la Descripcion del documento", txtDescripcion, TextPrompt.Show.ALWAYS);
+        descD.setForeground(Color.gray);
+
+        cargarEstados();
     }
 
     @SuppressWarnings("unchecked")
@@ -76,6 +99,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
+        txtHora = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDebito = new javax.swing.JTextField();
@@ -94,6 +121,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnSalir = new javax.swing.JButton();
         BtnGuardar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
+        BtnQuitarCuenta = new javax.swing.JButton();
+        BtnLimpiarAll = new javax.swing.JButton();
         PanelAzul = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -111,13 +140,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         PanelCabezera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel2.setText("FECHA");
-        PanelCabezera.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 50, 30));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel2.setText("HECHO POR");
+        PanelCabezera.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 100, 30));
 
         CbTipoDoc.setBackground(new java.awt.Color(237, 237, 237));
-        CbTipoDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        CbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0. AJUSTE", "1.COMPROVANTE DE PAGO", "2. COMPROVANTE DE DEVOLUCION", "3. CONSIGNACIONES", "4. ENTRADA", "5. FACTURA DE VENTA", "6. FACTURA DE COMPRA", "7. LETRAS DE CAMBIO", "8. PRESUPUESTOS", "9. RECIBO DE COBRO", "10. RECIBO DE PAGO", "11. RECIBO DE CAJA", "12.SALIDA", "13. VALES", " " }));
-        CbTipoDoc.setSelectedIndex(-1);
+        CbTipoDoc.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         CbTipoDoc.setToolTipText("");
         CbTipoDoc.setBorder(null);
         CbTipoDoc.addItemListener(new java.awt.event.ItemListener() {
@@ -132,10 +160,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel3.setText("TIPO DE DOCUMENTO");
         PanelCabezera.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 152, 32));
 
-        txtFecha.setBackground(new java.awt.Color(237, 237, 237));
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        txtFecha.setBorder(null);
-        PanelCabezera.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 100, 30));
+        txtFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelCabezera.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 100, 30));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -156,6 +183,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             }
         });
         txtNdocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNdocumentoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNdocumentoKeyTyped(evt);
             }
@@ -170,6 +200,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtDescripcion.setBorder(null);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
         PanelCabezera.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 280, 26));
 
         txtMonto.setBackground(new java.awt.Color(237, 237, 237));
@@ -177,7 +212,26 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtMonto.setBorder(null);
         PanelCabezera.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 280, 26));
 
-        PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 880, 170));
+        jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel12.setText("FECHA");
+        PanelCabezera.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 100, 30));
+
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel13.setText("HORA");
+        jLabel13.setPreferredSize(new java.awt.Dimension(84, 19));
+        PanelCabezera.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 100, 30));
+
+        txtUser.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelCabezera.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 100, 30));
+
+        txtHora.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelCabezera.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
+
+        PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 930, 180));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -186,7 +240,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DEBITO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 50, 32));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 50, 32));
 
         txtDebito.setBackground(new java.awt.Color(237, 237, 237));
         txtDebito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -199,14 +253,14 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtDebitoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtDebito, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 250, 26));
+        jPanel1.add(txtDebito, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 250, 26));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("COMENTARIO");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 105, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 105, 30));
 
         txtDescripcionC.setBackground(new java.awt.Color(237, 237, 237));
         txtDescripcionC.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -216,13 +270,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtDescripcionCKeyPressed(evt);
             }
         });
-        jPanel1.add(txtDescripcionC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 230, 26));
+        jPanel1.add(txtDescripcionC, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 230, 26));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("NO. CUENTA");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 100, 32));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 100, 32));
 
         txtNcuenta.setBackground(new java.awt.Color(237, 237, 237));
         txtNcuenta.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -237,13 +291,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtNcuentaKeyTyped(evt);
             }
         });
-        jPanel1.add(txtNcuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 230, 26));
+        jPanel1.add(txtNcuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 230, 26));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("CREDITO");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 70, 32));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 70, 32));
 
         txtCredito.setBackground(new java.awt.Color(237, 237, 237));
         txtCredito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -256,14 +310,14 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtCreditoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 250, 26));
+        jPanel1.add(txtCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 250, 26));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("DESCRIPCION");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 105, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 105, 30));
 
         txtComentario.setBackground(new java.awt.Color(237, 237, 237));
         txtComentario.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
@@ -273,7 +327,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 txtComentarioKeyPressed(evt);
             }
         });
-        jPanel1.add(txtComentario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 250, 26));
+        jPanel1.add(txtComentario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 250, 26));
 
         BtnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnAgregar.setText("AGREGAR");
@@ -283,9 +337,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 BtnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 140, 40));
+        jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 140, 40));
 
-        PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 880, 190));
+        PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 930, 190));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -328,7 +382,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             TablaRegistros.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 170));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 170));
 
         BtnSalir.setBackground(new java.awt.Color(160, 171, 176));
         BtnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -350,7 +404,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 BtnSalirActionPerformed(evt);
             }
         });
-        jPanel2.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 130, 50));
+        jPanel2.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 130, 50));
 
         BtnGuardar.setBackground(new java.awt.Color(160, 171, 176));
         BtnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -371,7 +425,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 BtnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 50));
+        jPanel2.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 130, 50));
 
         BtnLimpiar.setBackground(new java.awt.Color(160, 171, 176));
         BtnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -393,9 +447,53 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 BtnLimpiarActionPerformed(evt);
             }
         });
-        jPanel2.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 130, 50));
+        jPanel2.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 130, 50));
 
-        PanelPrincipal.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 880, 250));
+        BtnQuitarCuenta.setBackground(new java.awt.Color(160, 171, 176));
+        BtnQuitarCuenta.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnQuitarCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        BtnQuitarCuenta.setText("QUITAR CUENTA");
+        BtnQuitarCuenta.setBorder(null);
+        BtnQuitarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnQuitarCuenta.setPreferredSize(new java.awt.Dimension(76, 19));
+        BtnQuitarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnQuitarCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnQuitarCuentaMouseExited(evt);
+            }
+        });
+        BtnQuitarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnQuitarCuentaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnQuitarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 130, 50));
+
+        BtnLimpiarAll.setBackground(new java.awt.Color(160, 171, 176));
+        BtnLimpiarAll.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnLimpiarAll.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLimpiarAll.setText("LIMPIAR TODO");
+        BtnLimpiarAll.setBorder(null);
+        BtnLimpiarAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiarAll.setPreferredSize(new java.awt.Dimension(76, 19));
+        BtnLimpiarAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnLimpiarAllMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnLimpiarAllMouseExited(evt);
+            }
+        });
+        BtnLimpiarAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarAllActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnLimpiarAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 130, 50));
+
+        PanelPrincipal.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 930, 250));
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
         PanelAzul.setPreferredSize(new java.awt.Dimension(705, 70));
@@ -409,7 +507,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+            .addGroup(PanelAzulLayout.createSequentialGroup()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelAzulLayout.setVerticalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,13 +519,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
+        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,9 +540,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private void txtNdocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNdocumentoActionPerformed
 
         String doc = txtNdocumento.getText();
-
         try {
-
             boolean encontrado = false;
             Scanner s;
             File t = new File("Cabecera Transacciones.txt");
@@ -450,79 +548,57 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             s = new Scanner(t);
 
             while (s.hasNextLine() && !encontrado) {
-
                 String linea = s.nextLine();
                 Scanner s1 = new Scanner(linea);
 
                 s1.useDelimiter("\\s*;\\s*");
 
-                if (doc.equals(s1.next())) {
-                    estatus = true;
-                } else {
-                    estatus = false;
-                }
-            }
-        } catch (FileNotFoundException e) {
+                String codigoT = s1.next();
+                String fecha = s1.next();
+                String tipo = s1.next();
+                String Descripcion = s1.next();
+                String hechoPor = s1.next();
+                String monto = s1.next();
+                String fechaAc = s1.next();
+                String estado = s1.next();
 
-        }
+                if (doc.equals(codigoT)) {
 
-        if (estatus == true) {
-            JOptionPane.showMessageDialog(this, "Esta transaccion ya esta Actualizada");
-            LimpiarAll();
-        } else {
-
-            if (txtNdocumento.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
-                txtNdocumento.grabFocus();
-            } else {
-//                CbTipoDoc.requestFocus();
-            }
-
-            try {
-                boolean encontrado = false;
-                Scanner s;
-
-                try {
-
-                    File f = new File("Documentos.txt");
-                    if (!f.exists()) {
-                        JOptionPane.showMessageDialog(this, "No hay ningun registro de Documentos");
+                    if (estado.equals("true")) {
+                        JOptionPane.showMessageDialog(this, "Esta transaccion ya esta Actualizada");
+                        BtnLimpiarAllActionPerformed(evt);
                     } else {
-
-                        s = new Scanner(f);
-
-                        while (s.hasNextLine() && !encontrado) {
-
-                            String linea = s.nextLine();
-                            Scanner s1 = new Scanner(linea);
-
-                            s1.useDelimiter("\\s*;\\s*");
-
-                            String aux = s1.next();
-
-                            if (doc.equals(aux)) {
-
-                                txtNdocumento.setText(doc);
-                                txtDescripcion.setText(s1.next());
-                                encontrado = true;
-                                txtNdocumento.setEditable(false);
-                            }
+                        if (txtNdocumento.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(this, "Debe ingresar el Código del Documento para continuar");
+                            txtNdocumento.grabFocus();
+                        } else {
+                            txtDescripcion.requestFocus();
                         }
 
-                        if (!encontrado) {
-                            JOptionPane.showMessageDialog(this, "Este No. de Documento no existe");
-                            txtNdocumento.setText("");
-                            txtNdocumento.requestFocus();
-                        }
+                        int index = Integer.parseInt(tipo);
+                        CbTipoDoc.setSelectedIndex(index);
+                        txtDescripcion.setText(Descripcion);
+                        txtMonto.setText(monto);
+
+                        LineaAntigua = txtNdocumento.getText() + ";" + txtFecha.getText() + ";" + CbTipoDoc.getSelectedIndex()
+                                + ";" + txtDescripcion.getText() + ";" + usuario + ";" + txtMonto.getText() + ";"
+                                + fechaAc + ";" + estatus;
+
+                        TablaC(codigoT);
+
+                        Modificar = true;
+                        encontrado = true;
                     }
-                } catch (FileNotFoundException e) {
-                    JOptionPane.showMessageDialog(this, "No se encontró el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    txtNdocumento.setText(doc);
+                    Modificar = false;
+                    encontrado = false;
                 }
-            } catch (HeadlessException | NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Error al Abrir el Archivo...");
-                BtnLimpiarActionPerformed(evt);
             }
+            s.close();
+        } catch (FileNotFoundException e) {
         }
+
     }//GEN-LAST:event_txtNdocumentoActionPerformed
 
     private void txtNcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNcuentaActionPerformed
@@ -609,7 +685,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         } else {
 
             double totaldb = 0, totalcr = 0;
-            String fechaAc = "**/**/****";
             String monto;
 
             try {
@@ -660,13 +735,20 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                         f.createNewFile();
                     }
 
-                    String LineaActual = txtNdocumento.getText() + ";" + txtFecha.getText() + CbTipoDoc.getSelectedIndex() + ";"
+                    String LineaActual = txtNdocumento.getText() + ";" + txtFecha.getText() + ";" + CbTipoDoc.getSelectedIndex() + ";"
                             + txtDescripcion.getText() + ";" + usuario + ";" + txtMonto.getText() + ";" + fechaAc
                             + ";" + estatus;
 
-                    file.GuardarDatos(LineaActual, f);
-                    LimpiarAll();
-                    txtNdocumento.requestFocus();
+                    if (Modificar) {
+                        file.Modificar(LineaAntigua, LineaActual, f);
+                        BtnLimpiarAllActionPerformed(evt);
+                        Modificar = false;
+                        txtNdocumento.requestFocus();
+                    } else {
+                        file.GuardarDatos(LineaActual, f);
+                        BtnLimpiarAllActionPerformed(evt);
+                        txtNdocumento.requestFocus();
+                    }
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "La cantidad de Debitos y Creditos deben ser iguales", "ERROR", HEIGHT);
@@ -725,7 +807,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Por Favor Rellene Creditos o Debitos antes de agregar", "ERROR", HEIGHT);
         } else {
 
-            secuencia++;
+            int maxSecuencia = obtenerMaximaSecuencia();
+
+            secuencia = maxSecuencia + 1;
             String secf = String.format("%03d", secuencia);
 
             String debito, credito;
@@ -761,7 +845,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
     private void CbTipoDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CbTipoDocItemStateChanged
         txtNcuenta.requestFocus();
-        
+
     }//GEN-LAST:event_CbTipoDocItemStateChanged
 
     private void txtDescripcionCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionCKeyPressed
@@ -842,7 +926,33 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnSalir.setBackground(new Color(160, 171, 176));
     }//GEN-LAST:event_BtnSalirMouseExited
 
-    public void LimpiarAll() {
+    private void BtnQuitarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaMouseEntered
+        BtnQuitarCuenta.setBackground(Color.red);
+    }//GEN-LAST:event_BtnQuitarCuentaMouseEntered
+
+    private void BtnQuitarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaMouseExited
+        BtnQuitarCuenta.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnQuitarCuentaMouseExited
+
+    private void BtnQuitarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaActionPerformed
+        int fila = TablaRegistros.getSelectedRow();
+        if (fila >= 0) {
+            TablaM.removeRow(fila);
+            Asecuencia();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
+        }
+    }//GEN-LAST:event_BtnQuitarCuentaActionPerformed
+
+    private void BtnLimpiarAllMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarAllMouseEntered
+        BtnLimpiarAll.setBackground(new Color(0, 51, 204));
+    }//GEN-LAST:event_BtnLimpiarAllMouseEntered
+
+    private void BtnLimpiarAllMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarAllMouseExited
+        BtnLimpiarAll.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnLimpiarAllMouseExited
+
+    private void BtnLimpiarAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarAllActionPerformed
         txtNdocumento.setText("");
         CbTipoDoc.setSelectedItem(null);
         txtDescripcion.setText("");
@@ -853,12 +963,108 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtCredito.setText("");
         txtComentario.setText("");
         TablaM.setRowCount(0);
+        txtNdocumento.requestFocus();
+    }//GEN-LAST:event_BtnLimpiarAllActionPerformed
+
+    private void txtNdocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNdocumentoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtDescripcion.requestFocus();
+        }
+    }//GEN-LAST:event_txtNdocumentoKeyPressed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtNcuenta.requestFocus();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void cargarEstados() {
+        try {
+            File archivo = new File("Documentos.txt");
+            BufferedReader br = new BufferedReader(new FileReader(archivo));
+
+            String linea;
+            while ((linea = br.readLine()) != null) {
+
+                String[] partes = linea.split(";");
+
+                if (partes.length >= 2) {
+
+                    String des = partes[1].trim();
+                    CbTipoDoc.addItem(des);
+                }
+            }
+
+            br.close();
+        } catch (IOException e) {
+        }
+    }
+
+    private void TablaC(String nombreDoc) {
+        ArrayList<String[]> datos = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Detalle Transacciones.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                StringTokenizer tokens = new StringTokenizer(linea, ";");
+
+                String aux = tokens.nextToken();
+
+                if (aux.equals(nombreDoc)) {
+                    String[] fila = new String[TablaM.getColumnCount()];
+                    for (int j = 0; j < TablaM.getColumnCount(); j++) {
+                        if (tokens.hasMoreTokens()) {
+                            fila[j] = tokens.nextToken();
+                        }
+                    else {
+                        fila[j] = "";
+                    }
+                    }
+
+                    datos.add(fila);
+                }
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TablaM.setRowCount(0);
+        for (String[] fila : datos) {
+            TablaM.addRow(fila);
+        }
+    }
+    
+    private void Asecuencia() {
+        for (int i = 0; i < TablaM.getRowCount(); i++) {
+            TablaM.setValueAt(String.format("%03d", i + 1), i, 0);
+        }
+    }
+
+    private int obtenerMaximaSecuencia() {
+        int maxSecuencia = 0;
+
+        for (int i = 0; i < TablaM.getRowCount(); i++) {
+            Object valor = TablaM.getValueAt(i, 0);
+            if (valor != null) {
+                int valorSecuencia = Integer.parseInt(valor.toString());
+                maxSecuencia = Math.max(maxSecuencia, valorSecuencia);
+            }
+        }
+
+        return maxSecuencia;
     }
 
     public static String fecha() {
         Date fecha = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat(" dd/MM/YYYY");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
+    }
+
+    public static String hora() {
+        LocalTime horaActual = LocalTime.now();
+        DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return horaActual.format(hora);
     }
 
     public static void addToDebitoA(double amount) {
@@ -890,6 +1096,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnLimpiarAll;
+    private javax.swing.JButton BtnQuitarCuenta;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JComboBox<String> CbTipoDoc;
     private javax.swing.JPanel PanelAzul;
@@ -899,6 +1107,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -916,8 +1126,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDescripcionC;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtNcuenta;
     private javax.swing.JTextField txtNdocumento;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

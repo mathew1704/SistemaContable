@@ -27,7 +27,7 @@ public class ManejoArchivos {
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        
+
         BufferedReader br;
         try {
             if (archivoA.exists()) {
@@ -58,12 +58,12 @@ public class ManejoArchivos {
             System.out.println(e);
         }
     }
-    
+
     public void Borrar(File f) {
         try {
             if (f.exists()) {
                 f.delete();
-            } 
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

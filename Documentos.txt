@@ -2,3 +2,4 @@
 200;Salidas
 EN-102;Entrada cxc
 1;credito
+01;Ajustes del mes

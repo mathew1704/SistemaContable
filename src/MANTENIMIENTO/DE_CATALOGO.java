@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -40,6 +41,8 @@ public class DE_CATALOGO extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
         txtfecha.setText(fecha());
         txthora.setText(hora());
+        txtfecha.setEditable(false);
+        txthora.setEditable(false);
         txtnumero.requestFocusInWindow();
 
         buttonGroupTipoCta.add(rbgeneral);
@@ -771,6 +774,7 @@ public class DE_CATALOGO extends javax.swing.JFrame {
     }
 
     public void Actualizardcb() {
+        ArrayList<String> cb = new ArrayList<>();
         Scanner s;
 
         try {
@@ -786,17 +790,9 @@ public class DE_CATALOGO extends javax.swing.JFrame {
 
                 s1.useDelimiter("\\s*;\\s*");
 
-                String numc = s1.next();
-                String desc = s1.next();
-                String tipo = s1.next();
-                String nivel = s1.next();
-                String padre = s1.next();
-                String grupo = s1.next();
-                String db = s1.next();
-                String cr = s1.next();
-                String bl = s1.next();
+                cb.add(linea);
 
-                trans(numc, grupo);
+                trans(cb.get(0), cb.get(5));
             }
             s.close();
 

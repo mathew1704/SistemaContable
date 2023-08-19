@@ -1,4 +1,4 @@
-package MENU_PRINCIPAL;
+ package MENU_PRINCIPAL;
 
 import texto.TextPrompt;
 import java.awt.Color;
