@@ -40,6 +40,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         btnconsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 

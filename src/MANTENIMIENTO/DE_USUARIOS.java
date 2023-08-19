@@ -73,6 +73,7 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         jButton4.setText("SALIR");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

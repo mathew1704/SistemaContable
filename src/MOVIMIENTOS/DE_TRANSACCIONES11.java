@@ -31,9 +31,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
     public DefaultTableModel TablaM;
     private int secuencia = 0;
+    String secf = "";
     String usuario = LOgin.getUsuario();
     boolean estatus;
     public static String LineaAntigua;
+    public static String LineaAntigua1;
     private javax.swing.Timer timer;
 
     private static double DebitoA = 0.0;
@@ -53,6 +55,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
         txtNdocumento.requestFocusInWindow();
         txtMonto.setEditable(false);
+        this.TablaRegistros.setComponentPopupMenu(PopupMenuTabla);
 
         TablaM = (DefaultTableModel) TablaRegistros.getModel();
 
@@ -87,6 +90,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopupMenuTabla = new javax.swing.JPopupMenu();
+        m_eliminar = new javax.swing.JMenuItem();
+        m_modificar = new javax.swing.JMenuItem();
         PanelPrincipal = new javax.swing.JPanel();
         PanelCabezera = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,12 +103,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtNdocumento = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtDescripcion = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDebito = new javax.swing.JTextField();
@@ -125,6 +132,24 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnLimpiarAll = new javax.swing.JButton();
         PanelAzul = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+
+        m_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_eliminar.setText("ELIMINAR");
+        m_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_eliminarActionPerformed(evt);
+            }
+        });
+        PopupMenuTabla.add(m_eliminar);
+
+        m_modificar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        m_modificar.setText("MODIFICAR");
+        m_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_modificarActionPerformed(evt);
+            }
+        });
+        PopupMenuTabla.add(m_modificar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -197,16 +222,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel7.setText("DESCRIPCION");
         PanelCabezera.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 105, 32));
 
-        txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
-        txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
-        txtDescripcion.setBorder(null);
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyPressed(evt);
-            }
-        });
-        PanelCabezera.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 280, 26));
-
         txtMonto.setBackground(new java.awt.Color(237, 237, 237));
         txtMonto.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtMonto.setBorder(null);
@@ -230,6 +245,22 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtHora.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         txtHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelCabezera.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
+
+        jScrollPane2.setBorder(null);
+
+        txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setRows(5);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(txtDescripcion);
+
+        PanelCabezera.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 280, 26));
 
         PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 930, 180));
 
@@ -366,6 +397,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TablaRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaRegistrosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaRegistros);
@@ -723,7 +759,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                         writer.newLine();
                     }
                     writer.close();
-                    JOptionPane.showMessageDialog(rootPane, "Registro guardado");
 
                     DE_TRANSACCIONES11.addToDebitoA(totaldb);
                     DE_TRANSACCIONES11.addToCreditoA(totalcr);
@@ -749,6 +784,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                         BtnLimpiarAllActionPerformed(evt);
                         txtNdocumento.requestFocus();
                     }
+
+                    JOptionPane.showMessageDialog(rootPane, "Registro guardado");
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "La cantidad de Debitos y Creditos deben ser iguales", "ERROR", HEIGHT);
@@ -810,7 +847,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             int maxSecuencia = obtenerMaximaSecuencia();
 
             secuencia = maxSecuencia + 1;
-            String secf = String.format("%03d", secuencia);
+            secf = String.format("%03d", secuencia);
 
             String debito, credito;
             String cuenta = txtNcuenta.getText();
@@ -935,13 +972,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnQuitarCuentaMouseExited
 
     private void BtnQuitarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaActionPerformed
-        int fila = TablaRegistros.getSelectedRow();
-        if (fila >= 0) {
-            TablaM.removeRow(fila);
-            Asecuencia();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
-        }
+//        int fila = TablaRegistros.getSelectedRow();
+//        if (fila >= 0) {
+//            TablaM.removeRow(fila);
+//            Asecuencia();
+//        } else {
+//            JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
+//        }
     }//GEN-LAST:event_BtnQuitarCuentaActionPerformed
 
     private void BtnLimpiarAllMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarAllMouseEntered
@@ -977,6 +1014,43 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             txtNcuenta.requestFocus();
         }
     }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void TablaRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRegistrosMouseClicked
+//        int seleccionar = TablaRegistros.rowAtPoint(evt.getPoint());
+//
+//        txtNcuenta.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 1)));
+//        txtDescripcionC.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 2)));
+//        txtDebito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 3)));
+//        txtCredito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 4)));
+//        txtComentario.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 5)));
+    }//GEN-LAST:event_TablaRegistrosMouseClicked
+
+    private void m_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_eliminarActionPerformed
+        int fila = TablaRegistros.getSelectedRow();
+        if (fila >= 0) {
+            TablaM.removeRow(fila);
+            Asecuencia();
+        }
+    }//GEN-LAST:event_m_eliminarActionPerformed
+
+    private void m_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_modificarActionPerformed
+        int seleccionar = TablaRegistros.getSelectedRow();
+
+        if (seleccionar >= 0) {
+            String sec = String.valueOf(TablaRegistros.getValueAt(seleccionar, 1));
+            txtNcuenta.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 1)));
+            txtDescripcionC.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 2)));
+            txtDebito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 3)));
+            txtCredito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 4)));
+            txtComentario.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 5)));
+
+            LineaAntigua1 = sec + txtNcuenta.getText() + ";" + txtDescripcionC.getText() + ";" + txtDebito.getText() + ";"
+                    + txtComentario.getText();
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
+        }
+    }//GEN-LAST:event_m_modificarActionPerformed
 
     private void cargarEstados() {
         try {
@@ -1015,10 +1089,9 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                     for (int j = 0; j < TablaM.getColumnCount(); j++) {
                         if (tokens.hasMoreTokens()) {
                             fila[j] = tokens.nextToken();
+                        } else {
+                            fila[j] = "";
                         }
-                    else {
-                        fila[j] = "";
-                    }
                     }
 
                     datos.add(fila);
@@ -1034,7 +1107,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             TablaM.addRow(fila);
         }
     }
-    
+
     private void Asecuencia() {
         for (int i = 0; i < TablaM.getRowCount(); i++) {
             TablaM.setValueAt(String.format("%03d", i + 1), i, 0);
@@ -1103,6 +1176,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JPanel PanelAzul;
     private javax.swing.JPanel PanelCabezera;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JPopupMenu PopupMenuTabla;
     private javax.swing.JTable TablaRegistros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1120,10 +1194,13 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem m_eliminar;
+    private javax.swing.JMenuItem m_modificar;
     private javax.swing.JTextField txtComentario;
     private javax.swing.JTextField txtCredito;
     private javax.swing.JTextField txtDebito;
-    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtDescripcionC;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;

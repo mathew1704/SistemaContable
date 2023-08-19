@@ -38,6 +38,7 @@ public class CONSULTA_USUARIO extends javax.swing.JFrame {
         btnconsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 
