@@ -33,28 +33,33 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         fechaInicial = new com.toedter.calendar.JDateChooser();
         FechaFinal = new com.toedter.calendar.JDateChooser();
-        btnBuscar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnGuardar1 = new javax.swing.JButton();
+        btnProcesar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cierre de Diario");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CIERRE DIARIO");
+        jLabel1.setText("CIERRE DE DIARIO");
 
         javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAzulLayout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+            .addGroup(PanelAzulLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelAzulLayout.setVerticalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,141 +69,105 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnBuscar.setBackground(new java.awt.Color(160, 171, 176));
-        btnBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorder(null);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel1.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, -1));
+
+        fechaInicial.setBackground(new java.awt.Color(237, 237, 237));
+        fechaInicial.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jPanel1.add(fechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 220, 31));
+
+        FechaFinal.setBackground(new java.awt.Color(237, 237, 237));
+        FechaFinal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jPanel1.add(FechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 220, 31));
+
+        btnProcesar.setBackground(new java.awt.Color(160, 171, 176));
+        btnProcesar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnProcesar.setForeground(new java.awt.Color(255, 255, 255));
+        btnProcesar.setText("PROCESAR");
+        btnProcesar.setBorder(null);
+        btnProcesar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProcesar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseEntered(evt);
+                btnProcesarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseExited(evt);
+                btnProcesarMouseExited(evt);
             }
         });
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnProcesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnProcesarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnProcesar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 130, 50));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        btnGuardar1.setBackground(new java.awt.Color(160, 171, 176));
-        btnGuardar1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar1.setText("GUARDAR");
-        btnGuardar1.setBorder(null);
-        btnGuardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSalir.setBackground(new java.awt.Color(160, 171, 176));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("SALIR");
+        btnSalir.setBorder(null);
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardar1MouseEntered(evt);
+                btnSalirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardar1MouseExited(evt);
+                btnSalirMouseExited(evt);
             }
         });
-        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardar1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 130, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelAzul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(fechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(120, 120, 120)
-                                .addComponent(FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(294, 294, 294)
-                                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(PanelAzul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-        );
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel2.setText("FECHA FINAL");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 90, 20));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setText("FECHA INICIAL");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 100, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
-        btnBuscar.setBackground(new Color(0, 51, 204));
-    }//GEN-LAST:event_btnBuscarMouseEntered
+    private void btnProcesarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcesarMouseEntered
+        btnProcesar.setBackground(new Color(0, 51, 204));
+    }//GEN-LAST:event_btnProcesarMouseEntered
 
-    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
-        btnBuscar.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_btnBuscarMouseExited
+    private void btnProcesarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcesarMouseExited
+        btnProcesar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnProcesarMouseExited
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarActionPerformed
        
            
       
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_btnProcesarActionPerformed
 
-    private void btnGuardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1MouseEntered
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        btnSalir.setBackground(Color.red);
+    }//GEN-LAST:event_btnSalirMouseEntered
 
-    private void btnGuardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardar1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1MouseExited
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        btnSalir.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnSalirMouseExited
 
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,12 +207,12 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser FechaFinal;
     private javax.swing.JPanel PanelAzul;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnProcesar;
+    private javax.swing.JButton btnSalir;
     private com.toedter.calendar.JDateChooser fechaInicial;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

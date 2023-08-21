@@ -42,6 +42,8 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private static double CreditoA = 0.0;
     String fechaAc = "**/**/****";
     boolean Modificar = false;
+    int seleccionar;
+    boolean mod = false;
 
     public DE_TRANSACCIONES11() {
         initComponents();
@@ -108,8 +110,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDebito = new javax.swing.JTextField();
@@ -128,7 +129,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnSalir = new javax.swing.JButton();
         BtnGuardar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
-        BtnQuitarCuenta = new javax.swing.JButton();
         BtnLimpiarAll = new javax.swing.JButton();
         PanelAzul = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -178,7 +178,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 CbTipoDocItemStateChanged(evt);
             }
         });
-        PanelCabezera.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 280, 30));
+        PanelCabezera.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 280, 26));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -192,7 +192,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("MONTO");
-        PanelCabezera.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 105, 32));
+        PanelCabezera.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 105, 32));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -220,12 +220,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("DESCRIPCION");
-        PanelCabezera.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 105, 32));
+        PanelCabezera.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 105, 32));
 
         txtMonto.setBackground(new java.awt.Color(237, 237, 237));
         txtMonto.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtMonto.setBorder(null);
-        PanelCabezera.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 280, 26));
+        PanelCabezera.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 280, 26));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -246,21 +246,15 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         txtHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelCabezera.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
 
-        jScrollPane2.setBorder(null);
-
         txtDescripcion.setBackground(new java.awt.Color(237, 237, 237));
-        txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
-        txtDescripcion.setLineWrap(true);
-        txtDescripcion.setRows(5);
+        txtDescripcion.setBorder(null);
         txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDescripcionKeyPressed(evt);
             }
         });
-        jScrollPane2.setViewportView(txtDescripcion);
-
-        PanelCabezera.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 280, 26));
+        PanelCabezera.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 280, 26));
 
         PanelPrincipal.add(PanelCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 930, 180));
 
@@ -399,11 +393,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TablaRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaRegistrosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(TablaRegistros);
         if (TablaRegistros.getColumnModel().getColumnCount() > 0) {
             TablaRegistros.getColumnModel().getColumn(0).setPreferredWidth(1);
@@ -484,28 +473,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 130, 50));
-
-        BtnQuitarCuenta.setBackground(new java.awt.Color(160, 171, 176));
-        BtnQuitarCuenta.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        BtnQuitarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        BtnQuitarCuenta.setText("QUITAR CUENTA");
-        BtnQuitarCuenta.setBorder(null);
-        BtnQuitarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BtnQuitarCuenta.setPreferredSize(new java.awt.Dimension(76, 19));
-        BtnQuitarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtnQuitarCuentaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BtnQuitarCuentaMouseExited(evt);
-            }
-        });
-        BtnQuitarCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnQuitarCuentaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(BtnQuitarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 130, 50));
 
         BtnLimpiarAll.setBackground(new java.awt.Color(160, 171, 176));
         BtnLimpiarAll.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -744,6 +711,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                     }
 
                     BufferedWriter writer = new BufferedWriter(new FileWriter(d, true));
+                    String LineaActual1 = txtNdocumento.getText() + ";";
 
                     for (int i = 0; i < TablaM.getRowCount(); i++) {
                         writer.write(txtNdocumento.getText());
@@ -751,17 +719,17 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                         for (int j = 0; j < TablaM.getColumnCount(); j++) {
 
                             writer.write(TablaM.getValueAt(i, j).toString());
+                            LineaActual1 += TablaM.getValueAt(i, j).toString();
 
                             if (j < TablaM.getColumnCount() - 1) {
                                 writer.write(";");
+                                LineaActual1 += ";";
                             }
                         }
                         writer.newLine();
+                        LineaActual1 += System.lineSeparator();
                     }
                     writer.close();
-
-                    DE_TRANSACCIONES11.addToDebitoA(totaldb);
-                    DE_TRANSACCIONES11.addToCreditoA(totalcr);
 
                     File f = new File("Cabecera Transacciones.txt");
                     ManejoArchivos file = new ManejoArchivos();
@@ -776,6 +744,7 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
                     if (Modificar) {
                         file.Modificar(LineaAntigua, LineaActual, f);
+                        file.Modificar(LineaAntigua1, LineaActual1, d);
                         BtnLimpiarAllActionPerformed(evt);
                         Modificar = false;
                         txtNdocumento.requestFocus();
@@ -848,35 +817,47 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
 
             secuencia = maxSecuencia + 1;
             secf = String.format("%03d", secuencia);
+            
+            LineaAntigua1 = secf + ";" + txtNcuenta.getText() + ";" + txtDescripcionC.getText() + ";" + txtDebito.getText() +
+                    ";" + txtCredito.getText() + txtComentario.getText();
 
-            String debito, credito;
-            String cuenta = txtNcuenta.getText();
-            String descrip = txtDescripcionC.getText();
-
-            if (txtDebito.getText().isEmpty()) {
-                debito = "0";
-                txtMonto.setText(txtCredito.getText());
+            if (mod) {
+                TablaM.setValueAt(txtNcuenta.getText(), seleccionar, 1);
+                TablaM.setValueAt(txtDescripcionC.getText(), seleccionar, 2);
+                TablaM.setValueAt(txtDebito.getText(), seleccionar, 3);
+                TablaM.setValueAt(txtCredito.getText(), seleccionar, 4);
+                TablaM.setValueAt(txtComentario.getText(), seleccionar, 5);
+                BtnLimpiarActionPerformed(evt);
             } else {
-                debito = txtDebito.getText();
+                String debito, credito;
+                String cuenta = txtNcuenta.getText();
+                String descrip = txtDescripcionC.getText();
+
+                if (txtDebito.getText().isEmpty()) {
+                    debito = "0";
+                    txtMonto.setText(txtCredito.getText());
+                } else {
+                    debito = txtDebito.getText();
+                }
+
+                if (txtCredito.getText().isEmpty()) {
+                    credito = "0";
+                    txtMonto.setText(txtDebito.getText());
+                } else {
+                    credito = txtCredito.getText();
+                }
+
+                double acumD = Double.parseDouble(debito);
+                double acumC = Double.parseDouble(credito);
+                DebitoA = acumD;
+                CreditoA = acumC;
+
+                String coment = txtComentario.getText();
+
+                TablaM.addRow(new Object[]{secf, cuenta, descrip, debito, credito, coment});
+                BtnLimpiarActionPerformed(evt);
+                txtNcuenta.requestFocus();
             }
-
-            if (txtCredito.getText().isEmpty()) {
-                credito = "0";
-                txtMonto.setText(txtDebito.getText());
-            } else {
-                credito = txtCredito.getText();
-            }
-
-            double acumD = Double.parseDouble(debito);
-            double acumC = Double.parseDouble(credito);
-            DebitoA = acumD;
-            CreditoA = acumC;
-
-            String coment = txtComentario.getText();
-
-            TablaM.addRow(new Object[]{secf, cuenta, descrip, debito, credito, coment});
-            BtnLimpiarActionPerformed(evt);
-            txtNcuenta.requestFocus();
         }
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
@@ -963,24 +944,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         BtnSalir.setBackground(new Color(160, 171, 176));
     }//GEN-LAST:event_BtnSalirMouseExited
 
-    private void BtnQuitarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaMouseEntered
-        BtnQuitarCuenta.setBackground(Color.red);
-    }//GEN-LAST:event_BtnQuitarCuentaMouseEntered
-
-    private void BtnQuitarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaMouseExited
-        BtnQuitarCuenta.setBackground(new Color(160, 171, 176));
-    }//GEN-LAST:event_BtnQuitarCuentaMouseExited
-
-    private void BtnQuitarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuitarCuentaActionPerformed
-//        int fila = TablaRegistros.getSelectedRow();
-//        if (fila >= 0) {
-//            TablaM.removeRow(fila);
-//            Asecuencia();
-//        } else {
-//            JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
-//        }
-    }//GEN-LAST:event_BtnQuitarCuentaActionPerformed
-
     private void BtnLimpiarAllMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarAllMouseEntered
         BtnLimpiarAll.setBackground(new Color(0, 51, 204));
     }//GEN-LAST:event_BtnLimpiarAllMouseEntered
@@ -1009,22 +972,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNdocumentoKeyPressed
 
-    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtNcuenta.requestFocus();
-        }
-    }//GEN-LAST:event_txtDescripcionKeyPressed
-
-    private void TablaRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRegistrosMouseClicked
-//        int seleccionar = TablaRegistros.rowAtPoint(evt.getPoint());
-//
-//        txtNcuenta.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 1)));
-//        txtDescripcionC.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 2)));
-//        txtDebito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 3)));
-//        txtCredito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 4)));
-//        txtComentario.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 5)));
-    }//GEN-LAST:event_TablaRegistrosMouseClicked
-
     private void m_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_eliminarActionPerformed
         int fila = TablaRegistros.getSelectedRow();
         if (fila >= 0) {
@@ -1034,23 +981,39 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     }//GEN-LAST:event_m_eliminarActionPerformed
 
     private void m_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_modificarActionPerformed
-        int seleccionar = TablaRegistros.getSelectedRow();
+        seleccionar = TablaRegistros.getSelectedRow();
 
         if (seleccionar >= 0) {
-            String sec = String.valueOf(TablaRegistros.getValueAt(seleccionar, 1));
+            String sec = String.valueOf(TablaRegistros.getValueAt(seleccionar, 0));
             txtNcuenta.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 1)));
             txtDescripcionC.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 2)));
             txtDebito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 3)));
             txtCredito.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 4)));
             txtComentario.setText(String.valueOf(TablaRegistros.getValueAt(seleccionar, 5)));
 
-            LineaAntigua1 = sec + txtNcuenta.getText() + ";" + txtDescripcionC.getText() + ";" + txtDebito.getText() + ";"
-                    + txtComentario.getText();
+            if (txtDebito.getText().equals("0")) {
+                txtCredito.setEditable(false);
+            } else if (txtCredito.getText().equals("0")) {
+                txtDebito.setEditable(false);
+            } else {
+                txtDebito.setEditable(true);
+                txtCredito.setEditable(true);
+            }
 
+            txtDescripcion.setEditable(false);
+
+            mod = true;
         } else {
             JOptionPane.showMessageDialog(rootPane, "Seleccione la fila de la cuenta que desea eliminar", "ERROR", HEIGHT);
         }
+
     }//GEN-LAST:event_m_modificarActionPerformed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtNcuenta.requestFocus();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyPressed
 
     private void cargarEstados() {
         try {
@@ -1140,22 +1103,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
         return horaActual.format(hora);
     }
 
-    public static void addToDebitoA(double amount) {
-        DebitoA += amount;
-    }
-
-    public static void addToCreditoA(double amount) {
-        CreditoA += amount;
-    }
-
-    public static double getDebitoA() {
-        return DebitoA;
-    }
-
-    public static double getCreditoA() {
-        return CreditoA;
-    }
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1170,7 +1117,6 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnLimpiar;
     private javax.swing.JButton BtnLimpiarAll;
-    private javax.swing.JButton BtnQuitarCuenta;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JComboBox<String> CbTipoDoc;
     private javax.swing.JPanel PanelAzul;
@@ -1194,13 +1140,12 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem m_eliminar;
     private javax.swing.JMenuItem m_modificar;
     private javax.swing.JTextField txtComentario;
     private javax.swing.JTextField txtCredito;
     private javax.swing.JTextField txtDebito;
-    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDescripcionC;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
