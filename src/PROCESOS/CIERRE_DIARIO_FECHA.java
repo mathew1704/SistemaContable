@@ -5,6 +5,14 @@
 package PROCESOS;
 
 import java.awt.Color;
+import java.awt.List;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,9 +20,8 @@ import java.awt.Color;
  */
 public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CIERRE_DIARIO_FECHA
-     */
+    Date fecha2;
+    Date fecha1;
     public CIERRE_DIARIO_FECHA() {
         initComponents();
     }
@@ -37,6 +44,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        BtnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cierre de Diario");
@@ -98,7 +106,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                 btnProcesarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProcesar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 130, 50));
+        jPanel1.add(btnProcesar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 130, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -119,7 +127,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 130, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 130, 50));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setText("FECHA FINAL");
@@ -128,6 +136,27 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("FECHA INICIAL");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 100, 20));
+
+        BtnLimpiar.setBackground(new java.awt.Color(160, 171, 176));
+        BtnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLimpiar.setText("LIMPIAR");
+        BtnLimpiar.setBorder(null);
+        BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseExited(evt);
+            }
+        });
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 130, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,8 +181,16 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProcesarMouseExited
 
     private void btnProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarActionPerformed
-       
-           
+        fecha1 = fechaInicial.getDate();
+        fecha2 = FechaFinal.getDate();
+
+        if (fecha1 == null || fecha2 == null) {
+            JOptionPane.showMessageDialog(rootPane, "Por favor Rellene ambos campos", "ERROR", HEIGHT);
+        } else if (fecha1.after(fecha2)) {
+            JOptionPane.showMessageDialog(rootPane, "La Fecha de Inicio debe ser menor que la Fecha Final", "ERROR", HEIGHT);
+        } else {
+            
+        }
       
     }//GEN-LAST:event_btnProcesarActionPerformed
 
@@ -169,6 +206,19 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
+        BtnLimpiar.setBackground(new Color(0, 51, 204));
+    }//GEN-LAST:event_BtnLimpiarMouseEntered
+
+    private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
+        BtnLimpiar.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_BtnLimpiarMouseExited
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+       FechaFinal.setDate(fecha2);
+       fechaInicial.setDate(fecha1);
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
+ 
     /**
      * @param args the command line arguments
      */
@@ -205,6 +255,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnLimpiar;
     private com.toedter.calendar.JDateChooser FechaFinal;
     private javax.swing.JPanel PanelAzul;
     private javax.swing.JButton btnProcesar;
