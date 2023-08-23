@@ -2,5 +2,6 @@ EN-100;001;11021;Banco Popular Dominicano;500.9;0;LL
 SA-100;001;11021;Banco Popular Dominicano;100;0;
 SA-100;002;11022;Banco BHD;0;100;
 EN-100;002;11022;Banco BHD;0;500.9;
-PP-1;001;11021;Banco Popular Dominicano;990;0;prueba
-PP-1;002;11022;Banco BHD;0;990;
+PP-1;001;11021;Banco Popular Dominicano;995;0;prueba
+PP-1;002;11022;Banco BHD;0;990.0;
+PP-1;003;11022;Banco BHD;0;5;

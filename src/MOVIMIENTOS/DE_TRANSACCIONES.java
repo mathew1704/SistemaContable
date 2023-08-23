@@ -4,7 +4,6 @@ import ARCHIVOS.ManejoArchivos;
 import MENU_PRINCIPAL.LOgin;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,7 +27,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 import texto.TextPrompt;
 
-public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
+public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
     public DefaultTableModel TablaM;
     private int secuencia = 0;
@@ -50,7 +49,7 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
     String secuenciaGlobal;
     private int maxSequence = 2;
 
-    public DE_TRANSACCIONES21AGOS() {
+    public DE_TRANSACCIONES() {
         initComponents();
         txtFecha.setText(fecha());
         txtFecha.setEditable(false);
@@ -192,7 +191,7 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
         jLabel3.setText("TIPO DE DOCUMENTO");
         PanelCabezera.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 152, 32));
 
-        txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelCabezera.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 100, 30));
 
@@ -245,11 +244,11 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(84, 19));
         PanelCabezera.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 100, 30));
 
-        txtUser.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelCabezera.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 100, 30));
 
-        txtHora.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtHora.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelCabezera.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
 
@@ -278,9 +277,6 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
         txtDebito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtDebito.setBorder(null);
         txtDebito.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDebitoKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDebitoKeyTyped(evt);
             }
@@ -335,9 +331,6 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
         txtCredito.setFont(new java.awt.Font("Calibri Light", 0, 16)); // NOI18N
         txtCredito.setBorder(null);
         txtCredito.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCreditoKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCreditoKeyTyped(evt);
             }
@@ -805,64 +798,8 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
         txtComentario.setText("");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
-    private void txtCreditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreditoKeyPressed
-//        String creditoText = txtCredito.getText().trim();
-//        String debitoText = txtDebito.getText().trim();
-//
-//        if (!creditoText.isEmpty() && debitoText.isEmpty()) {
-//            txtDebito.setEditable(false);
-//        } else {
-//            txtDebito.setEditable(true);
-//        }
-//
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            txtComentario.requestFocus();
-//        }
-//
-//        if (Modificar) {
-//            if ("0".equals(creditoText)) {
-//                txtCredito.setEditable(false);
-//                txtDebito.setEditable(true);
-//            } else if ("0".equals(debitoText)) {
-//                txtDebito.setEditable(false);
-//                txtCredito.setEditable(true);
-//            } else if ("0".equals(debitoText) && "0".equals(creditoText)){
-//                txtDebito.setEditable(true);
-//                txtCredito.setEditable(true);
-//            }
-//        }
-    }//GEN-LAST:event_txtCreditoKeyPressed
-
-    private void txtDebitoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDebitoKeyPressed
-//        String debitoText = txtDebito.getText().trim();
-//        String creditoText = txtCredito.getText().trim();
-//
-//        if (!debitoText.isEmpty() && creditoText.isEmpty()) {
-//            txtCredito.setEditable(false);
-//        } else {
-//            txtCredito.setEditable(true);
-//        }
-//
-//        if (Modificar) {
-//            if ("0".equals(debitoText)) {
-//                txtDebito.setEditable(false);
-//                txtCredito.setEditable(true);
-//            } else if ("0".equals(creditoText)) {
-//                txtCredito.setEditable(false);
-//                txtDebito.setEditable(true);
-//            } else if ("0".equals(debitoText) && "0".equals(creditoText)) {
-//                txtDebito.setEditable(true);
-//                txtCredito.setEditable(true);
-//            }
-//        }
-//
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            txtComentario.requestFocus();
-//        }
-    }//GEN-LAST:event_txtDebitoKeyPressed
-
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        if (!(txtCredito.getText().isEmpty()) && !(txtDebito.getText().isEmpty())) {
+        if (!(txtCredito.getText().isEmpty() || txtCredito.getText().equals("0")) && !(txtDebito.getText().isEmpty() || txtDebito.getText().equals("0"))) {
             JOptionPane.showMessageDialog(rootPane, "Una cuenta no puede tener una transaccion de creditos y debitos en la misma linea", "ERROR", HEIGHT);
         }
         if (txtNcuenta.getText().isEmpty()) {
@@ -1263,7 +1200,7 @@ public class DE_TRANSACCIONES21AGOS extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DE_TRANSACCIONES21AGOS().setVisible(true);
+                new DE_TRANSACCIONES().setVisible(true);
             }
         });
     }

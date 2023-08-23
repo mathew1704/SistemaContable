@@ -6,7 +6,7 @@ import CONSULTAS.DE_DOCUMENTOS;
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_DOCUMENTO;
 import MANTENIMIENTO.DE_USUARIOS;
-import MOVIMIENTOS.DE_TRANSACCIONES11;
+import MOVIMIENTOS.DE_TRANSACCIONES;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -224,7 +224,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_m_documentosActionPerformed
 
     private void m_transaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_transaccionesActionPerformed
-        DE_TRANSACCIONES11 t = new DE_TRANSACCIONES11();
+        DE_TRANSACCIONES t = new DE_TRANSACCIONES();
         t.setVisible(true);
     }//GEN-LAST:event_m_transaccionesActionPerformed
 
