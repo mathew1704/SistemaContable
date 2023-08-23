@@ -6,9 +6,6 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="Mantenimientos">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\mantenimiento.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="MANTENIMIENTOS"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="14" style="0"/>
@@ -23,9 +20,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\usuarios.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="USUARIOS"/>
               </Properties>
               <Events>
@@ -36,9 +30,6 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\extracto-de-cuenta.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CUENTAS"/>
               </Properties>
@@ -51,9 +42,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\google-docs.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="DOCUMENTOS"/>
               </Properties>
               <Events>
@@ -64,9 +52,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="Movimiento">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\transaccion (1).png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="MOVIMIENTO"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="14" style="0"/>
@@ -78,9 +63,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\cambio-de-dinero.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="TRANSACCIONES"/>
               </Properties>
               <Events>
@@ -91,9 +73,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="Procesos">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\flujo-de-trabajo.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="PROCESOS"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="14" style="0"/>
@@ -105,9 +84,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\actualizar-pagina.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="CIERRE DIARO"/>
               </Properties>
             </MenuItem>
@@ -115,9 +91,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="Consultas">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\simbolo-de-base-de-datos-verificado-para-interfaz.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="CONSULTAS"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="14" style="0"/>
@@ -128,9 +101,6 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\usuarios.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="USUARIOS"/>
               </Properties>
@@ -143,22 +113,27 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\extracto-de-cuenta.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="CATALOGO DE CUENTAS"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="TipoDocumento">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\google-docs.png"/>
+                <Property name="text" type="java.lang.String" value="TRANSACCIONES POR FECHA"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="TipoDocumento">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="TIPO DE DOCUMENTO"/>
               </Properties>
@@ -170,9 +145,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="Salida">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\cerrar-sesion.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="14" style="0"/>
@@ -184,9 +156,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\acceso.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="IR AL LOGIN"/>
               </Properties>
               <Events>
@@ -197,9 +166,6 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\garci\Documents\Imagenes Proyecto\salida.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALIR DEL PROGRAMA"/>
               </Properties>

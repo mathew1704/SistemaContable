@@ -178,6 +178,11 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
                 CbTipoDocItemStateChanged(evt);
             }
         });
+        CbTipoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbTipoDocActionPerformed(evt);
+            }
+        });
         PanelCabezera.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 280, 26));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -1014,6 +1019,10 @@ public class DE_TRANSACCIONES11 extends javax.swing.JFrame {
             txtNcuenta.requestFocus();
         }
     }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void CbTipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbTipoDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CbTipoDocActionPerformed
 
     private void cargarEstados() {
         try {

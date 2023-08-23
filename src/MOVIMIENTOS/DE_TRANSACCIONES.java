@@ -193,6 +193,11 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
         PanelCabezera.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 100, 30));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -1073,6 +1078,10 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
             txtNcuenta.requestFocus();
         }
     }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void cargarEstados() {
         try {
