@@ -5,13 +5,19 @@
 package CONSULTAS;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,14 +25,20 @@ import javax.swing.JOptionPane;
  */
 public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DE_TRANSACCIONES_POR_RANGO_F
-     */
-    Date fecha2;
-    Date fecha1;
+   Date selectedDate ;
+        Date selectedDate1;
+    public DefaultTableModel TablaM;
 
     public DE_TRANSACCIONES_RANGO_FECHA() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Consulta Transacciones Por Fecha");
+        PanelPrincipal.requestFocusInWindow();
+
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
+        UIManager.put("OptionPane.messageForeground", Color.black);
+
+        TablaM = (DefaultTableModel) tablaRegistro.getModel();
     }
 
     /**
@@ -40,15 +52,15 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
 
         PanelAzul = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaRegistro = new javax.swing.JTable();
+        PanelPrincipal = new javax.swing.JPanel();
         btnconsultar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         Cfecha2 = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         Cfecha1 = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaRegistro = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,29 +71,8 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONSULTA DE TRANSACCIONES POR RANGO DE FECHA");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablaRegistro.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        tablaRegistro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                " Numero de C", "Fecha", "Nivel", "Descipcion", "", "Debito", "fecha creacion", "ESTATUS"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tablaRegistro);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 760, 370));
+        PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnconsultar.setBackground(new java.awt.Color(160, 171, 176));
         btnconsultar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -102,7 +93,7 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
                 btnconsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 150, 50));
+        PanelPrincipal.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 150, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -123,25 +114,46 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 150, 50));
-        jPanel1.add(Cfecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 230, 30));
+        PanelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 150, 50));
+        PanelPrincipal.add(Cfecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 230, 30));
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel13.setText("FECHA FINAL");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
+        PanelPrincipal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("FECHA INICIAL");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
-        jPanel1.add(Cfecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 230, 30));
+        PanelPrincipal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
+        PanelPrincipal.add(Cfecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 230, 30));
+
+        tablaRegistro.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tablaRegistro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No. Doc", "Fecha ", "Hecho Por", "#", "Cuenta", "Descripcion C", "Debitos", "Creditos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaRegistro);
+
+        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 900, 420));
 
         javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelAzulLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -152,7 +164,7 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addGap(7, 7, 7)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(1, 1, 1))
         );
 
@@ -183,57 +195,34 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnconsultarMouseExited
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
-        fecha1 = Cfecha1.getDate();
-        fecha2 = Cfecha2.getDate();
-
-        if (fecha1 == null || fecha2 == null) {
-            JOptionPane.showMessageDialog(null, "Por favor Rellene ambos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (fecha1.after(fecha2)) {
-            JOptionPane.showMessageDialog(null, "La Fecha de Inicio debe ser menor que la Fecha Final", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else {
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-            try ( BufferedReader reader = new BufferedReader(new FileReader("Catalogo.txt"))) {
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    try {
-                        Date currentDate = dateFormat.parse(line);
-                        if (currentDate.compareTo(fecha1) >= 0 && currentDate.compareTo(fecha2) <= 0) {
-                            System.out.println("Date found in the file: " + line);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // AQUI VA EL CODIGO QUE MUESTRE LA CONSULTA 
-
-        }
-        /*        Date selectedDate = Cfecha.getDate();
-
-        if (selectedDate == null) {
-            JOptionPane.showMessageDialog(rootPane, "Please select a date.");
+        selectedDate = Cfecha1.getDate();
+        selectedDate1 = Cfecha2.getDate();
+        if (selectedDate == null ||selectedDate1 == null ) {
+            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar una fecha");
             return;
-        }
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        }else if(selectedDate.after(selectedDate1)){
+            JOptionPane.showMessageDialog(null, "La Fecha de Inicio debe ser menor que la Fecha Final", "ERROR", JOptionPane.ERROR_MESSAGE);
+           Cfecha1.setDate(null);
+           Cfecha2.setDate(null);
+        }else{
+           SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
         String selectedDateString = dateFormat.format(selectedDate);
+        String selectedDateString1 = dateFormat.format(selectedDate1);
         TablaM.setRowCount(0);
         boolean filas = false;
 
-        String user, passw, nivel, nomb, apell, email;
+        String Ndoc, tipo, desc, nombH, monto, fechaA, estado;
+        String numDoc, sec, cuenta, descC, deb, cred, comt;
+
         File f = new File("Cabecera Transacciones.txt");
+        File d = new File("Detalle Transacciones.txt");
 
         try {
             if (!f.exists()) {
                 JOptionPane.showMessageDialog(rootPane, "El archivo no existe");
             } else {
                 Scanner s = new Scanner(f);
+                Scanner w = new Scanner(d);
 
                 while (s.hasNextLine()) {
                     String linea = s.nextLine();
@@ -241,17 +230,34 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
 
                     s1.useDelimiter("\\s*;\\s*");
 
-                    user = s1.next();
+                    Ndoc = s1.next();
                     String fechaArchivo = s1.next();
-                    passw = s1.next();
-                    nivel = s1.next();
-                    nomb = s1.next();
-                    apell = s1.next();
-                    email = s1.next();
+                    tipo = s1.next();
+                    desc = s1.next();
+                    nombH = s1.next();
+                    monto = s1.next();
+                    fechaA = s1.next();
+                    estado = s1.next();
 
-                    if (fechaArchivo.equals(selectedDateString)) {
-                        TablaM.addRow(new Object[]{user, fechaArchivo, passw, nivel, nomb, apell, email});
-                        filas = true;
+                    if (fechaArchivo.equals(selectedDateString ) ||fechaArchivo.equals(selectedDateString1) ) {
+
+                        while (w.hasNextLine()) {
+                            String line = w.nextLine();
+                            Scanner s2 = new Scanner(line);
+
+                            s2.useDelimiter("\\s*;\\s*");
+
+                            numDoc = s2.next();
+                            sec = s2.next();
+                            cuenta = s2.next();
+                            descC = s2.next();
+                            deb = s2.next();
+                            cred = s2.next();
+//                        comt = s2.next();
+
+                            TablaM.addRow(new Object[]{numDoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
+                            filas = true;
+                        }
                     }
                 }
                 s.close();
@@ -262,7 +268,9 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
             }
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
-        }*/
+        } 
+      }
+
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
@@ -321,12 +329,12 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser Cfecha1;
     private com.toedter.calendar.JDateChooser Cfecha2;
     private javax.swing.JPanel PanelAzul;
+    private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnconsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaRegistro;
     // End of variables declaration//GEN-END:variables
