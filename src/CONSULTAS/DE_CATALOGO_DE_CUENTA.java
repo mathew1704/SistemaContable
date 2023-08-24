@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
 
@@ -25,6 +26,10 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
 
         TablaM = (DefaultTableModel) tablaRegistro.getModel();
+        
+        JTableHeader tableHeader = tablaRegistro.getTableHeader();
+        Font headerFont = new Font("Century Gothic", Font.PLAIN, 14); // Cambiar el tipo de letra
+        tableHeader.setFont(headerFont);
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +76,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaRegistro);
         if (tablaRegistro.getColumnModel().getColumnCount() > 0) {
-            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(3);
             tablaRegistro.getColumnModel().getColumn(1).setPreferredWidth(155);
             tablaRegistro.getColumnModel().getColumn(2).setPreferredWidth(4);
             tablaRegistro.getColumnModel().getColumn(3).setPreferredWidth(1);
@@ -84,7 +89,7 @@ public class DE_CATALOGO_DE_CUENTA extends javax.swing.JFrame {
             tablaRegistro.getColumnModel().getColumn(10).setPreferredWidth(15);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 410));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 410));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N

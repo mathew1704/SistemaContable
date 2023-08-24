@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class DE_DOCUMENTOS extends javax.swing.JFrame {
 
@@ -23,6 +24,9 @@ public class DE_DOCUMENTOS extends javax.swing.JFrame {
         UIManager.put("OptionPane.messageForeground", Color.black);
 
         TablaM = (DefaultTableModel) tablaRegistro.getModel();
+        JTableHeader tableHeader = tablaRegistro.getTableHeader();
+        Font headerFont = new Font("Century Gothic", Font.PLAIN, 14); // Cambiar el tipo de letra
+        tableHeader.setFont(headerFont);
     }
 
     @SuppressWarnings("unchecked")

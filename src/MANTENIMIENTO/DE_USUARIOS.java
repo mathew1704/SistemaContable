@@ -131,7 +131,7 @@ public class DE_USUARIOS extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
 
         btnGuardar.setBackground(new java.awt.Color(160, 171, 176));
-        btnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("GUARDAR");
         btnGuardar.setBorder(null);
@@ -149,10 +149,10 @@ public class DE_USUARIOS extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 150, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 130, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(160, 171, 176));
-        btnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setText("LIMPIAR");
         btnLimpiar.setBorder(null);
@@ -173,10 +173,10 @@ public class DE_USUARIOS extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 150, 50));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 130, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
-        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("SALIR");
         btnSalir.setBorder(null);
@@ -194,7 +194,7 @@ public class DE_USUARIOS extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 150, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 130, 50));
 
         txtEmail.setBackground(new java.awt.Color(237, 237, 237));
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N

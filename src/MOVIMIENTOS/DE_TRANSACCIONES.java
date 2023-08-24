@@ -23,8 +23,11 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import texto.TextPrompt;
 
 public class DE_TRANSACCIONES extends javax.swing.JFrame {
@@ -76,6 +79,10 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
+        
+        JTableHeader tableHeader = TablaRegistros.getTableHeader();
+        Font headerFont = new Font("Century Gothic", Font.PLAIN, 14); // Cambiar el tipo de letra
+        tableHeader.setFont(headerFont);
 
         TextPrompt ndoc = new TextPrompt(" Digite No. del documento", txtNdocumento, TextPrompt.Show.ALWAYS);
         ndoc.setForeground(Color.gray);
@@ -361,7 +368,16 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
         BtnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnAgregar.setText("AGREGAR");
+        BtnAgregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         BtnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnAgregarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnAgregarMouseExited(evt);
+            }
+        });
         BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAgregarActionPerformed(evt);
@@ -371,8 +387,17 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
         BtnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         BtnLimpiar.setText("LIMPIAR");
+        BtnLimpiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnLimpiar.setPreferredSize(new java.awt.Dimension(76, 19));
+        BtnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseExited(evt);
+            }
+        });
         BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLimpiarActionPerformed(evt);
@@ -1082,6 +1107,22 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void BtnAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseEntered
+        BtnAgregar.setBorder(new LineBorder(new Color(160, 171, 176)));
+    }//GEN-LAST:event_BtnAgregarMouseEntered
+
+    private void BtnAgregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseExited
+        BtnAgregar.setBorder(new LineBorder(Color.white));
+    }//GEN-LAST:event_BtnAgregarMouseExited
+
+    private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
+        BtnLimpiar.setBorder(new LineBorder(new Color(160, 171, 176)));
+    }//GEN-LAST:event_BtnLimpiarMouseEntered
+
+    private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
+       BtnLimpiar.setBorder(new LineBorder(Color.white));
+    }//GEN-LAST:event_BtnLimpiarMouseExited
 
     private void cargarEstados() {
         try {
