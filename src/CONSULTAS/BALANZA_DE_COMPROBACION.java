@@ -4,6 +4,8 @@
  */
 package CONSULTAS;
 
+import java.awt.Color;
+
 /**
  *
  * @author garci
@@ -26,21 +28,125 @@ public class BALANZA_DE_COMPROBACION extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelPrincipal = new javax.swing.JPanel();
+        PanelAzul = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaRegistros = new javax.swing.JTable();
+        LabelCred = new javax.swing.JLabel();
+        LabelTotal = new javax.swing.JLabel();
+        LabelDeb = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("BALANZA DE COMPROBACIÓN");
+
+        javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
+        PanelAzul.setLayout(PanelAzulLayout);
+        PanelAzulLayout.setHorizontalGroup(
+            PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+        );
+        PanelAzulLayout.setVerticalGroup(
+            PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelAzulLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 60));
+
+        btnSalir.setBackground(new java.awt.Color(160, 171, 176));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("SALIR");
+        btnSalir.setBorder(null);
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, 130, 50));
+
+        tablaRegistros.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NO. CUENTA", "DESCRIPCION", "DÉBITOS", "CRÉDITOS", "BALANCE"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaRegistros.setInheritsPopupMenu(true);
+        tablaRegistros.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(tablaRegistros);
+
+        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 360));
+
+        LabelCred.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        PanelPrincipal.add(LabelCred, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 150, 20));
+
+        LabelTotal.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        LabelTotal.setText("TOTAL");
+        PanelPrincipal.add(LabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 180, 20));
+
+        LabelDeb.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        PanelPrincipal.add(LabelDeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 160, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        btnSalir.setBackground(Color.red);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        btnSalir.setBackground(new Color(160, 171, 176));
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +184,14 @@ public class BALANZA_DE_COMPROBACION extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelCred;
+    private javax.swing.JLabel LabelDeb;
+    private javax.swing.JLabel LabelTotal;
+    private javax.swing.JPanel PanelAzul;
+    private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaRegistros;
     // End of variables declaration//GEN-END:variables
 }

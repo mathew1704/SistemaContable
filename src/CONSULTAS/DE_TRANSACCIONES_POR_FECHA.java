@@ -44,6 +44,8 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         Cfecha = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
+        PanelAzul1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         PanelAzul = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -133,6 +135,29 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
         jLabel13.setText("FECHA");
         PanelPrincipal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 100, 30));
 
+        PanelAzul1.setBackground(new java.awt.Color(0, 153, 255));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("TRANSACCIONES POR FECHA");
+
+        javax.swing.GroupLayout PanelAzul1Layout = new javax.swing.GroupLayout(PanelAzul1);
+        PanelAzul1.setLayout(PanelAzul1Layout);
+        PanelAzul1Layout.setHorizontalGroup(
+            PanelAzul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+        );
+        PanelAzul1Layout.setVerticalGroup(
+            PanelAzul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelAzul1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(PanelAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 60));
+
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -144,7 +169,7 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
         );
         PanelAzulLayout.setVerticalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,11 +309,13 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Cfecha;
     private javax.swing.JPanel PanelAzul;
+    private javax.swing.JPanel PanelAzul1;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnconsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaRegistro;
     // End of variables declaration//GEN-END:variables

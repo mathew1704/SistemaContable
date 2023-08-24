@@ -69,13 +69,13 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CONSULTA DE TRANSACCIONES POR RANGO DE FECHA");
+        jLabel1.setText("TRANSACCIONES POR RANGO DE FECHA");
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnconsultar.setBackground(new java.awt.Color(160, 171, 176));
-        btnconsultar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnconsultar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnconsultar.setForeground(new java.awt.Color(255, 255, 255));
         btnconsultar.setText("CONSULTAR");
         btnconsultar.setBorder(null);
@@ -93,10 +93,10 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
                 btnconsultarActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 150, 50));
+        PanelPrincipal.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, 130, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
-        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("SALIR");
         btnSalir.setBorder(null);
@@ -114,19 +114,19 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 150, 50));
-        PanelPrincipal.add(Cfecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 230, 30));
+        PanelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 130, 50));
+        PanelPrincipal.add(Cfecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 230, 30));
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel13.setText("FECHA FINAL");
-        PanelPrincipal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
+        PanelPrincipal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 100, 30));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("FECHA INICIAL");
-        PanelPrincipal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 100, 30));
-        PanelPrincipal.add(Cfecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 230, 30));
+        PanelPrincipal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 100, 30));
+        PanelPrincipal.add(Cfecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 230, 30));
 
         tablaRegistro.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tablaRegistro.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,40 +147,37 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaRegistro);
 
-        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 900, 420));
+        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 900, 420));
 
         javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
         PanelAzul.setLayout(PanelAzulLayout);
         PanelAzulLayout.setHorizontalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelAzulLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         PanelAzulLayout.setVerticalGroup(
             PanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAzulLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(7, 7, 7)
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1))
+                .addGap(18, 18, 18)
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelAzul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(PanelAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelAzul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(PanelAzul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

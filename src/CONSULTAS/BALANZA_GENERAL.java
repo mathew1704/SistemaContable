@@ -108,11 +108,11 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NO. CUENTA", "DESCRIPCION", "DÉBITOS", "CRÉDITOS"
+                "NO. CUENTA", "DESCRIPCION", "DÉBITOS", "CRÉDITOS", "BALANCE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -127,6 +127,7 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
             tablaRegistros.getColumnModel().getColumn(1).setPreferredWidth(140);
             tablaRegistros.getColumnModel().getColumn(2).setPreferredWidth(30);
             tablaRegistros.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tablaRegistros.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
         PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 360));
