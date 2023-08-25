@@ -190,7 +190,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
         
-       cargarEstados();
+      
         String selectedOption = (String) CbTipoDoc.getSelectedItem();
 
         if (selectedOption == null) {
