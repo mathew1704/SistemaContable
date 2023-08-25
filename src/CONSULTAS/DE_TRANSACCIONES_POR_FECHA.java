@@ -61,11 +61,11 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No. Doc", "Fecha ", "Hecho Por", "#", "Cuenta", "Descripcion C", "Debitos", "Creditos"
+                "No. Doc", "Fecha ", "Hecho Por", "#", "Cuenta", "Descripcion C", "Debitos", "Creditos", "Monto", "Actualizacion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -75,12 +75,23 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaRegistro);
         if (tablaRegistro.getColumnModel().getColumnCount() > 0) {
             tablaRegistro.getColumnModel().getColumn(0).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(6);
+            tablaRegistro.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tablaRegistro.getColumnModel().getColumn(1).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(1).setPreferredWidth(25);
+            tablaRegistro.getColumnModel().getColumn(2).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(2).setPreferredWidth(16);
             tablaRegistro.getColumnModel().getColumn(3).setResizable(false);
             tablaRegistro.getColumnModel().getColumn(3).setPreferredWidth(2);
             tablaRegistro.getColumnModel().getColumn(4).setResizable(false);
-            tablaRegistro.getColumnModel().getColumn(4).setPreferredWidth(6);
-            tablaRegistro.getColumnModel().getColumn(5).setPreferredWidth(120);
+            tablaRegistro.getColumnModel().getColumn(4).setPreferredWidth(10);
+            tablaRegistro.getColumnModel().getColumn(5).setPreferredWidth(160);
+            tablaRegistro.getColumnModel().getColumn(6).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(6).setPreferredWidth(15);
+            tablaRegistro.getColumnModel().getColumn(7).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(7).setPreferredWidth(15);
+            tablaRegistro.getColumnModel().getColumn(8).setPreferredWidth(20);
+            tablaRegistro.getColumnModel().getColumn(9).setResizable(false);
+            tablaRegistro.getColumnModel().getColumn(9).setPreferredWidth(10);
         }
 
         PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 900, 420));
@@ -235,7 +246,7 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
         boolean filas = false;
 
         String Ndoc, tipo, desc, nombH, monto, fechaA, estado;
-        String numDoc, sec, cuenta, descC, deb, cred, comt;
+        String numDoc, sec, cuenta, descC, deb, cred, comt,act;
 
         File f = new File("Cabecera Transacciones.txt");
         File d = new File("Detalle Transacciones.txt");
@@ -261,7 +272,13 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
                     monto = s1.next();
                     fechaA = s1.next();
                     estado = s1.next();
-
+                    
+                    if (estado.equals("true")) {
+                        act = "SI";
+                    } else {
+                         act = "NO";
+                    }
+                    
                     if (fechaArchivo.equals(selectedDateString)) {
 
                         while (w.hasNextLine()) {
@@ -278,12 +295,13 @@ public class DE_TRANSACCIONES_POR_FECHA extends javax.swing.JFrame {
                             cred = s2.next();
 //                        comt = s2.next();
 
-                            TablaM.addRow(new Object[]{numDoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
+                            TablaM.addRow(new Object[]{numDoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred,monto,act});
                             filas = true;
                         }
                     }
                 }
                 s.close();
+                w.close();
 
                 if (!filas) {
                     JOptionPane.showMessageDialog(rootPane, "No se encontró ningún registro para la fecha seleccionada.");

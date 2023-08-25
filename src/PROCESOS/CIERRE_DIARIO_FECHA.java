@@ -4,16 +4,16 @@ import ARCHIVOS.ManejoArchivos;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -261,45 +261,50 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                     String fechaA = s1.next();
                     String estado = s1.next();
 
-                    lineaVieja = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";" + montoD + ";"
-                            + fechaA + ";" + estado;
+                    if (estado.equals("true")) {
+                        //no hacer nada
+//                        System.out.println("no entra porque esta actualizado");
+                    } else {
+                        lineaVieja = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";" + montoD + ";"
+                                + fechaA + ";" + estado;
 
-                    try {
-                        Date currentDate = dateFormat.parse(fechaD);
+                        try {
+                            Date currentDate = dateFormat.parse(fechaD);
 
-                        if (currentDate.compareTo(fecha1) >= 0 && currentDate.compareTo(fecha2) <= 0) {
+                            if (currentDate.compareTo(fecha1) >= 0 && currentDate.compareTo(fecha2) <= 0) {
 
-                            while (w.hasNextLine()) {
-                                String line = w.nextLine();
-                                Scanner s2 = new Scanner(line);
+                                while (w.hasNextLine()) {
+                                    String line = w.nextLine();
+                                    Scanner s2 = new Scanner(line);
 
-                                s2.useDelimiter("\\s*;\\s*");
+                                    s2.useDelimiter("\\s*;\\s*");
 
-                                String numD = s2.next();
-                                String sec = s2.next();
-                                String cuentaT = s2.next();
-                                String descCuenta = s2.next();
-                                String debito = s2.next();
-                                String credito = s2.next();
+                                    String numD = s2.next();
+                                    String sec = s2.next();
+                                    String cuentaT = s2.next();
+                                    String descCuenta = s2.next();
+                                    String debito = s2.next();
+                                    String credito = s2.next();
 //                                    String coment = s2.next();
 
-                                //catalogo
-                                if (nDoc.equals(numD)) {
-                                    Catalogo(cuentaT, debito, credito);
+                                    //catalogo
+                                    if (nDoc.equals(numD)) {
+                                        Catalogo(cuentaT, debito, credito);
 
-                                    lineaNueva = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";"
-                                            + montoD + ";" + txtFecha.getText() + ";" + true;
+                                        lineaNueva = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";"
+                                                + montoD + ";" + txtFecha.getText() + ";" + true;
 
-                                    lineasViejas.add(lineaVieja);
-                                    lineasNuevas.add(lineaNueva);
+                                        lineasViejas.add(lineaVieja);
+                                        lineasNuevas.add(lineaNueva);
 
-                                    modificar = true;
-                                    hayTransacciones = true;
+                                        modificar = true;
+                                        hayTransacciones = true;
+                                    }
                                 }
                             }
+                        } catch (ParseException p) {
+                            p.printStackTrace();
                         }
-                    } catch (ParseException p) {
-                        p.printStackTrace();
                     }
                 }
                 s.close();
@@ -388,9 +393,9 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                         + fechaC + ";" + horaC + ";" + debitoA + ";" + creditoA + ";" + balance;
 
                 if (DetalleCuenta.equals(cuenta)) {
-                    trans(cuenta, grupo, deb, cr, balance);
                     acumD = Double.parseDouble(debitoA);
                     acumC = Double.parseDouble(creditoA);
+                    trans(cuenta, grupo, deb, cr, balance);
 
                     LineaNueva = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
                             + fechaC + ";" + horaC + ";" + debitoNew + ";" + creditoNew + ";" + balanceNew;
@@ -403,11 +408,10 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
             s.close();
 
             if (modificar) {
-                ManejoArchivos l = new ManejoArchivos();
 
                 int cantidadElementos = Math.min(lineasAntiguas.size(), LineasNuevas.size());
                 for (int i = 0; i < cantidadElementos; i++) {
-                    l.Modificar(lineasAntiguas.get(i), LineasNuevas.get(i), f);
+                    Modificar(lineasAntiguas.get(i), LineasNuevas.get(i), f);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -454,11 +458,11 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     public void trans(String cnum, String itemg, String d, String c, String bl) {
 
         String orig = origen(itemg);
-        double balancc = 0.00;
+        double balancc = Double.parseDouble(bl);
+        double almD = Double.parseDouble(d);
+        double almC = Double.parseDouble(c);
 
         if (orig.equals("debito")) {
-            double almD = Double.parseDouble(d);
-            double almC = Double.parseDouble(c);
 
             acumD += almD;
             acumC += almC;
@@ -475,9 +479,6 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
             balanceNew = pbal;
 
         } else if (orig.equals("credito")) {
-
-            double almD = Double.parseDouble(d);
-            double almC = Double.parseDouble(c);
 
             acumD += almD;
             acumC += almC;
@@ -542,7 +543,71 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
     }
+    
+    public void GuardarDatos(String cadena, File archivo) {
+        try {
 
+            if (!archivo.exists()) {
+                archivo.createNewFile();
+            }
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true));
+            bw.write(cadena + "\r\n");
+            bw.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void Modificar(String cadenaA, String cadenaN, File archivoA) {
+        File archivoN = new File("AuxiliarC.txt");
+
+        try {
+            archivoN.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
+        BufferedReader br;
+        try {
+            if (archivoA.exists()) {
+
+                br = new BufferedReader(new FileReader(archivoA));
+
+                String linea;
+
+                while ((linea = br.readLine()) != null) {
+
+                    if (linea.equals(cadenaA)) {
+                        GuardarDatos(cadenaN, archivoN);
+                    } else {
+                        GuardarDatos(linea, archivoN);
+                    }
+                }
+
+                br.close();
+
+                Borrar(archivoA);
+                archivoN.renameTo(archivoA);
+
+            } else {
+                System.out.println("No existe el archivo");
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void Borrar(File f) {
+        try {
+            if (f.exists()) {
+                f.delete();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

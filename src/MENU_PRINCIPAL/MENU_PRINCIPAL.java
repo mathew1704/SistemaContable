@@ -5,7 +5,11 @@ import CONSULTAS.BALANZA_GENERAL;
 import CONSULTAS.CONSULTA_USUARIO;
 import CONSULTAS.DE_CATALOGO_DE_CUENTA;
 import CONSULTAS.DE_DOCUMENTOS;
+import CONSULTAS.DE_TRANSACCIONES_POR_DOCUMENTO;
 import CONSULTAS.DE_TRANSACCIONES_POR_FECHA;
+import CONSULTAS.DE_TRANSACCIONES_RANGO_FECHA;
+import CONSULTAS.DE_TRANSACCIONES_TIPO_DOCUMENTO;
+import CONSULTAS.RESUMEN_DE_GASTOS_GENERALES;
 import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_DOCUMENTO;
 import MANTENIMIENTO.DE_USUARIOS;
@@ -49,8 +53,12 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         c_tipoDoc = new javax.swing.JMenuItem();
         c_Transacciones = new javax.swing.JMenu();
         t_PorFecha = new javax.swing.JMenuItem();
+        t_porRango = new javax.swing.JMenuItem();
+        t_PorDoc = new javax.swing.JMenuItem();
+        t_PorTipoD = new javax.swing.JMenuItem();
         c_balanzaG = new javax.swing.JMenuItem();
         c_balanzaC = new javax.swing.JMenuItem();
+        c_resumenG = new javax.swing.JMenuItem();
         Salida = new javax.swing.JMenu();
         m_login = new javax.swing.JMenuItem();
         m_salir = new javax.swing.JMenuItem();
@@ -183,7 +191,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         c_Transacciones.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         t_PorFecha.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        t_PorFecha.setText("POR FECHA");
+        t_PorFecha.setText("FECHA");
         t_PorFecha.setToolTipText("");
         t_PorFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +199,33 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
             }
         });
         c_Transacciones.add(t_PorFecha);
+
+        t_porRango.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        t_porRango.setText("RANGO DE FECHAS");
+        t_porRango.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_porRangoActionPerformed(evt);
+            }
+        });
+        c_Transacciones.add(t_porRango);
+
+        t_PorDoc.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        t_PorDoc.setText("DOCUMENTO");
+        t_PorDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_PorDocActionPerformed(evt);
+            }
+        });
+        c_Transacciones.add(t_PorDoc);
+
+        t_PorTipoD.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        t_PorTipoD.setText("TIPO DE DOCUMENTO");
+        t_PorTipoD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_PorTipoDActionPerformed(evt);
+            }
+        });
+        c_Transacciones.add(t_PorTipoD);
 
         Consultas.add(c_Transacciones);
 
@@ -211,6 +246,15 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
             }
         });
         Consultas.add(c_balanzaC);
+
+        c_resumenG.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        c_resumenG.setText("RESUMEN DE GASTOS");
+        c_resumenG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c_resumenGActionPerformed(evt);
+            }
+        });
+        Consultas.add(c_resumenG);
 
         jMenuBar1.add(Consultas);
 
@@ -336,6 +380,26 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         BALANZA_DE_COMPROBACION b = new BALANZA_DE_COMPROBACION();
         b.setVisible(true);
     }//GEN-LAST:event_c_balanzaCActionPerformed
+
+    private void c_resumenGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_resumenGActionPerformed
+        RESUMEN_DE_GASTOS_GENERALES r = new RESUMEN_DE_GASTOS_GENERALES();
+        r.setVisible(true);
+    }//GEN-LAST:event_c_resumenGActionPerformed
+
+    private void t_porRangoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_porRangoActionPerformed
+        DE_TRANSACCIONES_RANGO_FECHA f = new DE_TRANSACCIONES_RANGO_FECHA();
+        f.setVisible(true);
+    }//GEN-LAST:event_t_porRangoActionPerformed
+
+    private void t_PorDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_PorDocActionPerformed
+        DE_TRANSACCIONES_POR_DOCUMENTO d = new DE_TRANSACCIONES_POR_DOCUMENTO();
+        d.setVisible(true);
+    }//GEN-LAST:event_t_PorDocActionPerformed
+
+    private void t_PorTipoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_PorTipoDActionPerformed
+        DE_TRANSACCIONES_TIPO_DOCUMENTO n = new DE_TRANSACCIONES_TIPO_DOCUMENTO();
+        n.setVisible(true);
+    }//GEN-LAST:event_t_PorTipoDActionPerformed
     
     public void habilitarMantenimientos(boolean habilitar) {
         Mantenimientos.setEnabled(habilitar);
@@ -366,6 +430,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     private javax.swing.JMenuItem c_balanzaC;
     private javax.swing.JMenuItem c_balanzaG;
     private javax.swing.JMenuItem c_cuentas;
+    private javax.swing.JMenuItem c_resumenG;
     private javax.swing.JMenuItem c_tipoDoc;
     private javax.swing.JMenuItem c_usuarios;
     private javax.swing.JMenuBar jMenuBar1;
@@ -376,6 +441,9 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_transacciones;
     private javax.swing.JMenuItem m_usuarios;
     private javax.swing.JMenuItem p_cierreD;
+    private javax.swing.JMenuItem t_PorDoc;
     private javax.swing.JMenuItem t_PorFecha;
+    private javax.swing.JMenuItem t_PorTipoD;
+    private javax.swing.JMenuItem t_porRango;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,8 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDoc = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,7 +63,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CONSULTA DE TRANSACCIONES DE TIPO DE DOCUMENTOS");
+        jLabel1.setText("TRANSACCIONES POR TIPO DE DOCUMENTOS");
 
         javax.swing.GroupLayout PanelAzulLayout = new javax.swing.GroupLayout(PanelAzul);
         PanelAzul.setLayout(PanelAzulLayout);
@@ -80,7 +81,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
+        PanelPrincipal.add(PanelAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 70));
 
         btnconsultar.setBackground(new java.awt.Color(160, 171, 176));
         btnconsultar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -101,7 +102,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                 btnconsultarActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 130, 50));
+        PanelPrincipal.add(btnconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 130, 50));
 
         btnSalir.setBackground(new java.awt.Color(160, 171, 176));
         btnSalir.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -143,7 +144,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                 CbTipoDocActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 330, -1));
+        PanelPrincipal.add(CbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 240, 30));
 
         TablaDoc.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         TablaDoc.setModel(new javax.swing.table.DefaultTableModel(
@@ -151,11 +152,11 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No. Doc", "Fecha ", "Hecho Por", "#", "Cuenta", "Descripcion C", "Debitos", "Creditos"
+                "No. Doc", "Fecha ", "Hecho Por", "#", "Cuenta", "Descripcion C", "Debitos", "Creditos", "Monto", "Actualizado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -163,8 +164,27 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TablaDoc);
+        if (TablaDoc.getColumnModel().getColumnCount() > 0) {
+            TablaDoc.getColumnModel().getColumn(0).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(0).setPreferredWidth(15);
+            TablaDoc.getColumnModel().getColumn(1).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(1).setPreferredWidth(25);
+            TablaDoc.getColumnModel().getColumn(2).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(2).setPreferredWidth(25);
+            TablaDoc.getColumnModel().getColumn(3).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(3).setPreferredWidth(2);
+            TablaDoc.getColumnModel().getColumn(4).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(4).setPreferredWidth(15);
+            TablaDoc.getColumnModel().getColumn(5).setPreferredWidth(160);
+            TablaDoc.getColumnModel().getColumn(6).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(6).setPreferredWidth(10);
+            TablaDoc.getColumnModel().getColumn(7).setPreferredWidth(10);
+            TablaDoc.getColumnModel().getColumn(8).setPreferredWidth(20);
+            TablaDoc.getColumnModel().getColumn(9).setResizable(false);
+            TablaDoc.getColumnModel().getColumn(9).setPreferredWidth(10);
+        }
 
-        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 900, 420));
+        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 920, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,11 +209,9 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_btnconsultarMouseExited
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
-        
-      
-        String selectedOption = (String) CbTipoDoc.getSelectedItem();
+        int eleccion = CbTipoDoc.getSelectedIndex();
 
-        if (selectedOption == null) {
+        if (CbTipoDoc.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(rootPane, "Debe Seleccionar un tipo de Documento");
             return;
         }
@@ -202,7 +220,7 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
         boolean filas = false;
 
         String Ndoc, tipo, desc, nombH, monto, fechaA, estado;
-        String numDoc, sec, cuenta, descC, deb, cred, comt;
+        String numDoc, sec, cuenta, descC, deb, cred, comt, act;
 
         File f = new File("Cabecera Transacciones.txt");
         File d = new File("Detalle Transacciones.txt");
@@ -229,7 +247,15 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                     fechaA = s1.next();
                     estado = s1.next();
 
-                    if (tipo.equals(selectedOption)) {
+                    int tipoS = Integer.parseInt(tipo);
+                    
+                    if (estado.equals("true")) {
+                        act = "SI";
+                    } else {
+                         act = "NO";
+                    }
+
+                    if (tipoS == eleccion) {
 
                         while (w.hasNextLine()) {
                             String line = w.nextLine();
@@ -243,15 +269,16 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                             descC = s2.next();
                             deb = s2.next();
                             cred = s2.next();
-                            
-                                TablaM.addRow(new Object[]{Ndoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
+
+                            if (Ndoc.equals(numDoc)) {
+                                TablaM.addRow(new Object[]{Ndoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred,monto,act});
                                 filas = true;
-                                break; 
                             }
                         }
                     }
-                
+                }
                 s.close();
+                w.close();
 
                 if (!filas) {
                     JOptionPane.showMessageDialog(rootPane, "No se encontró ningún registro con el Documento Ingresado.");

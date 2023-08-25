@@ -155,14 +155,14 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
         PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 360));
 
         LabelCred.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        PanelPrincipal.add(LabelCred, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 150, 20));
+        PanelPrincipal.add(LabelCred, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 460, 140, 20));
 
         LabelTotal.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         LabelTotal.setText("TOTAL");
         PanelPrincipal.add(LabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 180, 20));
 
         LabelDeb.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        PanelPrincipal.add(LabelDeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 160, 20));
+        PanelPrincipal.add(LabelDeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, 140, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
