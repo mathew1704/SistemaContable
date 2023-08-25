@@ -1,5 +1,6 @@
 package MENU_PRINCIPAL;
 
+import CONSULTAS.BALANZA_DE_COMPROBACION;
 import CONSULTAS.BALANZA_GENERAL;
 import CONSULTAS.CONSULTA_USUARIO;
 import CONSULTAS.DE_CATALOGO_DE_CUENTA;
@@ -9,6 +10,7 @@ import MANTENIMIENTO.DE_CATALOGO;
 import MANTENIMIENTO.DE_DOCUMENTO;
 import MANTENIMIENTO.DE_USUARIOS;
 import MOVIMIENTOS.DE_TRANSACCIONES;
+import PROCESOS.CIERRE_DIARIO_FECHA;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -39,7 +41,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Movimiento = new javax.swing.JMenu();
         m_transacciones = new javax.swing.JMenuItem();
         Procesos = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        p_cierreD = new javax.swing.JMenuItem();
         Consultas = new javax.swing.JMenu();
         c_Manteniminentos = new javax.swing.JMenu();
         c_usuarios = new javax.swing.JMenuItem();
@@ -47,7 +49,8 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         c_tipoDoc = new javax.swing.JMenuItem();
         c_Transacciones = new javax.swing.JMenu();
         t_PorFecha = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        c_balanzaG = new javax.swing.JMenuItem();
+        c_balanzaC = new javax.swing.JMenuItem();
         Salida = new javax.swing.JMenu();
         m_login = new javax.swing.JMenuItem();
         m_salir = new javax.swing.JMenuItem();
@@ -125,10 +128,15 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         Procesos.setText("PROCESOS");
         Procesos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\actualizar-pagina.png")); // NOI18N
-        jMenuItem2.setText("CIERRE DIARO");
-        Procesos.add(jMenuItem2);
+        p_cierreD.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        p_cierreD.setIcon(new javax.swing.ImageIcon("C:\\Users\\garci\\Documents\\Imagenes Proyecto\\actualizar-pagina.png")); // NOI18N
+        p_cierreD.setText("CIERRE DIARO");
+        p_cierreD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                p_cierreDActionPerformed(evt);
+            }
+        });
+        Procesos.add(p_cierreD);
 
         jMenuBar1.add(Procesos);
 
@@ -186,14 +194,23 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
         Consultas.add(c_Transacciones);
 
-        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jMenuItem1.setText("BALANZA GENERAL");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        c_balanzaG.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        c_balanzaG.setText("BALANZA GENERAL");
+        c_balanzaG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                c_balanzaGActionPerformed(evt);
             }
         });
-        Consultas.add(jMenuItem1);
+        Consultas.add(c_balanzaG);
+
+        c_balanzaC.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        c_balanzaC.setText("BALANZA DE COMPROBACION");
+        c_balanzaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c_balanzaCActionPerformed(evt);
+            }
+        });
+        Consultas.add(c_balanzaC);
 
         jMenuBar1.add(Consultas);
 
@@ -305,10 +322,20 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         t.setVisible(true);
     }//GEN-LAST:event_t_PorFechaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void c_balanzaGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_balanzaGActionPerformed
         BALANZA_GENERAL b = new BALANZA_GENERAL();
         b.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_c_balanzaGActionPerformed
+
+    private void p_cierreDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_cierreDActionPerformed
+        CIERRE_DIARIO_FECHA cf = new CIERRE_DIARIO_FECHA();
+        cf.setVisible(true);
+    }//GEN-LAST:event_p_cierreDActionPerformed
+
+    private void c_balanzaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_balanzaCActionPerformed
+        BALANZA_DE_COMPROBACION b = new BALANZA_DE_COMPROBACION();
+        b.setVisible(true);
+    }//GEN-LAST:event_c_balanzaCActionPerformed
     
     public void habilitarMantenimientos(boolean habilitar) {
         Mantenimientos.setEnabled(habilitar);
@@ -336,18 +363,19 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     private javax.swing.JMenu Salida;
     private javax.swing.JMenu c_Manteniminentos;
     private javax.swing.JMenu c_Transacciones;
+    private javax.swing.JMenuItem c_balanzaC;
+    private javax.swing.JMenuItem c_balanzaG;
     private javax.swing.JMenuItem c_cuentas;
     private javax.swing.JMenuItem c_tipoDoc;
     private javax.swing.JMenuItem c_usuarios;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem m_cuentas;
     private javax.swing.JMenuItem m_documentos;
     private javax.swing.JMenuItem m_login;
     private javax.swing.JMenuItem m_salir;
     private javax.swing.JMenuItem m_transacciones;
     private javax.swing.JMenuItem m_usuarios;
+    private javax.swing.JMenuItem p_cierreD;
     private javax.swing.JMenuItem t_PorFecha;
     // End of variables declaration//GEN-END:variables
 }

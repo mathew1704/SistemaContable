@@ -3,17 +3,15 @@ package PROCESOS;
 import ARCHIVOS.ManejoArchivos;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -205,10 +203,26 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         fecha1 = fechaInicial.getDate();
         fecha2 = FechaFinal.getDate();
         boolean modificar = false;
+        boolean encontradom = false;
+        boolean hayTransacciones = false;
         String lineaVieja = null;
         String lineaNueva = null;
+        ArrayList<String> lineasViejas = new ArrayList<>();
+        ArrayList<String> lineasNuevas = new ArrayList<>();
+        int estadoR = 0;
 
-        if (fecha1 == null || fecha2 == null) {
+        try {
+            estadoR = estado();
+
+        } catch (ParseException ex) {
+            Logger.getLogger(CIERRE_DIARIO_FECHA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (estadoR == 1) {
+            JOptionPane.showMessageDialog(null, "Ya se han Actualizado Todas las Transacciones en ese rango de fecha ");
+            fechaInicial.setDate(null);
+            FechaFinal.setDate(null);
+        } else if (fecha1 == null || fecha2 == null) {
             JOptionPane.showMessageDialog(null, "Por favor Rellene ambos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (fecha1.after(fecha2)) {
             JOptionPane.showMessageDialog(null, "La Fecha de Inicio debe ser menor que la Fecha Final", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -223,6 +237,8 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
 
                 File f = new File("Cabecera Transacciones.txt");
                 s = new Scanner(f);
+                File d = new File("Detalle Transacciones.txt");
+                w = new Scanner(d);
 
                 while (s.hasNextLine()) {
                     String linea = s.nextLine();
@@ -247,39 +263,34 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
 
                         if (currentDate.compareTo(fecha1) >= 0 && currentDate.compareTo(fecha2) <= 0) {
 
-                            try {
-                                File d = new File("Detalle Transacciones.txt");
-                                w = new Scanner(d);
+                            while (w.hasNextLine()) {
+                                String line = w.nextLine();
+                                Scanner s2 = new Scanner(line);
 
-                                while (w.hasNextLine()) {
-                                    String line = w.nextLine();
-                                    Scanner s2 = new Scanner(line);
+                                s2.useDelimiter("\\s*;\\s*");
 
-                                    s2.useDelimiter("\\s*;\\s*");
-
-                                    String numD = s2.next();
-                                    String sec = s2.next();
-                                    String cuentaT = s2.next();
-                                    String descCuenta = s2.next();
-                                    String debito = s2.next();
-                                    String credito = s2.next();
+                                String numD = s2.next();
+                                String sec = s2.next();
+                                String cuentaT = s2.next();
+                                String descCuenta = s2.next();
+                                String debito = s2.next();
+                                String credito = s2.next();
 //                                    String coment = s2.next();
 
-                                    //catalogo
-                                    if (nDoc.equals(numD)) {
-                                        Catalogo(cuentaT, debito, credito);
-                                        System.out.println("Entra en la condicion ");
-                                        
-                                        lineaNueva = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";"
-                                                + montoD + ";" + txtFecha.getText() + ";" + true;
+                                //catalogo
+                                if (nDoc.equals(numD)) {
+                                    Catalogo(cuentaT, debito, credito);
+                                    System.out.println("Entra en la condicion ");
 
-//                                        Modificar(lineaVieja, lineaNueva, f);
-                                        modificar = true;
-                                    }
+                                    lineaNueva = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";"
+                                            + montoD + ";" + txtFecha.getText() + ";" + true;
+
+                                    lineasViejas.add(lineaVieja);
+                                    lineasNuevas.add(lineaNueva);
+
+                                    modificar = true;
+                                    hayTransacciones = true;
                                 }
-                                w.close();
-
-                            } catch (FileNotFoundException e) {
                             }
                         }
                     } catch (ParseException p) {
@@ -287,38 +298,23 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                     }
                 }
                 s.close();
+                w.close();
 
                 if (modificar) {
-                    try {
-                        File archivoN = new File("AuxiliarTrans.txt");
-                        BufferedReader br = new BufferedReader(new FileReader(f));
-                        BufferedWriter bw = new BufferedWriter(new FileWriter(archivoN));
-
-                        String lineaM;
-                        while ((lineaM = br.readLine()) != null) {
-                            if (lineaM.equals(lineaVieja)) {
-                                bw.write(lineaNueva + "\r\n");
-                            } else {
-                                bw.write(lineaM + "\r\n");
-                            }
-                        }
-
-                        br.close();
-                        bw.close();
-
-                        archivoN.renameTo(f);
-
-                        if (f.exists()) {
-                            f.delete();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                     ManejoArchivos m = new ManejoArchivos();
+                    for (int i = 0; i < lineasViejas.size(); i++) {
+                        m.Modificar(lineasViejas.get(i), lineasNuevas.get(i), f);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Cierre procesado");
+                if (hayTransacciones) {
+                    JOptionPane.showMessageDialog(null, "Cierre procesado");
+                } else if (!hayTransacciones) {
+                    JOptionPane.showMessageDialog(null, "No hay Transacciones en este rango de fechas");
+                    fechaInicial.setDate(null);
+                    FechaFinal.setDate(null);
+                }
+                
             } catch (FileNotFoundException e) {
-
             }
         }
     }//GEN-LAST:event_btnProcesarActionPerformed
@@ -354,13 +350,17 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
 
     public void Catalogo(String DetalleCuenta, String deb, String cr) {
         boolean encontrado = false;
+        boolean modificar = false;
+        String LineaAntigua = "", LineaNueva = "";
         Scanner s;
+        ArrayList<String> lineasAntiguas = new ArrayList<>();
+        ArrayList<String> LineasNuevas = new ArrayList<>();
 
         try {
             File f = new File("Catalogo.txt");
 
             s = new Scanner(f);
-            while (s.hasNextLine() && !encontrado) {
+            while (s.hasNextLine()) {
 
                 String linea = s.nextLine();
                 Scanner s1 = new Scanner(linea);
@@ -379,46 +379,30 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                 String creditoA = s1.next();
                 String balance = s1.next();
 
-                String LineaAntigua = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
+                LineaAntigua = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
                         + fechaC + ";" + horaC + ";" + debitoA + ";" + creditoA + ";" + balance;
 
                 if (DetalleCuenta.equals(cuenta)) {
                     trans(cuenta, grupo, deb, cr, balance);
 
-                    String LineaNueva = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
+                    LineaNueva = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
                             + fechaC + ";" + horaC + ";" + debitoNew + ";" + creditoNew + ";" + balanceNew;
-
-                    Modificar(LineaAntigua, LineaNueva, f);
-                    try {
-                        File archivoN = new File("AuxiliarTrans.txt");
-                        BufferedReader br = new BufferedReader(new FileReader(f));
-                        BufferedWriter bw = new BufferedWriter(new FileWriter(archivoN));
-
-                        String lineaM;
-                        while ((lineaM = br.readLine()) != null) {
-                            if (lineaM.equals(LineaAntigua)) {
-                                bw.write(LineaNueva + "\r\n");
-                            } else {
-                                bw.write(lineaM + "\r\n");
-                            }
-                        }
-
-                        br.close();
-                        bw.close();
-
-                        archivoN.renameTo(f);
-
-                        if (f.exists()) {
-                            f.delete();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     
+                    lineasAntiguas.add(LineaAntigua);
+                    LineasNuevas.add(LineaNueva);
+                    modificar = true;
                 }
             }
             s.close();
+            
+            if (modificar) {
+                ManejoArchivos l = new ManejoArchivos();
+
+                int cantidadElementos = Math.min(lineasAntiguas.size(), LineasNuevas.size());
+                for (int i = 0; i < cantidadElementos; i++) {
+                    l.Modificar(lineasAntiguas.get(i), LineasNuevas.get(i), f);
+                }
+            }
         } catch (FileNotFoundException e) {
         }
     }
@@ -468,8 +452,6 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         if (orig.equals("debito")) {
             double almD = Double.parseDouble(d);
             double almC = Double.parseDouble(c);
-//            System.out.println("almD " + almD );
-//            System.out.println("almc " + almC);
 
             acumD += almD;
             acumC += almC;
@@ -477,14 +459,10 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
             balancc += almD;
             balancc -= almC;
 
-//            System.out.println("balance " + balancc);
             String pdeb = Double.toString(acumD);
             String pcre = Double.toString(acumC);
             String pbal = Double.toString(balancc);
 
-//            System.out.println("debito " + pdeb);
-//            System.out.println("credito " + pcre);
-//            System.out.println("BALANCE " + pbal);
             debitoNew = pdeb;
             creditoNew = pcre;
             balanceNew = pbal;
@@ -510,100 +488,46 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
         }
     }
 
-//    public void Modificar(String cadenaA, String cadenaN, File archivoA) {
-//        File archivoN = new File("Auxiliar.txt");
-//
-//        try {
-//            archivoN.createNewFile();
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//        }
-//
-//        BufferedReader br;
-//        try {
-//            if (archivoA.exists()) {
-//
-//                br = new BufferedReader(new FileReader(archivoA));
-//
-//                String linea;
-//
-//                while ((linea = br.readLine()) != null) {
-//
-//                    if (linea.equals(cadenaA)) {
-//                        try {
-//
-//                            if (!archivoN.exists()) {
-//                                archivoN.createNewFile();
-//                            }
-//
-//                            BufferedWriter bw = new BufferedWriter(new FileWriter(archivoN, true));
-//                            bw.write(cadenaN + "\r\n");
-//                            bw.close();
-//                        } catch (IOException e) {
-//                            System.out.println(e);
-//                        }
-//                    } else {
-//                        try {
-//
-//                            if (!archivoN.exists()) {
-//                                archivoN.createNewFile();
-//                            }
-//
-//                            BufferedWriter bw = new BufferedWriter(new FileWriter(archivoN, true));
-//                            bw.write(linea + "\r\n");
-//                            bw.close();
-//                        } catch (IOException e) {
-//                            System.out.println(e);
-//                        }
-//                    }
-//                }
-//
-//                br.close();
-//
-//                archivoN.renameTo(archivoA);
-//                try {
-//                    if (archivoA.exists()) {
-//                        archivoA.delete();
-//                    }
-//                } catch (Exception e) {
-//                    System.out.println(e);
-//                }
-//
-//            } else {
-//                System.out.println("No existe el archivo");
-//            }
-//
-//        } catch (IOException e) {
-//            System.out.println(e);
-//        }
-//    }
-    private void Modificar(String lineaVieja, String lineaNueva, File archivo) {
+    public int estado() throws ParseException {
+        int num = 0;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            File archivoN = new File("AuxiliarTrans.txt");
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
-            BufferedWriter bw = new BufferedWriter(new FileWriter(archivoN));
+            boolean encontrado = false;
+            Scanner s;
+            File t = new File("Cabecera Transacciones.txt");
+            s = new Scanner(t);
 
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                if (linea.equals(lineaVieja)) {
-                    bw.write(lineaNueva + "\r\n");
-                } else {
-                    bw.write(linea + "\r\n");
+            while (s.hasNextLine() && !encontrado) {
+                String linea = s.nextLine();
+                Scanner s1 = new Scanner(linea);
+
+                s1.useDelimiter("\\s*;\\s*");
+
+                String codigoT = s1.next();
+                String fecha = s1.next();
+                String tipo = s1.next();
+                String Descripcion = s1.next();
+                String hechoPor = s1.next();
+                String monto = s1.next();
+                String fechaAc = s1.next();
+                String estado = s1.next();
+
+                Date currentDate = dateFormat.parse(fecha);
+
+                if (currentDate.compareTo(fecha1) >= 0 && currentDate.compareTo(fecha2) <= 0) {
+                    if (estado.equals("true")) {
+                        num = 1;
+                    } else {
+                        num = 2;
+                    }
                 }
             }
+            s.close();
+        } catch (FileNotFoundException e) {
 
-            br.close();
-            bw.close();
-
-            archivoN.renameTo(archivo);
-
-            if (archivo.exists()) {
-                archivo.delete();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        return num;
     }
 
     public static String fecha() {

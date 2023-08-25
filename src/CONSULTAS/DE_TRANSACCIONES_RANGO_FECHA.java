@@ -62,7 +62,8 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRegistro = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         PanelAzul.setBackground(new java.awt.Color(0, 153, 255));
 

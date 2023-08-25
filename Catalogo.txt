@@ -2,7 +2,7 @@
 2;Pasivos;0;1;0;Pasivo;17/08/2023;12:21:34;0.0;0.0;0.0
 11;Activos Circulantes;0;2;1;Activo;17/08/2023;12:40:59;0.0;0.0;0.0
 1101;Efectivo en Caja;0;3;11;Activo;17/08/2023;12:22:27;0.0;0.0;0.0
-11021;Banco Popular Dominicano;1;4;1102;Activo;17/08/2023;12:22:57;0.0;0.0;0.0
+11021;Banco Popular Dominicano;1;4;1102;Activo;17/08/2023;12:22:57;0.0;10000.0;-10000.0
 11022;Banco BHD;1;4;1102;Activo;17/08/2023;12:23:29;0.0;0.0;0.0
 1102;Efectivo en Bancos;0;3;11;Activo;17/08/2023;12:39:05;0.0;0.0;0.0
 11025;Cuenta de Nomina;1;4;1102;Activo;17/08/2023;12:39:43;0.0;0.0;0.0
@@ -21,7 +21,7 @@
 5;Gastos;0;1;0;Gastos;23/08/2023;21:31:35;0.0;0.0;0.0
 52;Gastos Generales y Administrativos;0;2;5;Gastos;23/08/2023;21:33:35;0.0;0.0;0.0
 5201;Nomina;0;3;52;Gastos;23/08/2023;21:34:06;0.0;0.0;0.0
-520111;Gastos de sueldos Empleados;1;5;52011;Gastos;23/08/2023;21:45:11;0.0;0.0;0.0
+520111;Gastos de sueldos Empleados;1;5;52011;Gastos;23/08/2023;21:45:11;10000.0;0.0;10000.0
 520112;Incentivos;1;5;52011;Gastos;23/08/2023;21:36:12;0.0;0.0;0.0
 520121;Seguro Medico y Dental;1;5;52012;Gastos;23/08/2023;21:37:19;0.0;0.0;0.0
 52012;Beneficios a los Empleados;0;4;5201;Gastos;23/08/2023;21:38:34;0.0;0.0;0.0

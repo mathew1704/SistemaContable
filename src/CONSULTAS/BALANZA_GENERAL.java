@@ -1,6 +1,7 @@
 package CONSULTAS;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
@@ -8,10 +9,31 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+class BalanceCellRenderer extends DefaultTableCellRenderer {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cellComponent = super.getTableCellRendererComponent(table, value,
+                isSelected, hasFocus, row, column);
+
+         String balanceValue = (String) value; // Suponiendo que 'value' es el balance en formato String
+
+        if (balanceValue.startsWith("-")) {
+            cellComponent.setForeground(Color.RED);
+        } else {
+            cellComponent.setForeground(table.getForeground()); // Restaura el color predeterminado
+        }
+
+        return cellComponent;
+    }
+}
 
 public class BALANZA_GENERAL extends javax.swing.JFrame {
 
@@ -163,7 +185,10 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
         double deb = 0.00, cred = 0.00;
         double sumaD = 0.00, sumaC = 0.00;
         ArrayList<String[]> datos = new ArrayList<>();
-
+        
+        int indexDeLaColumnaDeBalance = TablaM.getColumnCount() - 1;
+        tablaRegistros.getColumnModel().getColumn(indexDeLaColumnaDeBalance).setCellRenderer(new BalanceCellRenderer());
+        
         try {
             File f = new File("Catalogo.txt");
 

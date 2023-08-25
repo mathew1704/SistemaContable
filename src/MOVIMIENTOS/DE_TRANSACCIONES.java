@@ -23,7 +23,6 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
@@ -50,6 +49,8 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
     boolean mod = false;
     boolean eliminar = false;
     String secuenciaGlobal;
+    String num;
+    int numero;
     private int maxSequence = 2;
 
     public DE_TRANSACCIONES() {
@@ -79,7 +80,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
 
         UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Century Gothic", Font.PLAIN, 14)));
         UIManager.put("OptionPane.messageForeground", Color.black);
-        
+
         JTableHeader tableHeader = TablaRegistros.getTableHeader();
         Font headerFont = new Font("Century Gothic", Font.PLAIN, 14); // Cambiar el tipo de letra
         tableHeader.setFont(headerFont);
@@ -699,13 +700,14 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
         } else if (txtNcuenta.getText().isEmpty() && txtCredito.getText().isEmpty() && txtDebito.getText().isEmpty() && secuencia < 2) {
             JOptionPane.showMessageDialog(this, "Debe realizar transacciones para Guardar");
             txtNcuenta.grabFocus();
-        }
-
-        if (secuencia < 2) {
+        } else if (secuencia < 2) {
             JOptionPane.showMessageDialog(rootPane, "Para guardar Debe al menos involucrar dos cuentas", "ERROR", HEIGHT);
             txtNcuenta.grabFocus();
         } else {
-
+            
+            num = (String) TablaM.getValueAt(TablaM.getRowCount() - 1, 0);
+            numero = Integer.parseInt(num);
+            
             double totaldb = 0, totalcr = 0;
             String monto;
 
@@ -755,7 +757,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
                         file.Modificar(LineaAntigua, LineaActual, f);
                         fL.Modificar(LineaAntigua1, LineaActual1, d);
 
-                        if (secuencia > maxSequence) {
+                        if (numero > 2) {
                             maxSequence = secuencia;
                             int fila = TablaM.getRowCount() - 1;
 
@@ -770,7 +772,6 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
                                     + ";" + tdebito + ";" + tcred + ";" + tcomt;
 
                             fL.GuardarDatos(LineaGuardar, d);
-
                         }
 
                         if (eliminar) {
@@ -926,7 +927,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
         if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != '.' || txtDebito.getText().contains("."))) {
             evt.consume();
         }
-        
+
         String debitoText = txtDebito.getText().trim();
         String creditoText = txtCredito.getText().trim();
 
@@ -960,7 +961,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
         if (((c < '0' || c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != '.' || txtCredito.getText().contains("."))) {
             evt.consume();
         }
-        
+
         String creditoText = txtCredito.getText().trim();
         String debitoText = txtDebito.getText().trim();
 
@@ -981,7 +982,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
             } else if ("0".equals(debitoText)) {
                 txtDebito.setEditable(false);
                 txtCredito.setEditable(true);
-            } else if ("0".equals(debitoText) && "0".equals(creditoText)){
+            } else if ("0".equals(debitoText) && "0".equals(creditoText)) {
                 txtDebito.setEditable(true);
                 txtCredito.setEditable(true);
             }
@@ -1080,16 +1081,6 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
             LineaAntigua1 = txtNdocumento.getText() + ";" + secuenciaGlobal + ";" + txtNcuenta.getText() + ";" + txtDescripcionC.getText() + ";" + txtDebito.getText()
                     + ";" + txtCredito.getText() + ";" + txtComentario.getText();
 
-//            if (txtDebito.getText().equals("0")) {
-//                txtCredito.setEditable(true);
-//            } else if (txtCredito.getText().equals("0")) {
-//                txtDebito.setEditable(true);
-//            }
-//            else {
-//                txtDebito.setEditable(true);
-//                txtCredito.setEditable(true);
-//            }
-
             txtDescripcionC.setEditable(false);
             mod = true;
         } else {
@@ -1121,7 +1112,7 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimpiarMouseEntered
 
     private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
-       BtnLimpiar.setBorder(new LineBorder(Color.white));
+        BtnLimpiar.setBorder(new LineBorder(Color.white));
     }//GEN-LAST:event_BtnLimpiarMouseExited
 
     private void cargarEstados() {
@@ -1213,10 +1204,8 @@ public class DE_TRANSACCIONES extends javax.swing.JFrame {
             while ((linea = reader.readLine()) != null) {
 
                 if (linea.equals(LineaTabla)) {
-                    System.out.println("es la que se va");
-
+                    //es la que se queda
                 } else {
-                    System.out.println("es la que se queda");
                     writer.write(linea);
                     writer.newLine();
                 }
