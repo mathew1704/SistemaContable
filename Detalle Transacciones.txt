@@ -1,2 +1,4 @@
 EN-100;001;11021;Banco Popular Dominicano;0;10000;
 EN-100;002;520111;Gastos de sueldos Empleados;10000;0;pago mes
+PP-1;001;11022;Banco BHD;5000;0;
+PP-1;002;11021;Banco Popular Dominicano;0;5000;

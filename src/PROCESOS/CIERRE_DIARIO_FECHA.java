@@ -3,12 +3,17 @@ package PROCESOS;
 import ARCHIVOS.ManejoArchivos;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +26,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     Date fecha2;
     Date fecha1;
     String debitoNew, creditoNew, balanceNew;
+    double acumD = 0.00, acumC = 0.00;
 
     public CIERRE_DIARIO_FECHA() {
         initComponents();
@@ -280,7 +286,6 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                                 //catalogo
                                 if (nDoc.equals(numD)) {
                                     Catalogo(cuentaT, debito, credito);
-                                    System.out.println("Entra en la condicion ");
 
                                     lineaNueva = nDoc + ";" + fechaD + ";" + tipoD + ";" + descD + ";" + hechoPor + ";"
                                             + montoD + ";" + txtFecha.getText() + ";" + true;
@@ -301,7 +306,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                 w.close();
 
                 if (modificar) {
-                     ManejoArchivos m = new ManejoArchivos();
+                    ManejoArchivos m = new ManejoArchivos();
                     for (int i = 0; i < lineasViejas.size(); i++) {
                         m.Modificar(lineasViejas.get(i), lineasNuevas.get(i), f);
                     }
@@ -313,7 +318,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
                     fechaInicial.setDate(null);
                     FechaFinal.setDate(null);
                 }
-                
+
             } catch (FileNotFoundException e) {
             }
         }
@@ -384,17 +389,19 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
 
                 if (DetalleCuenta.equals(cuenta)) {
                     trans(cuenta, grupo, deb, cr, balance);
+                    acumD = Double.parseDouble(debitoA);
+                    acumC = Double.parseDouble(creditoA);
 
                     LineaNueva = cuenta + ";" + descC + ";" + tipo + ";" + nivel + ";" + padre + ";" + grupo + ";"
                             + fechaC + ";" + horaC + ";" + debitoNew + ";" + creditoNew + ";" + balanceNew;
-                    
+
                     lineasAntiguas.add(LineaAntigua);
                     LineasNuevas.add(LineaNueva);
                     modificar = true;
                 }
             }
             s.close();
-            
+
             if (modificar) {
                 ManejoArchivos l = new ManejoArchivos();
 
@@ -447,7 +454,7 @@ public class CIERRE_DIARIO_FECHA extends javax.swing.JFrame {
     public void trans(String cnum, String itemg, String d, String c, String bl) {
 
         String orig = origen(itemg);
-        double acumD = 0.00, acumC = 0.00, balancc = 0.00;
+        double balancc = 0.00;
 
         if (orig.equals("debito")) {
             double almD = Double.parseDouble(d);
