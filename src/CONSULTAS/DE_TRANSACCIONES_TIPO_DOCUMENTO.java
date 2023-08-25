@@ -189,6 +189,8 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
     }//GEN-LAST:event_btnconsultarMouseExited
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
+        
+       cargarEstados();
         String selectedOption = (String) CbTipoDoc.getSelectedItem();
 
         if (selectedOption == null) {
@@ -241,16 +243,14 @@ public class DE_TRANSACCIONES_TIPO_DOCUMENTO extends javax.swing.JFrame {
                             descC = s2.next();
                             deb = s2.next();
                             cred = s2.next();
-//                        comt = s2.next();
-
-                            if (numDoc.equals(Ndoc)) {
+                            
                                 TablaM.addRow(new Object[]{Ndoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
                                 filas = true;
-                                break; // Salimos del loop una vez que se encuentra una coincidencia
+                                break; 
                             }
                         }
                     }
-                }
+                
                 s.close();
 
                 if (!filas) {
