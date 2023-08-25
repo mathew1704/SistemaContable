@@ -25,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
 
-   Date selectedDate ;
-        Date selectedDate1;
+    Date selectedDate;
+    Date selectedDate1;
     public DefaultTableModel TablaM;
 
     public DE_TRANSACCIONES_RANGO_FECHA() {
@@ -195,80 +195,87 @@ public class DE_TRANSACCIONES_RANGO_FECHA extends javax.swing.JFrame {
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
         selectedDate = Cfecha1.getDate();
         selectedDate1 = Cfecha2.getDate();
-        if (selectedDate == null ||selectedDate1 == null ) {
+
+        if (selectedDate == null || selectedDate1 == null) {
             JOptionPane.showMessageDialog(rootPane, "Debe seleccionar una fecha");
             return;
-        }else if(selectedDate.after(selectedDate1)){
+        } else if (selectedDate.after(selectedDate1)) {
             JOptionPane.showMessageDialog(null, "La Fecha de Inicio debe ser menor que la Fecha Final", "ERROR", JOptionPane.ERROR_MESSAGE);
-           Cfecha1.setDate(null);
-           Cfecha2.setDate(null);
-        }else{
-           SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String selectedDateString = dateFormat.format(selectedDate);
-        String selectedDateString1 = dateFormat.format(selectedDate1);
-        TablaM.setRowCount(0);
-        boolean filas = false;
+            Cfecha1.setDate(null);
+            Cfecha2.setDate(null);
+        } else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String selectedDateString = dateFormat.format(selectedDate);
+            String selectedDateString1 = dateFormat.format(selectedDate1);
+            TablaM.setRowCount(0);
+            boolean filas = false;
 
-        String Ndoc, tipo, desc, nombH, monto, fechaA, estado;
-        String numDoc, sec, cuenta, descC, deb, cred, comt;
+            String Ndoc, tipo, desc, nombH, monto, fechaA, estado;
+            String numDoc, sec, cuenta, descC, deb, cred, comt;
 
-        File f = new File("Cabecera Transacciones.txt");
-        File d = new File("Detalle Transacciones.txt");
+            File f = new File("Cabecera Transacciones.txt");
+            File d = new File("Detalle Transacciones.txt");
 
-        try {
-            if (!f.exists()) {
-                JOptionPane.showMessageDialog(rootPane, "El archivo no existe");
-            } else {
-                Scanner s = new Scanner(f);
-                Scanner w = new Scanner(d);
+            try {
+                if (!f.exists()) {
+                    JOptionPane.showMessageDialog(rootPane, "El archivo no existe");
+                } else {
+                    Scanner s = new Scanner(f);
 
-                while (s.hasNextLine()) {
-                    String linea = s.nextLine();
-                    Scanner s1 = new Scanner(linea);
+                    while (s.hasNextLine()) {
+                        String linea = s.nextLine();
+                        Scanner s1 = new Scanner(linea);
 
-                    s1.useDelimiter("\\s*;\\s*");
+                        s1.useDelimiter("\\s*;\\s*");
 
-                    Ndoc = s1.next();
-                    String fechaArchivo = s1.next();
-                    tipo = s1.next();
-                    desc = s1.next();
-                    nombH = s1.next();
-                    monto = s1.next();
-                    fechaA = s1.next();
-                    estado = s1.next();
+                        Ndoc = s1.next();
+                        String fechaArchivo = s1.next();
+                        tipo = s1.next();
+                        desc = s1.next();
+                        nombH = s1.next();
+                        monto = s1.next();
+                        fechaA = s1.next();
+                        estado = s1.next();
 
-                    if (fechaArchivo.equals(selectedDateString ) ||fechaArchivo.equals(selectedDateString1) ) {
+                        Date currentDate = dateFormat.parse(fechaArchivo);
+                        if (currentDate.compareTo(selectedDate) >= 0 && currentDate.compareTo(selectedDate1) <= 0) {
 
-                        while (w.hasNextLine()) {
-                            String line = w.nextLine();
-                            Scanner s2 = new Scanner(line);
+                            try ( Scanner w = new Scanner(d)) {
+                                while (w.hasNextLine()) {
+                                    String line = w.nextLine();
+                                    Scanner s2 = new Scanner(line);
 
-                            s2.useDelimiter("\\s*;\\s*");
+                                    s2.useDelimiter("\\s*;\\s*");
 
-                            numDoc = s2.next();
-                            sec = s2.next();
-                            cuenta = s2.next();
-                            descC = s2.next();
-                            deb = s2.next();
-                            cred = s2.next();
-//                        comt = s2.next();
+                                    numDoc = s2.next();
+                                    sec = s2.next();
+                                    cuenta = s2.next();
+                                    descC = s2.next();
+                                    deb = s2.next();
+                                    cred = s2.next();
+                                    // comt = s2.next();
 
-                            TablaM.addRow(new Object[]{numDoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
-                            filas = true;
+                                    if (numDoc.equals(Ndoc)) {
+                                        TablaM.addRow(new Object[]{numDoc, fechaArchivo, nombH, sec, cuenta, descC, deb, cred});
+                                        filas = true;
+                                        break; // Salimos del loop una vez que se encuentra una coincidencia
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-                s.close();
+                    s.close();
 
-                if (!filas) {
-                    JOptionPane.showMessageDialog(rootPane, "No se encontró ningún registro para la fecha seleccionada.");
+                    if (!filas) {
+                        JOptionPane.showMessageDialog(rootPane, "No se encontró ningún registro para el rango de fechas seleccionado.");
+                    }
                 }
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            } catch (ParseException ex) {
+                ex.printStackTrace();
             }
-        } catch (IOException e) {
-            System.out.println("Error al abrir el archivo");
-        } 
-      }
-
+        }
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
