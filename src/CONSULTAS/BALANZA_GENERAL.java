@@ -17,13 +17,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 class BalanceCellRenderer extends DefaultTableCellRenderer {
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
         Component cellComponent = super.getTableCellRendererComponent(table, value,
                 isSelected, hasFocus, row, column);
 
-         String balanceValue = (String) value; // Suponiendo que 'value' es el balance en formato String
+        String balanceValue = (String) value; // Suponiendo que 'value' es el balance en formato String
 
         if (balanceValue.startsWith("-")) {
             cellComponent.setForeground(Color.RED);
@@ -185,10 +186,10 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
         double deb = 0.00, cred = 0.00;
         double sumaD = 0.00, sumaC = 0.00;
         ArrayList<String[]> datos = new ArrayList<>();
-        
+
         int indexDeLaColumnaDeBalance = TablaM.getColumnCount() - 1;
         tablaRegistros.getColumnModel().getColumn(indexDeLaColumnaDeBalance).setCellRenderer(new BalanceCellRenderer());
-        
+
         try {
             File f = new File("Catalogo.txt");
 
@@ -215,14 +216,16 @@ public class BALANZA_GENERAL extends javax.swing.JFrame {
                     String creditoA = s1.next();
                     String balance = s1.next();
 
-                    if (grupo.equals("Activo") || grupo.equals("Pasivo") || grupo.equals("Capital")) {
-                        datos.add(new String[]{cuenta, descC, debitoA, creditoA, balance});
-                        filas = true;
-                        deb = Double.parseDouble(debitoA);
-                        cred = Double.parseDouble(creditoA);
+                    if (!balance.equals("0.0")) {
+                        if (grupo.equals("Activo") || grupo.equals("Pasivo") || grupo.equals("Capital")) {
+                            datos.add(new String[]{cuenta, descC, debitoA, creditoA, balance});
+                            filas = true;
+                            deb = Double.parseDouble(debitoA);
+                            cred = Double.parseDouble(creditoA);
 
-                        sumaD += deb;
-                        sumaC += cred;
+                            sumaD += deb;
+                            sumaC += cred;
+                        }
                     }
                 }
                 s.close();
